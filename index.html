@@ -33,11 +33,15 @@ $user_name = $_SESSION['user_name'] ?? '';
               style="
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 12px;
                 margin-left: 20px;
+                background: rgba(64, 201, 255, 0.08);
+                padding: 5px 16px 5px 20px;
+                border-radius: 30px;
+                border: 1px solid rgba(64, 201, 255, 0.15);
               "
             >
-              <span style="color: #40c9ff; font-weight: bold"
+              <span style="color: #40c9ff; font-weight: 600; font-size: 0.95rem"
                 >👤 <?php echo htmlspecialchars($user_name); ?></span
               >
               <a
@@ -45,11 +49,12 @@ $user_name = $_SESSION['user_name'] ?? '';
                 style="
                   color: #ff6b6b;
                   text-decoration: none;
-                  padding: 5px 14px;
+                  padding: 4px 14px;
                   border: 1px solid rgba(255, 107, 107, 0.3);
                   border-radius: 20px;
-                  font-size: 0.85rem;
+                  font-size: 0.8rem;
                   transition: all 0.3s;
+                  background: rgba(255, 107, 107, 0.05);
                 "
                 >🚪 Выйти</a
               >
@@ -61,10 +66,11 @@ $user_name = $_SESSION['user_name'] ?? '';
                 style="
                   background: linear-gradient(45deg, #1a5fb4, #40c9ff);
                   color: white;
-                  padding: 8px 18px;
+                  padding: 8px 22px;
                   border-radius: 30px;
                   font-weight: bold;
                   transition: all 0.3s;
+                  display: inline-block;
                 "
                 >🔐 Войти</a
               >
@@ -348,7 +354,6 @@ $user_name = $_SESSION['user_name'] ?? '';
           <div id="messageContainer"></div>
 
           <div class="form-scroll">
-            <!-- УБРАЛИ action="api.php" чтобы не перенаправляло -->
             <form id="feedbackForm" method="POST" data-api="true">
               <input type="hidden" name="csrf_token" value="" />
 
@@ -591,9 +596,7 @@ $user_name = $_SESSION['user_name'] ?? '';
                                     </div>
                                 `;
                   }
-                  // Очищаем форму
                   form.reset();
-                  // Обновляем страницу, чтобы показать имя в меню
                   setTimeout(function () {
                     location.reload();
                   }, 3000);
