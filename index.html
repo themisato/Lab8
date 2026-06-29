@@ -359,38 +359,38 @@
             </div>
 
             <!-- Пол -->
-            <div class="form-group">
-                <label class="required">Пол</label>
-                <div style="display: flex; gap: 20px; margin-top: 8px">
-                    <label style="display: flex; align-items: center; gap: 8px; color: #bae7ff;">
-                        <input type="radio" name="gender" value="male" /> Мужской
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; color: #bae7ff;">
-                        <input type="radio" name="gender" value="female" /> Женский
-                    </label>
-                </div>
-                <div class="error-message" id="genderError">Выберите пол</div>
-            </div>
+<div class="form-group">
+    <label class="required">Пол</label>
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="gender" value="male" /> Мужской
+        </label>
+        <label>
+            <input type="radio" name="gender" value="female" /> Женский
+        </label>
+    </div>
+    <div class="error-message" id="genderError">Выберите пол</div>
+</div>
 
-            <!-- Языки -->
-            <div class="form-group">
-                <label for="languages" class="required">Любимые языки программирования</label>
-                <select id="languages" name="languages[]" multiple size="4" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(64,201,255,0.2);">
-                    <option value="Pascal">Pascal</option>
-                    <option value="C">C</option>
-                    <option value="C++">C++</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="PHP">PHP</option>
-                    <option value="Python">Python</option>
-                    <option value="Java">Java</option>
-                    <option value="Haskell">Haskell</option>
-                    <option value="Clojure">Clojure</option>
-                    <option value="Prolog">Prolog</option>
-                    <option value="Scala">Scala</option>
-                    <option value="Go">Go</option>
-                </select>
-                <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
-            </div>
+           <!-- Языки -->
+<div class="form-group">
+    <label for="languages" class="required">Любимые языки программирования</label>
+    <select id="languages" name="languages[]" multiple size="4">
+        <option value="Pascal">Pascal</option>
+        <option value="C">C</option>
+        <option value="C++">C++</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="PHP">PHP</option>
+        <option value="Python">Python</option>
+        <option value="Java">Java</option>
+        <option value="Haskell">Haskell</option>
+        <option value="Clojure">Clojure</option>
+        <option value="Prolog">Prolog</option>
+        <option value="Scala">Scala</option>
+        <option value="Go">Go</option>
+    </select>
+    <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
+</div>
 
             <!-- Биография -->
             <div class="form-group">

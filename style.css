@@ -1588,3 +1588,190 @@ textarea {
   color: #ff6b6b !important;
   border: 1px solid rgba(255, 107, 107, 0.2) !important;
 }
+/* ====================================================
+   ИСПРАВЛЕНИЕ ДЛЯ ФОРМЫ В МОДАЛЬНОМ ОКНЕ
+   ==================================================== */
+
+/* Отступы между полями формы */
+.modal-content .form-group {
+  margin-bottom: 20px !important;
+  clear: both !important;
+}
+
+/* Подписи полей */
+.modal-content .form-group label {
+  display: block !important;
+  margin-bottom: 6px !important;
+  color: #bae7ff !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Поля ввода */
+.modal-content .form-group input,
+.modal-content .form-group select,
+.modal-content .form-group textarea {
+  width: 100% !important;
+  padding: 10px 14px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(64, 201, 255, 0.2) !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  transition: border-color 0.3s ease !important;
+  box-sizing: border-box !important;
+}
+
+.modal-content .form-group input:focus,
+.modal-content .form-group select:focus,
+.modal-content .form-group textarea:focus {
+  border-color: #40c9ff !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(64, 201, 255, 0.1) !important;
+}
+
+/* Радио-кнопки (пол) */
+.modal-content .radio-group {
+  display: flex !important;
+  gap: 30px !important;
+  margin-top: 8px !important;
+  padding: 5px 0 !important;
+}
+
+.modal-content .radio-group label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #bae7ff !important;
+  font-weight: normal !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+}
+
+.modal-content .radio-group input[type="radio"] {
+  width: 16px !important;
+  height: 16px !important;
+  accent-color: #40c9ff !important;
+  cursor: pointer !important;
+}
+
+/* Множественный выбор (языки) */
+.modal-content select[multiple] {
+  min-height: 120px !important;
+  padding: 8px !important;
+}
+
+.modal-content select[multiple] option {
+  padding: 6px 10px !important;
+  border-radius: 4px !important;
+}
+
+.modal-content select[multiple] option:checked {
+  background: linear-gradient(135deg, #1a5fb4, #40c9ff) !important;
+  color: white !important;
+}
+
+/* Чекбокс */
+.checkbox-group-custom {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  padding: 12px 15px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 10px !important;
+  border-left: 4px solid #40c9ff !important;
+  margin-top: 5px !important;
+}
+
+.checkbox-group-custom input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+  accent-color: #40c9ff !important;
+  cursor: pointer !important;
+}
+
+.checkbox-group-custom label {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-weight: normal !important;
+  color: #bae7ff !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+  cursor: pointer !important;
+}
+
+.checkbox-group-custom label .required {
+  color: #ff6b6b !important;
+}
+
+/* Кнопка отправки */
+.modal-content .submit-btn {
+  display: block !important;
+  width: 100% !important;
+  padding: 16px 20px !important;
+  background: linear-gradient(135deg, #1a5fb4, #40c9ff) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 40px !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  margin-top: 25px !important;
+  margin-bottom: 5px !important;
+  text-align: center !important;
+  box-shadow: 0 4px 15px rgba(64, 201, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.modal-content .submit-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(64, 201, 255, 0.5) !important;
+  background: linear-gradient(135deg, #0d47a1, #1a5fb4) !important;
+}
+
+.modal-content .submit-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Сообщения об ошибках */
+.modal-content .error-message {
+  color: #ff6b6b !important;
+  font-size: 0.8rem !important;
+  margin-top: 5px !important;
+  display: none !important;
+}
+
+.modal-content .error-message.show {
+  display: block !important;
+}
+
+/* Контейнер для сообщений */
+#messageContainer {
+  margin-bottom: 15px !important;
+}
+
+.message {
+  padding: 12px 16px !important;
+  border-radius: 10px !important;
+  margin-bottom: 10px !important;
+  text-align: center !important;
+  font-weight: 500 !important;
+}
+
+.message.success {
+  background: rgba(76, 175, 80, 0.15) !important;
+  color: #81c784 !important;
+  border: 1px solid rgba(76, 175, 80, 0.2) !important;
+}
+
+.message.error {
+  background: rgba(255, 107, 107, 0.15) !important;
+  color: #ff6b6b !important;
+  border: 1px solid rgba(255, 107, 107, 0.2) !important;
+}
