@@ -318,6 +318,11 @@
 <!-- Модальное окно формы -->
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
+      <!-- Внутри modal-content -->
+<div class="form-scroll">
+    <form id="feedbackForm" action="api.php" method="POST" data-api="true">
+        <!-- все поля формы -->
+    
         <button class="close-btn" id="closeBtn">×</button>
 
         <div class="form-header">
@@ -419,6 +424,8 @@
             </button>
         </form>
     </div>
+</div>
+</form>
 </div>
     <!-- Подвал -->
     <footer class="main-footer">

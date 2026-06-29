@@ -1,13 +1,16 @@
 <?php
-// config.php - Конфигурация подключения к базе данных
+// config.php - НЕТ session_start()!
+
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 header('X-XSS-Protection: 1; mode=block');
 
+// ===== НАСТРОЙКИ СЕССИИ (ДО ЗАПУСКА) =====
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_samesite', 'Strict');
 ini_set('session.use_only_cookies', 1);
 ini_set('session.gc_maxlifetime', 3600);
+
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 error_reporting(E_ALL);

@@ -5,8 +5,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-session_start();
+// ===== ВАЖНО: СНАЧАЛА ПОДКЛЮЧАЕМ CONFIG, ПОТОМ СЕССИЮ =====
 require_once 'config.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -214,7 +215,7 @@ try {
         sendResponse(['error' => 'Метод не поддерживается']);
     }
 } catch (PDOException $e) {
-    $pdo->rollBack();
+    if (isset($pdo)) $pdo->rollBack();
     error_log("API Error: " . $e->getMessage());
     sendResponse(['error' => 'Ошибка базы данных: ' . $e->getMessage()]);
 } catch (Exception $e) {
