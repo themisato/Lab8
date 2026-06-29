@@ -1486,3 +1486,105 @@ textarea {
   color: #80d8ff;
   text-decoration: underline;
 }
+/* ====================================================
+   ИСПРАВЛЕНИЯ ДЛЯ ФОРМЫ
+   ==================================================== */
+
+/* Чекбокс */
+.checkbox-group-custom {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  padding: 12px 15px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 10px !important;
+  border-left: 4px solid #40c9ff !important;
+  margin-top: 5px !important;
+}
+
+.checkbox-group-custom input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+  accent-color: #40c9ff !important;
+  cursor: pointer !important;
+}
+
+.checkbox-group-custom label {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-weight: normal !important;
+  color: #bae7ff !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+  cursor: pointer !important;
+}
+
+.checkbox-group-custom label .required {
+  color: #ff6b6b !important;
+}
+
+.checkbox-group-custom.error {
+  border-left-color: #ff6b6b !important;
+  background: rgba(255, 107, 107, 0.1) !important;
+}
+
+.checkbox-group-custom.success {
+  border-left-color: #4caf50 !important;
+  background: rgba(76, 175, 80, 0.1) !important;
+}
+
+/* Кнопка отправки */
+.modal-content .submit-btn {
+  display: block !important;
+  width: 100% !important;
+  padding: 16px 20px !important;
+  background: linear-gradient(135deg, #1a5fb4, #40c9ff) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 40px !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  margin-top: 20px !important;
+  margin-bottom: 5px !important;
+  text-align: center !important;
+  box-shadow: 0 4px 15px rgba(64, 201, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.modal-content .submit-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(64, 201, 255, 0.5) !important;
+  background: linear-gradient(135deg, #0d47a1, #1a5fb4) !important;
+}
+
+.modal-content .submit-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Сообщения */
+.message {
+  padding: 12px 16px !important;
+  border-radius: 10px !important;
+  margin-bottom: 15px !important;
+  text-align: center !important;
+  font-weight: 500 !important;
+}
+
+.message.success {
+  background: rgba(76, 175, 80, 0.15) !important;
+  color: #81c784 !important;
+  border: 1px solid rgba(76, 175, 80, 0.2) !important;
+}
+
+.message.error {
+  background: rgba(255, 107, 107, 0.15) !important;
+  color: #ff6b6b !important;
+  border: 1px solid rgba(255, 107, 107, 0.2) !important;
+}

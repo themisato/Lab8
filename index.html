@@ -301,207 +301,124 @@
       </section>
 
       <!-- Блок 5: Форма обратной связи -->
-      <section id="contact" class="section form-section">
-        <div class="container">
-          <div class="text-center">
+<section id="contact" class="section form-section">
+    <div class="container">
+        <div class="text-center">
             <h2 class="section-title">💬 Свяжитесь с нами</h2>
             <p class="section-subtitle">
-              Мы всегда рады помочь и ответить на ваши вопросы
+                Мы всегда рады помочь и ответить на ваши вопросы
             </p>
             <button class="open-form-btn" id="openFormBtn">
-              📝 Заполнить анкету
+                📝 Заполнить анкету
             </button>
-          </div>
         </div>
-      </section>
+    </div>
+</section>
 
-      <!-- Модальное окно формы -->
-      <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-content">
-          <button class="close-btn" id="closeBtn">×</button>
+<!-- Модальное окно формы -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+        <button class="close-btn" id="closeBtn">×</button>
 
-          <div class="form-header">
+        <div class="form-header">
             <h2 class="form-title">📋 Анкета</h2>
             <p class="form-subtitle">Заполните все обязательные поля</p>
-          </div>
+        </div>
 
-          <div id="messageContainer"></div>
+        <div id="messageContainer"></div>
 
-          <form
-            id="feedbackForm"
-            action="process.php"
-            method="POST"
-            data-api="true"
-          >
+        <form id="feedbackForm" action="process.php" method="POST" data-api="true">
             <input type="hidden" name="csrf_token" value="" />
 
             <!-- ФИО -->
             <div class="form-group">
-              <input
-                type="text"
-                id="fullName"
-                name="full_name"
-                required
-                placeholder=" "
-                autocomplete="name"
-              />
-              <label for="fullName" class="required">ФИО</label>
-              <div class="error-message" id="fullNameError">
-                ФИО должно содержать только буквы и пробелы
-              </div>
+                <input type="text" id="fullName" name="full_name" required placeholder=" " autocomplete="name" />
+                <label for="fullName" class="required">ФИО</label>
+                <div class="error-message" id="fullNameError">ФИО должно содержать только буквы и пробелы</div>
             </div>
 
             <!-- Телефон -->
             <div class="form-group">
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                placeholder=" "
-                autocomplete="tel"
-                maxlength="11"
-              />
-              <label for="phone" class="required">Телефон</label>
-              <div class="error-message" id="phoneError">
-                Телефон должен содержать ровно 11 цифр
-              </div>
+                <input type="tel" id="phone" name="phone" required placeholder=" " autocomplete="tel" maxlength="11" />
+                <label for="phone" class="required">Телефон</label>
+                <div class="error-message" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
             </div>
 
             <!-- Email -->
             <div class="form-group">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                placeholder=" "
-                autocomplete="email"
-              />
-              <label for="email" class="required">E-mail</label>
-              <div class="error-message" id="emailError">
-                Введите корректный email адрес
-              </div>
+                <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
+                <label for="email" class="required">E-mail</label>
+                <div class="error-message" id="emailError">Введите корректный email адрес</div>
             </div>
 
             <!-- Дата рождения -->
             <div class="form-group">
-              <input
-                type="date"
-                id="birth_date"
-                name="birth_date"
-                required
-                placeholder=" "
-              />
-              <label for="birth_date" class="required">Дата рождения</label>
-              <div class="error-message" id="birth_dateError">
-                Введите корректную дату рождения
-              </div>
+                <input type="date" id="birth_date" name="birth_date" required placeholder=" " />
+                <label for="birth_date" class="required">Дата рождения</label>
+                <div class="error-message" id="birth_dateError">Введите корректную дату рождения</div>
             </div>
 
             <!-- Пол -->
             <div class="form-group">
-              <label class="required">Пол</label>
-              <div style="display: flex; gap: 20px; margin-top: 8px">
-                <label style="align-items: center; gap: 8px; color: #bae7ff">
-                  <input type="radio" name="gender" value="male" /> Мужской
-                </label>
-                <label
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    color: #bae7ff;
-                  "
-                >
-                  <input type="radio" name="gender" value="female" /> Женский
-                </label>
-              </div>
-              <div class="error-message" id="genderError">Выберите пол</div>
+                <label class="required">Пол</label>
+                <div style="display: flex; gap: 20px; margin-top: 8px">
+                    <label style="display: flex; align-items: center; gap: 8px; color: #bae7ff;">
+                        <input type="radio" name="gender" value="male" /> Мужской
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; color: #bae7ff;">
+                        <input type="radio" name="gender" value="female" /> Женский
+                    </label>
+                </div>
+                <div class="error-message" id="genderError">Выберите пол</div>
             </div>
 
             <!-- Языки -->
             <div class="form-group">
-              <label for="languages" class="required"
-                >Любимые языки программирования</label
-              >
-              <select
-                id="languages"
-                name="languages[]"
-                multiple
-                size="4"
-                style="
-                  width: 100%;
-                  padding: 10px;
-                  border-radius: 8px;
-                  background: rgba(255, 255, 255, 0.05);
-                  color: #fff;
-                  border: 1px solid rgba(64, 201, 255, 0.2);
-                "
-              >
-                <option value="Pascal">Pascal</option>
-                <option value="C">C</option>
-                <option value="C++">C++</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="PHP">PHP</option>
-                <option value="Python">Python</option>
-                <option value="Java">Java</option>
-                <option value="Haskell">Haskell</option>
-                <option value="Clojure">Clojure</option>
-                <option value="Prolog">Prolog</option>
-                <option value="Scala">Scala</option>
-                <option value="Go">Go</option>
-              </select>
-              <div class="error-message" id="languagesError">
-                Выберите хотя бы один язык
-              </div>
+                <label for="languages" class="required">Любимые языки программирования</label>
+                <select id="languages" name="languages[]" multiple size="4" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(64,201,255,0.2);">
+                    <option value="Pascal">Pascal</option>
+                    <option value="C">C</option>
+                    <option value="C++">C++</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="Haskell">Haskell</option>
+                    <option value="Clojure">Clojure</option>
+                    <option value="Prolog">Prolog</option>
+                    <option value="Scala">Scala</option>
+                    <option value="Go">Go</option>
+                </select>
+                <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
             </div>
 
             <!-- Биография -->
             <div class="form-group">
-              <textarea
-                id="biography"
-                name="biography"
-                placeholder=" "
-                rows="4"
-              ></textarea>
-              <label for="biography">Биография</label>
-              <div class="error-message" id="biographyError">
-                Биография не должна превышать 5000 символов
-              </div>
+                <textarea id="biography" name="biography" placeholder=" " rows="4"></textarea>
+                <label for="biography">Биография</label>
+                <div class="error-message" id="biographyError">Биография не должна превышать 5000 символов</div>
             </div>
 
-            <!-- Чекбокс -->
+            <!-- Чекбокс (исправленный) -->
             <div class="form-group">
-              <label for="privacyPolicy" class="required">
-                Я согласен с политикой обработки персональных данных и
-                ознакомлен с контрактом
-              </label>
-              <div class="checkbox-group-custom" id="checkboxGroup">
-                <div>
-                  <input
-                    type="checkbox"
-                    id="privacyPolicy"
-                    name="contract_accepted"
-                    value="1"
-                    required
-                  />
+                <div class="checkbox-group-custom" id="checkboxGroup">
+                    <input type="checkbox" id="privacyPolicy" name="contract_accepted" value="1" required />
+                    <label for="privacyPolicy" class="required">
+                        Я согласен с политикой обработки персональных данных и ознакомлен с контрактом
+                    </label>
                 </div>
-              </div>
-              <div class="error-message" id="privacyPolicyError">
-                Необходимо согласие с политикой обработки данных
-              </div>
+                <div class="error-message" id="privacyPolicyError">
+                    Необходимо согласие с политикой обработки данных
+                </div>
             </div>
 
             <!-- КНОПКА ОТПРАВКИ -->
             <button type="submit" class="submit-btn" id="submitBtn">
-              📤 Отправить анкету
+                📤 Отправить анкету
             </button>
-          </form>
-        </div>
-      </div>
-    </main>
-
+        </form>
+    </div>
+</div>
     <!-- Подвал -->
     <footer class="main-footer">
       <div class="container">
