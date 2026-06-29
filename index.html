@@ -327,94 +327,100 @@
 
         <div id="messageContainer"></div>
 
-        <form id="feedbackForm" action="process.php" method="POST" data-api="true">
-            <input type="hidden" name="csrf_token" value="" />
+        <!-- ОБЕРТКА С ПРОКРУТКОЙ -->
+        <div class="form-scroll">
+            <form id="feedbackForm" action="process.php" method="POST" data-api="true">
+                <input type="hidden" name="csrf_token" value="" />
 
-            <!-- ФИО -->
-            <div class="form-group">
-                <input type="text" id="fullName" name="full_name" required placeholder=" " autocomplete="name" />
-                <label for="fullName" class="required">ФИО</label>
-                <div class="error-message" id="fullNameError">ФИО должно содержать только буквы и пробелы</div>
-            </div>
-
-            <!-- Телефон -->
-            <div class="form-group">
-                <input type="tel" id="phone" name="phone" required placeholder=" " autocomplete="tel" maxlength="11" />
-                <label for="phone" class="required">Телефон</label>
-                <div class="error-message" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
-            </div>
-
-            <!-- Email -->
-            <div class="form-group">
-                <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
-                <label for="email" class="required">E-mail</label>
-                <div class="error-message" id="emailError">Введите корректный email адрес</div>
-            </div>
-
-            <!-- Дата рождения -->
-            <div class="form-group">
-                <input type="date" id="birth_date" name="birth_date" required placeholder=" " />
-                <label for="birth_date" class="required">Дата рождения</label>
-                <div class="error-message" id="birth_dateError">Введите корректную дату рождения</div>
-            </div>
-
-           <!-- Пол -->
-<div class="form-group">
-    <label class="required">Пол</label>
-    <div class="radio-group">
-        <label>
-            <input type="radio" name="gender" value="male" /> Мужской
-        </label>
-        <label>
-            <input type="radio" name="gender" value="female" /> Женский
-        </label>
-    </div>
-    <div class="error-message" id="genderError">Выберите пол</div>
-</div>
-
-<!-- Языки -->
-<div class="form-group">
-    <label for="languages" class="required">Любимые языки программирования</label>
-    <select id="languages" name="languages[]" multiple size="4">
-        <option value="Pascal">Pascal</option>
-        <option value="C">C</option>
-        <option value="C++">C++</option>
-        <option value="JavaScript">JavaScript</option>
-        <option value="PHP">PHP</option>
-        <option value="Python">Python</option>
-        <option value="Java">Java</option>
-        <option value="Haskell">Haskell</option>
-        <option value="Clojure">Clojure</option>
-        <option value="Prolog">Prolog</option>
-        <option value="Scala">Scala</option>
-        <option value="Go">Go</option>
-    </select>
-    <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
-</div> 
-<!-- Биография -->
-            <div class="form-group">
-                <textarea id="biography" name="biography" placeholder=" " rows="4"></textarea>
-                <label for="biography">Биография</label>
-                <div class="error-message" id="biographyError">Биография не должна превышать 5000 символов</div>
-            </div>
-            <!-- Чекбокс (исправленный) -->
-            <div class="form-group">
-                <div class="checkbox-group-custom" id="checkboxGroup">
-                    <input type="checkbox" id="privacyPolicy" name="contract_accepted" value="1" required />
-                    <label for="privacyPolicy" class="required">
-                        Я согласен с политикой обработки персональных данных и ознакомлен с контрактом
-                    </label>
+                <!-- ФИО -->
+                <div class="form-group">
+                    <input type="text" id="fullName" name="full_name" required placeholder=" " autocomplete="name" />
+                    <label for="fullName" class="required">ФИО</label>
+                    <div class="error-message" id="fullNameError">ФИО должно содержать только буквы и пробелы</div>
                 </div>
-                <div class="error-message" id="privacyPolicyError">
-                    Необходимо согласие с политикой обработки данных
-                </div>
-            </div>
 
-            <!-- КНОПКА ОТПРАВКИ -->
-<button type="submit" class="submit-btn" id="submitBtn">
-    📤 Отправить анкету
-</button>
-        </form>
+                <!-- Телефон -->
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" required placeholder=" " autocomplete="tel" maxlength="11" />
+                    <label for="phone" class="required">Телефон</label>
+                    <div class="error-message" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
+                    <label for="email" class="required">E-mail</label>
+                    <div class="error-message" id="emailError">Введите корректный email адрес</div>
+                </div>
+
+                <!-- Дата рождения -->
+                <div class="form-group">
+                    <input type="date" id="birth_date" name="birth_date" required placeholder=" " />
+                    <label for="birth_date" class="required">Дата рождения</label>
+                    <div class="error-message" id="birth_dateError">Введите корректную дату рождения</div>
+                </div>
+
+                <!-- Пол -->
+                <div class="form-group">
+                    <label class="required">Пол</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="gender" value="male" /> Мужской
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female" /> Женский
+                        </label>
+                    </div>
+                    <div class="error-message" id="genderError">Выберите пол</div>
+                </div>
+
+                <!-- Языки -->
+                <div class="form-group">
+                    <label for="languages" class="required">Любимые языки программирования</label>
+                    <select id="languages" name="languages[]" multiple size="4">
+                        <option value="Pascal">Pascal</option>
+                        <option value="C">C</option>
+                        <option value="C++">C++</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Python">Python</option>
+                        <option value="Java">Java</option>
+                        <option value="Haskell">Haskell</option>
+                        <option value="Clojure">Clojure</option>
+                        <option value="Prolog">Prolog</option>
+                        <option value="Scala">Scala</option>
+                        <option value="Go">Go</option>
+                    </select>
+                    <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
+                </div>
+
+                <!-- Биография -->
+                <div class="form-group">
+                    <textarea id="biography" name="biography" placeholder=" " rows="3"></textarea>
+                    <label for="biography">Биография</label>
+                    <div class="error-message" id="biographyError">Биография не должна превышать 5000 символов</div>
+                </div>
+
+                <!-- Чекбокс -->
+                <div class="form-group">
+                    <div class="checkbox-group-custom" id="checkboxGroup">
+                        <input type="checkbox" id="privacyPolicy" name="contract_accepted" value="1" required />
+                        <label for="privacyPolicy" class="required">
+                            Я согласен с политикой обработки персональных данных и ознакомлен с контрактом
+                        </label>
+                    </div>
+                    <div class="error-message" id="privacyPolicyError">
+                        Необходимо согласие с политикой обработки данных
+                    </div>
+                </div>
+
+                <!-- КНОПКА ОТПРАВКИ -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    📤 Отправить анкету
+                </button>
+            </form>
+        </div>
+        <!-- КОНЕЦ ОБЕРТКИ С ПРОКРУТКОЙ -->
     </div>
 </div>
     <!-- Подвал -->
