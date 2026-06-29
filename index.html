@@ -28,8 +28,8 @@ $user_name = $_SESSION['user_name'] ?? '';
             <li><a href="catalog.html">Персонажи</a></li>
             <li><a href="list.php">📋 Анкеты</a></li>
             <li><a href="admin.php">🔧 Админка</a></li>
-            <!-- ТОЛЬКО ОДНА КНОПКА В ЗАВИСИМОСТИ ОТ СЕССИИ -->
-            <?php if ($is_logged_in): ?>
+            <?php if (isset($_SESSION['user_id']) &&
+            !empty($_SESSION['user_id'])): ?>
             <li
               style="
                 display: flex;
@@ -43,7 +43,8 @@ $user_name = $_SESSION['user_name'] ?? '';
               "
             >
               <span style="color: #40c9ff; font-weight: 600; font-size: 0.9rem"
-                >👤 <?php echo htmlspecialchars($user_name); ?></span
+                >👤 <?php echo htmlspecialchars($_SESSION['user_name']);
+                ?></span
               >
               <a
                 href="logout.php"
@@ -55,7 +56,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   border-radius: 20px;
                   font-size: 0.75rem;
                   transition: all 0.3s;
-                  background: rgba(255, 107, 107, 0.05);
                 "
                 >Выйти</a
               >
@@ -73,7 +73,7 @@ $user_name = $_SESSION['user_name'] ?? '';
                   font-size: 0.95rem;
                   transition: all 0.3s;
                 "
-                >Войти</a
+                >🔐 Войти</a
               >
             </li>
             <?php endif; ?>
