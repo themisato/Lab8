@@ -17,19 +17,10 @@
         <a href="index.html" class="logo">Нод-край</a>
         <nav class="main-nav" id="mainNav">
           <ul>
-            <li><a href="#home">Главная</a></li>
-            <li class="dropdown">
-              <a href="#characters"
-                >Персонажи <i class="fas fa-chevron-down"></i
-              ></a>
-              <ul class="dropdown-menu">
-                <li><a href="#characters-block">Все персонажи</a></li>
-                <li><a href="catalog.html">Галерея персонажей</a></li>
-              </ul>
-            </li>
-            <li><a href="#about-game">О игре</a></li>
-            <li><a href="#about-region">О регионе</a></li>
-            <li><a href="#contact">Связаться</a></li>
+            <li><a href="index.html#home">Главная</a></li>
+            <li><a href="catalog.html">Персонажи</a></li>
+            <li><a href="list.php">📋 Анкеты</a></li>
+            <li><a href="admin.php">🔧 Админка</a></li>
           </ul>
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Меню">
@@ -353,7 +344,6 @@
             method="POST"
             data-api="true"
           >
-            <!-- CSRF-токен (если нужно) -->
             <input type="hidden" name="csrf_token" value="" />
 
             <div class="form-group">
@@ -548,17 +538,13 @@
 
         if (form) {
           form.addEventListener("submit", function (e) {
-            // Проверяем, не было ли уже отправки
             if (form.dataset.submitted === "true") return;
-
             e.preventDefault();
 
-            // Собираем данные формы
             const formData = new FormData(form);
             const data = {};
 
             for (let [key, value] of formData.entries()) {
-              // Обрабатываем множественный select
               if (key === "languages[]") {
                 if (!data.languages) data.languages = [];
                 data.languages.push(value);
@@ -567,12 +553,10 @@
               }
             }
 
-            // Если languages не было выбрано - удаляем пустой массив
             if (data.languages && data.languages.length === 0) {
               delete data.languages;
             }
 
-            // Показываем загрузку
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn
               ? submitBtn.textContent
@@ -582,7 +566,6 @@
               submitBtn.disabled = true;
             }
 
-            // Отправляем запрос к API
             fetch("api.php", {
               method: "POST",
               headers: {
@@ -595,62 +578,58 @@
               .then((response) => response.json())
               .then((result) => {
                 if (result.success) {
-                  // Успех
                   showMessage(
                     "✅ " + (result.message || "Данные успешно сохранены!"),
                     "success",
+                    messageContainer,
                   );
-
-                  // Если есть логин и пароль - показываем
                   if (
                     result.data &&
                     result.data.login &&
                     result.data.password
                   ) {
-                    showCredentials(result.data.login, result.data.password);
+                    showCredentials(
+                      result.data.login,
+                      result.data.password,
+                      messageContainer,
+                    );
                   }
-
-                  // Очищаем форму
                   form.reset();
                   form
                     .querySelectorAll(".success")
                     .forEach((el) => el.classList.remove("success"));
-
-                  // Если есть profile_url - перенаправляем
                   if (result.data && result.data.profile_url) {
                     setTimeout(() => {
                       window.location.href = result.data.profile_url;
                     }, 3000);
                   }
                 } else {
-                  // Ошибки валидации
                   if (result.errors) {
                     let errorText = "";
                     for (let key in result.errors) {
                       errorText += "• " + result.errors[key] + "\n";
                     }
-                    showMessage("❌ " + errorText, "error");
-
-                    // Подсвечиваем поля с ошибками
+                    showMessage("❌ " + errorText, "error", messageContainer);
                     for (let key in result.errors) {
                       const field = document.querySelector(`[name="${key}"]`);
-                      if (field) {
-                        field.classList.add("error");
-                      }
+                      if (field) field.classList.add("error");
                     }
                   } else {
                     showMessage(
                       "❌ " + (result.error || "Ошибка при сохранении данных"),
                       "error",
+                      messageContainer,
                     );
                   }
                 }
               })
               .catch((error) => {
                 console.error("Ошибка:", error);
-                showMessage("❌ Ошибка соединения. Попробуйте позже.", "error");
-
-                // Если fetch не работает - отправляем обычным способом
+                showMessage(
+                  "❌ Ошибка соединения. Попробуйте позже.",
+                  "error",
+                  messageContainer,
+                );
                 form.dataset.submitted = "true";
                 form.submit();
               })
@@ -663,10 +642,8 @@
           });
         }
 
-        // Функция показа сообщений
-        function showMessage(text, type) {
-          if (!messageContainer) return;
-
+        function showMessage(text, type, container) {
+          if (!container) return;
           const msg = document.createElement("div");
           msg.className = "message " + type;
           msg.textContent = text;
@@ -674,7 +651,6 @@
           msg.style.padding = "12px";
           msg.style.borderRadius = "8px";
           msg.style.marginBottom = "15px";
-
           if (type === "success") {
             msg.style.background = "#dcfce7";
             msg.style.color = "#166534";
@@ -684,64 +660,38 @@
             msg.style.color = "#991b1b";
             msg.style.border = "1px solid #fecaca";
           }
-
-          messageContainer.innerHTML = "";
-          messageContainer.appendChild(msg);
-
+          container.innerHTML = "";
+          container.appendChild(msg);
           setTimeout(() => {
-            if (msg.parentNode) {
-              msg.remove();
-            }
+            if (msg.parentNode) msg.remove();
           }, 8000);
         }
 
-        // Функция показа логина и пароля
-        function showCredentials(login, password) {
-          if (!messageContainer) return;
-
+        function showCredentials(login, password, container) {
+          if (!container) return;
           const html = `
-            <div class="message" style="
-              background: #fff3e0;
-              color: #e65100;
-              border: 2px dashed #ff9800;
-              padding: 15px;
-              border-radius: 8px;
-              margin-bottom: 15px;
-              text-align: center;
-            ">
+            <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;margin-bottom:15px;text-align:center;">
               <strong>🔑 Ваши данные для входа сохранены!</strong><br>
-              <span style="font-size: 1.1rem;">
-                Логин: <strong>${login}</strong>
-              </span><br>
-              <span style="font-size: 1.1rem;">
-                Пароль: <strong>${password}</strong>
-              </span><br>
-              <span style="color: #d32f2f; font-size: 0.8rem;">
-                ⚠️ Сохраните эти данные! Пароль отображается только один раз.
-              </span>
+              Логин: <strong>${login}</strong><br>
+              Пароль: <strong>${password}</strong><br>
+              <span style="color:#d32f2f;font-size:0.8rem;">⚠️ Сохраните эти данные! Пароль отображается только один раз.</span>
             </div>
           `;
-
-          messageContainer.innerHTML += html;
+          container.innerHTML += html;
         }
 
         // Автозаполнение данных при авторизации
-        // Проверяем, есть ли скрытое поле с ID пользователя
         const editIdInput = document.querySelector('input[name="edit_id"]');
         if (editIdInput && editIdInput.value) {
-          // Загружаем данные пользователя
           fetch("api.php", {
             method: "GET",
-            headers: {
-              Accept: "application/json",
-            },
+            headers: { Accept: "application/json" },
             credentials: "same-origin",
           })
             .then((response) => response.json())
             .then((result) => {
               if (result.success && result.data) {
                 const data = result.data;
-                // Заполняем поля
                 const fields = [
                   "full_name",
                   "phone",
@@ -763,8 +713,6 @@
                     }
                   }
                 });
-
-                // Заполняем языки
                 if (data.languages) {
                   const select = document.getElementById("languages");
                   if (select) {
@@ -773,8 +721,6 @@
                     });
                   }
                 }
-
-                // Чекбокс контракта
                 const contractCheck = document.querySelector(
                   '[name="contract_accepted"]',
                 );

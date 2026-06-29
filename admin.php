@@ -1,18 +1,15 @@
 <?php
 // admin.php - Админ-панель
-session_start();
 require_once 'config.php';
+session_start();
 
-// Проверка авторизации через сессию (вход через admin_login.php)
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header('Location: admin_login.php');
     exit;
 }
 
-// Обработка действий
 $messages = [];
 
-// Удаление анкеты
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     try {
@@ -25,7 +22,6 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     }
 }
 
-// Редактирование
 $edit_id = 0;
 $edit_values = [];
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
@@ -46,7 +42,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     }
 }
 
-// Сохранение редактирования
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $id = (int)$_POST['edit_id'];
     $full_name = trim($_POST['full_name'] ?? '');
@@ -95,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     }
 }
 
-// Получение данных для таблицы
 $applications = [];
 $stmt = $pdo->query("
     SELECT a.*, GROUP_CONCAT(pl.name SEPARATOR ', ') AS languages_list
@@ -107,7 +101,6 @@ $stmt = $pdo->query("
 ");
 $applications = $stmt->fetchAll();
 
-// Статистика
 $stats = [];
 $stmt = $pdo->query("
     SELECT pl.name, COUNT(DISTINCT al.application_id) AS count
@@ -407,14 +400,12 @@ $all_languages = $pdo->query("SELECT name FROM programming_languages ORDER BY na
                 </div>
             </div>
 
-            <!-- Сообщения -->
             <?php if (!empty($messages)): ?>
                 <?php foreach ($messages as $msg): ?>
                     <?php echo $msg; ?>
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <!-- Статистика -->
             <div class="stats-grid">
                 <div class="stats-card">
                     <div class="number"><?php echo $total_users; ?></div>
@@ -428,13 +419,11 @@ $all_languages = $pdo->query("SELECT name FROM programming_languages ORDER BY na
                 <?php endforeach; ?>
             </div>
 
-            <!-- Форма редактирования -->
             <?php if ($edit_id > 0 && $edit_values): ?>
             <div class="edit-form">
                 <h2 style="color: #40c9ff; margin-bottom: 1rem;">✏️ Редактирование анкеты #<?php echo $edit_id; ?></h2>
                 <form method="POST" action="">
                     <input type="hidden" name="edit_id" value="<?php echo $edit_id; ?>">
-                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                     
                     <div class="form-group">
                         <label>ФИО <span class="required">*</span></label>
@@ -486,7 +475,6 @@ $all_languages = $pdo->query("SELECT name FROM programming_languages ORDER BY na
             </div>
             <?php endif; ?>
 
-            <!-- Таблица анкет -->
             <div class="table-wrapper">
                 <h2 style="color: #40c9ff; margin-bottom: 1rem;">📋 Все анкеты</h2>
                 <table class="admin-table">

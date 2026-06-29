@@ -1,7 +1,7 @@
 <?php
 // admin_stats.php - Статистика для администратора
-session_start();
 require_once 'config.php';
+session_start();
 
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header('Location: admin_login.php');

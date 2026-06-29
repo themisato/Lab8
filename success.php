@@ -1,13 +1,12 @@
 <?php
 // success.php - Страница успешного сохранения
-session_start();
 require_once 'config.php';
+session_start();
 
 $id = $_GET['id'] ?? '';
 $login = $_GET['login'] ?? '';
 $password = $_GET['password'] ?? '';
 
-// Очищаем Cookies ошибок
 foreach (['full_name', 'phone', 'email', 'birth_date', 'gender', 'languages', 'biography', 'contract_accepted'] as $field) {
     setcookie("error_$field", "", time() - 3600, '/');
 }

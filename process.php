@@ -2,8 +2,8 @@
 // process.php - Обработчик формы
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-session_start();
 require_once 'config.php';
+session_start();
 
 function setError($field, $message) {
     setcookie("error_$field", $message, time() + 60, '/');
@@ -34,7 +34,6 @@ $edit_id = isset($_GET['edit_id']) && is_numeric($_GET['edit_id']) ? (int)$_GET[
 
 $errors = [];
 
-// Валидация
 if (empty($full_name)) {
     $errors['full_name'] = "ФИО обязательно для заполнения";
 } elseif (strlen($full_name) > 150) {
@@ -173,7 +172,6 @@ try {
         setcookie("error_$field", "", time() - 3600, '/');
     }
     
-    // Перенаправляем на страницу успеха с данными
     header("Location: success.php?id=" . $application_id . "&login=" . urlencode($login ?? '') . "&password=" . urlencode($password ?? ''));
     exit;
     

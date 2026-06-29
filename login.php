@@ -1,7 +1,7 @@
 <?php
 // login.php - Страница входа
-session_start();
 require_once 'config.php';
+session_start();
 
 if (isset($_SESSION['user_id'])) {
     header('Location: index.html');
