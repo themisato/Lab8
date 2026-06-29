@@ -438,233 +438,199 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-      // ===== ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
-      document.addEventListener("DOMContentLoaded", function () {
-        const openBtn = document.getElementById("openFormBtn");
-        const modal = document.getElementById("modalOverlay");
-        const closeBtn = document.getElementById("closeBtn");
+      <script>
+    // ===== ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const openBtn = document.getElementById('openFormBtn');
+        const modal = document.getElementById('modalOverlay');
+        const closeBtn = document.getElementById('closeBtn');
 
         if (openBtn && modal) {
-          openBtn.addEventListener("click", function () {
-            modal.style.display = "flex";
-          });
+            openBtn.addEventListener('click', function() {
+                modal.style.display = 'flex';
+            });
         }
 
         if (closeBtn && modal) {
-          closeBtn.addEventListener("click", function () {
-            modal.style.display = "none";
-          });
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
         }
 
         if (modal) {
-          modal.addEventListener("click", function (e) {
-            if (e.target === modal) {
-              modal.style.display = "none";
-            }
-          });
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         }
 
         // ===== ОТПРАВКА ФОРМЫ ЧЕРЕЗ FETCH =====
-        const form = document.getElementById("feedbackForm");
-        const messageContainer = document.getElementById("messageContainer");
+        const form = document.getElementById('feedbackForm');
+        const messageContainer = document.getElementById('messageContainer');
 
         if (form) {
-          form.addEventListener("submit", function (e) {
-            if (form.dataset.submitted === "true") return;
-            e.preventDefault();
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            const formData = new FormData(form);
-            const data = {};
+                // Собираем данные формы
+                const formData = new FormData(form);
+                const data = {};
 
-            for (let [key, value] of formData.entries()) {
-              if (key === "languages[]") {
-                if (!data.languages) data.languages = [];
-                data.languages.push(value);
-              } else {
-                data[key] = value;
-              }
-            }
-
-            if (data.languages && data.languages.length === 0) {
-              delete data.languages;
-            }
-
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn
-              ? submitBtn.textContent
-              : "Отправить";
-            if (submitBtn) {
-              submitBtn.textContent = "⏳ Отправка...";
-              submitBtn.disabled = true;
-            }
-
-            fetch("api.php", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-              body: JSON.stringify(data),
-              credentials: "same-origin",
-            })
-              .then((response) => response.json())
-              .then((result) => {
-                if (result.success) {
-                  showMessage(
-                    "✅ " + (result.message || "Данные успешно сохранены!"),
-                    "success",
-                    messageContainer,
-                  );
-                  if (
-                    result.data &&
-                    result.data.login &&
-                    result.data.password
-                  ) {
-                    showCredentials(
-                      result.data.login,
-                      result.data.password,
-                      messageContainer,
-                    );
-                  }
-                  form.reset();
-                  form
-                    .querySelectorAll(".success")
-                    .forEach((el) => el.classList.remove("success"));
-                  if (result.data && result.data.profile_url) {
-                    setTimeout(() => {
-                      window.location.href = result.data.profile_url;
-                    }, 3000);
-                  }
-                } else {
-                  if (result.errors) {
-                    let errorText = "";
-                    for (let key in result.errors) {
-                      errorText += "• " + result.errors[key] + "\n";
+                for (let [key, value] of formData.entries()) {
+                    if (key === 'languages[]') {
+                        if (!data.languages) data.languages = [];
+                        data.languages.push(value);
+                    } else {
+                        data[key] = value;
                     }
-                    showMessage("❌ " + errorText, "error", messageContainer);
-                    for (let key in result.errors) {
-                      const field = document.querySelector(`[name="${key}"]`);
-                      if (field) field.classList.add("error");
-                    }
-                  } else {
-                    showMessage(
-                      "❌ " + (result.error || "Ошибка при сохранении данных"),
-                      "error",
-                      messageContainer,
-                    );
-                  }
                 }
-              })
-              .catch((error) => {
-                console.error("Ошибка:", error);
-                showMessage(
-                  "❌ Ошибка соединения. Попробуйте позже.",
-                  "error",
-                  messageContainer,
-                );
-                form.dataset.submitted = "true";
-                form.submit();
-              })
-              .finally(() => {
+
+                if (data.languages && data.languages.length === 0) {
+                    delete data.languages;
+                }
+
+                // Блокируем кнопку
+                const submitBtn = form.querySelector('.submit-btn');
+                const originalText = submitBtn ? submitBtn.textContent : 'Отправить';
                 if (submitBtn) {
-                  submitBtn.textContent = originalText;
-                  submitBtn.disabled = false;
+                    submitBtn.textContent = '⏳ Отправка...';
+                    submitBtn.disabled = true;
                 }
-              });
-          });
-        }
 
-        function showMessage(text, type, container) {
-          if (!container) return;
-          const msg = document.createElement("div");
-          msg.className = "message " + type;
-          msg.textContent = text;
-          msg.style.whiteSpace = "pre-line";
-          msg.style.padding = "12px";
-          msg.style.borderRadius = "8px";
-          msg.style.marginBottom = "15px";
-          if (type === "success") {
-            msg.style.background = "#dcfce7";
-            msg.style.color = "#166534";
-            msg.style.border = "1px solid #bbf7d0";
-          } else {
-            msg.style.background = "#fee2e2";
-            msg.style.color = "#991b1b";
-            msg.style.border = "1px solid #fecaca";
-          }
-          container.innerHTML = "";
-          container.appendChild(msg);
-          setTimeout(() => {
-            if (msg.parentNode) msg.remove();
-          }, 8000);
-        }
-
-        function showCredentials(login, password, container) {
-          if (!container) return;
-          const html = `
-            <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;margin-bottom:15px;text-align:center;">
-              <strong>🔑 Ваши данные для входа сохранены!</strong><br>
-              Логин: <strong>${login}</strong><br>
-              Пароль: <strong>${password}</strong><br>
-              <span style="color:#d32f2f;font-size:0.8rem;">⚠️ Сохраните эти данные! Пароль отображается только один раз.</span>
-            </div>
-          `;
-          container.innerHTML += html;
+                // Отправляем запрос к API
+                fetch('api.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                    credentials: 'same-origin'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ошибка сети: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    if (result.success) {
+                        // УСПЕХ - показываем логин и пароль
+                        let message = '✅ ' + (result.message || 'Данные успешно сохранены!');
+                        let html = '<div class="message success">' + message + '</div>';
+                        
+                        if (result.data && result.data.login && result.data.password) {
+                            html += `
+                                <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;margin-bottom:15px;text-align:center;">
+                                    <strong>🔑 Ваши данные для входа сохранены!</strong><br>
+                                    Логин: <strong>${result.data.login}</strong><br>
+                                    Пароль: <strong>${result.data.password}</strong><br>
+                                    <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные! Пароль отображается только один раз.</span>
+                                </div>
+                            `;
+                        }
+                        
+                        messageContainer.innerHTML = html;
+                        
+                        // Очищаем форму
+                        form.reset();
+                        form.querySelectorAll('.success').forEach(el => el.classList.remove('success'));
+                        
+                        // НЕ ЗАКРЫВАЕМ ОКНО - пользователь закроет сам
+                        
+                        // Если есть profile_url - показать ссылку
+                        if (result.data && result.data.profile_url) {
+                            html += `<div style="text-align:center;margin-top:10px;">
+                                <a href="${result.data.profile_url}" class="btn" style="display:inline-block;padding:8px 20px;font-size:0.9rem;">Перейти к анкете</a>
+                            </div>`;
+                            messageContainer.innerHTML = html;
+                        }
+                    } else {
+                        // Ошибки валидации
+                        if (result.errors) {
+                            let errorText = '';
+                            for (let key in result.errors) {
+                                errorText += '• ' + result.errors[key] + '<br>';
+                                // Подсвечиваем поля с ошибками
+                                const field = document.querySelector(`[name="${key}"]`);
+                                if (field) {
+                                    field.classList.add('error');
+                                    // Показываем ошибку под полем
+                                    const errorEl = document.getElementById(key + 'Error');
+                                    if (errorEl) {
+                                        errorEl.textContent = result.errors[key];
+                                        errorEl.classList.add('show');
+                                    }
+                                }
+                            }
+                            messageContainer.innerHTML = `<div class="message error">❌ ${errorText}</div>`;
+                        } else {
+                            messageContainer.innerHTML = `<div class="message error">❌ ${result.error || 'Ошибка при сохранении данных'}</div>`;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    // Показываем ошибку, НЕ закрываем окно
+                    messageContainer.innerHTML = `
+                        <div class="message error">
+                            ❌ Ошибка соединения. Попробуйте позже.
+                            <br><small>Проверьте, что файл api.php существует на сервере.</small>
+                        </div>
+                    `;
+                })
+                .finally(() => {
+                    // Восстанавливаем кнопку
+                    if (submitBtn) {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            });
         }
 
         // Автозаполнение данных при авторизации
         const editIdInput = document.querySelector('input[name="edit_id"]');
         if (editIdInput && editIdInput.value) {
-          fetch("api.php", {
-            method: "GET",
-            headers: { Accept: "application/json" },
-            credentials: "same-origin",
-          })
-            .then((response) => response.json())
-            .then((result) => {
-              if (result.success && result.data) {
-                const data = result.data;
-                const fields = [
-                  "full_name",
-                  "phone",
-                  "email",
-                  "birth_date",
-                  "gender",
-                  "biography",
-                ];
-                fields.forEach((field) => {
-                  const input = document.querySelector(`[name="${field}"]`);
-                  if (input && data[field]) {
-                    if (input.type === "radio") {
-                      const radio = document.querySelector(
-                        `[name="${field}"][value="${data[field]}"]`,
-                      );
-                      if (radio) radio.checked = true;
-                    } else {
-                      input.value = data[field];
-                    }
-                  }
-                });
-                if (data.languages) {
-                  const select = document.getElementById("languages");
-                  if (select) {
-                    Array.from(select.options).forEach((opt) => {
-                      opt.selected = data.languages.includes(opt.value);
-                    });
-                  }
-                }
-                const contractCheck = document.querySelector(
-                  '[name="contract_accepted"]',
-                );
-                if (contractCheck && data.contract_accepted) {
-                  contractCheck.checked = true;
-                }
-              }
+            fetch('api.php', {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' },
+                credentials: 'same-origin'
             })
-            .catch((error) => console.error("Ошибка загрузки данных:", error));
+            .then(response => response.json())
+            .then(result => {
+                if (result.success && result.data) {
+                    const data = result.data;
+                    const fields = ['full_name', 'phone', 'email', 'birth_date', 'gender', 'biography'];
+                    fields.forEach(field => {
+                        const input = document.querySelector(`[name="${field}"]`);
+                        if (input && data[field]) {
+                            if (input.type === 'radio') {
+                                const radio = document.querySelector(`[name="${field}"][value="${data[field]}"]`);
+                                if (radio) radio.checked = true;
+                            } else {
+                                input.value = data[field];
+                            }
+                        }
+                    });
+                    if (data.languages) {
+                        const select = document.getElementById('languages');
+                        if (select) {
+                            Array.from(select.options).forEach(opt => {
+                                opt.selected = data.languages.includes(opt.value);
+                            });
+                        }
+                    }
+                    const contractCheck = document.querySelector('[name="contract_accepted"]');
+                    if (contractCheck && data.contract_accepted) {
+                        contractCheck.checked = true;
+                    }
+                }
+            })
+            .catch(error => console.error('Ошибка загрузки данных:', error));
         }
-      });
-    </script>
+    });
+</script>
   </body>
 </html>
