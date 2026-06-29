@@ -136,7 +136,7 @@ $applications = $stmt->fetchAll();
 
     <main>
         <div class="container list-container">
-            <h1>📋 Список анкет</h1>
+            <h1> Список анкет</h1>
             <p class="subtitle">Все сохранённые анкеты пользователей</p>
             
             <div style="text-align:center; margin-bottom:1.5rem;">
@@ -147,9 +147,9 @@ $applications = $stmt->fetchAll();
 
             <?php if (empty($applications)): ?>
                 <div class="empty-state">
-                    <div class="icon">📭</div>
+                    <div class="icon"></div>
                     <p>Пока нет ни одной сохранённой анкеты.</p>
-                    <a href="index.html" class="btn-back">📝 Заполнить анкету</a>
+                    <a href="index.html" class="btn-back"> Заполнить анкету</a>
                 </div>
             <?php else: ?>
                 <div class="table-wrapper">

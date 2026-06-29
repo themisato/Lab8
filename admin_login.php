@@ -40,26 +40,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Полностью переопределяем стили для страницы входа в админку */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a1929;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .admin-login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+        
         .login-container {
             max-width: 420px;
-            margin: 120px auto 60px;
+            width: 100%;
             background: #1a2a4a;
             padding: 2.5rem;
             border-radius: 24px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.4);
             border: 1px solid rgba(64, 201, 255, 0.2);
         }
-        .login-container h2 {
-            color: #b87333;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
+        
         .login-container .logo-icon {
             text-align: center;
             font-size: 3rem;
             margin-bottom: 0.5rem;
         }
+        
+        .login-container h2 {
+            color: #b87333;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .login-container .subtitle {
+            text-align: center;
+            color: #bae7ff;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+        }
+        
         .login-error {
             background: rgba(255, 107, 107, 0.15);
             color: #ff6b6b;
@@ -69,9 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
             border: 1px solid rgba(255, 107, 107, 0.2);
         }
+        
         .login-container .form-group {
             margin-bottom: 1.2rem;
         }
+        
         .login-container .form-group label {
             display: block;
             font-weight: 600;
@@ -79,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 0.3rem;
             font-size: 0.95rem;
         }
+        
         .login-container .form-group input {
             width: 100%;
             padding: 0.75rem 1rem;
@@ -89,11 +127,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #fff;
             transition: all 0.3s;
         }
+        
         .login-container .form-group input:focus {
             border-color: #b87333;
             outline: none;
             box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.2);
         }
+        
+        .login-container .form-group input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+        
         .login-btn {
             width: 100%;
             padding: 0.85rem;
@@ -106,90 +150,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cursor: pointer;
             transition: all 0.3s;
         }
+        
         .login-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(184, 115, 51, 0.3);
         }
-        .back-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #bae7ff;
-        }
-        .back-link a {
-            color: #40c9ff;
-            text-decoration: none;
-        }
-        .back-link a:hover {
-            text-decoration: underline;
-        }
+        
         .info-text {
             text-align: center;
             color: #666;
             font-size: 0.85rem;
             margin-top: 1rem;
+            padding: 0.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        
+        .info-text strong {
+            color: #b87333;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .back-link a {
+            color: #40c9ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .back-link a:hover {
+            color: #80d8ff;
+            text-decoration: underline;
+        }
+        
+        /* Скрываем header и footer на этой странице */
+        .main-header,
+        .main-footer {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="container header-container">
-            <a href="index.html" class="logo">Нод-край</a>
-            <nav class="main-nav" id="mainNav">
-                <ul>
-                    <li><a href="index.html#home">Главная</a></li>
-                    <li><a href="catalog.html">Персонажи</a></li>
-                    <li><a href="list.php">Анкеты</a></li>
-                    <li><a href="admin.php">Админка</a></li>
-                </ul>
-            </nav>
-            <button class="menu-toggle" id="menuToggle" aria-label="Меню">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </header>
-
-    <main>
-        <div class="container">
-            <div class="login-container">
-                <div class="logo-icon">👑</div>
-                <h2>Админ-панель</h2>
-                
-                <?php if ($error): ?>
-                    <div class="login-error">❌ <?php echo h($error); ?></div>
-                <?php endif; ?>
-                
-                <form method="POST" action="">
-                    <div class="form-group">
-                        <label for="login">Логин администратора</label>
-                        <input type="text" id="login" name="login" required placeholder="Введите логин" value="admin">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Пароль</label>
-                        <input type="password" id="password" name="password" required placeholder="Введите пароль" value="admin123">
-                    </div>
-                    
-                    <button type="submit" class="login-btn">👑 Войти в админку</button>
-                </form>
-                
-                <div class="info-text">
-                    Логин: <strong>admin</strong> | Пароль: <strong>admin123</strong>
+    <div class="admin-login-wrapper">
+        <div class="login-container">
+            <div class="logo-icon">👑</div>
+            <h2>Админ-панель</h2>
+            <p class="subtitle">Вход для администраторов</p>
+            
+            <?php if ($error): ?>
+                <div class="login-error">❌ <?php echo h($error); ?></div>
+            <?php endif; ?>
+            
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="login">Логин</label>
+                    <input type="text" id="login" name="login" required placeholder="Введите логин" value="admin">
                 </div>
                 
-                <div class="back-link">
-                    <a href="index.html">← Вернуться на главную</a>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required placeholder="Введите пароль" value="admin123">
                 </div>
+                
+                <button type="submit" class="login-btn"> Войти в админку</button>
+            </form>
+            
+            <div class="info-text">
+                Логин: <strong>admin</strong> | Пароль: <strong>admin123</strong>
+            </div>
+            
+            <div class="back-link">
+                <a href="index.html">← Вернуться на главную</a>
             </div>
         </div>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>Nod-Krai &copy; Фанатский проект по Genshin Impact</p>
-            <p class="disclaimer">Все права принадлежат HoYoverse</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    </div>
 </body>
 </html>
