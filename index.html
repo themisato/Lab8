@@ -348,12 +348,8 @@ $user_name = $_SESSION['user_name'] ?? '';
           <div id="messageContainer"></div>
 
           <div class="form-scroll">
-            <form
-              id="feedbackForm"
-              action="api.php"
-              method="POST"
-              data-api="true"
-            >
+            <!-- УБРАЛИ action="api.php" чтобы не перенаправляло -->
+            <form id="feedbackForm" method="POST" data-api="true">
               <input type="hidden" name="csrf_token" value="" />
 
               <div class="form-group">
@@ -590,10 +586,17 @@ $user_name = $_SESSION['user_name'] ?? '';
                                         Логин: <strong>${result.data.login}</strong><br>
                                         Пароль: <strong>${result.data.password}</strong><br>
                                         <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные!</span>
+                                        <br><br>
+                                        <a href="login.php" style="display:inline-block;padding:8px 20px;background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;border-radius:30px;text-decoration:none;font-weight:bold;">🔐 Перейти ко входу</a>
                                     </div>
                                 `;
                   }
+                  // Очищаем форму
                   form.reset();
+                  // Обновляем страницу, чтобы показать имя в меню
+                  setTimeout(function () {
+                    location.reload();
+                  }, 3000);
                 } else {
                   if (result.errors) {
                     let errorText = "";
