@@ -1,11 +1,10 @@
 <?php
-// api.php - Веб-сервис
+// api.php - Веб-сервис (исправленный)
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-// ===== ВАЖНО: СНАЧАЛА ПОДКЛЮЧАЕМ CONFIG, ПОТОМ СЕССИЮ =====
 require_once 'config.php';
 session_start();
 
@@ -115,13 +114,12 @@ try {
         ]);
     }
     elseif ($method === 'POST') {
-        if ($is_auth) {
-            sendResponse(['error' => 'Вы уже авторизованы. Используйте PUT для обновления']);
-        }
+        // ===== РАЗРЕШАЕМ СОЗДАНИЕ НОВОЙ АНКЕТЫ ВСЕГДА =====
         $errors = validateData($input_data);
         if (!empty($errors)) {
             sendResponse(['success' => false, 'errors' => $errors]);
         }
+        
         $pdo->beginTransaction();
         $sql = "INSERT INTO applications (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
                 VALUES (:full_name, :phone, :email, :birth_date, :gender, :biography, :contract_accepted)";
@@ -136,6 +134,7 @@ try {
             ':contract_accepted' => $input_data['contract_accepted'] ?? 0
         ]);
         $user_id = $pdo->lastInsertId();
+        
         if (!empty($input_data['languages'])) {
             $langStmt = $pdo->prepare("SELECT id FROM programming_languages WHERE name = ?");
             $linkStmt = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (?, ?)");
@@ -147,15 +146,20 @@ try {
                 }
             }
         }
+        
         $login = strtolower(preg_replace('/[^a-zA-Z]/', '', $input_data['full_name']));
         $login = substr($login, 0, 8) . '_' . rand(100, 999);
         $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%'), 0, 12);
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        
         $updateStmt = $pdo->prepare("UPDATE applications SET login = ?, password_hash = ? WHERE id = ?");
         $updateStmt->execute([$login, $password_hash, $user_id]);
         $pdo->commit();
+        
+        // Обновляем сессию - теперь пользователь авторизован под НОВОЙ анкетой
         $_SESSION['user_id'] = $user_id;
         $_SESSION['user_name'] = $input_data['full_name'];
+        
         sendResponse([
             'success' => true,
             'message' => 'Пользователь создан',
