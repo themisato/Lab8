@@ -91,7 +91,7 @@ try {
         }
         
         $pdo->beginTransaction();
-        $sql = "INSERT INTO applications (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
+        $sql = "INSERT INTO " . table('applications') . " (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
                 VALUES (:full_name, :phone, :email, :birth_date, :gender, :biography, :contract_accepted)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -106,8 +106,8 @@ try {
         $user_id = $pdo->lastInsertId();
         
         if (!empty($input_data['languages'])) {
-            $langStmt = $pdo->prepare("SELECT id FROM programming_languages WHERE name = ?");
-            $linkStmt = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (?, ?)");
+            $langStmt = $pdo->prepare("SELECT id FROM " . table('programming_languages') . " WHERE name = ?");
+            $linkStmt = $pdo->prepare("INSERT INTO " . table('application_languages') . " (application_id, language_id) VALUES (?, ?)");
             foreach ($input_data['languages'] as $lang_name) {
                 $langStmt->execute([$lang_name]);
                 $lang = $langStmt->fetch();
@@ -122,7 +122,7 @@ try {
         $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%'), 0, 12);
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
-        $updateStmt = $pdo->prepare("UPDATE applications SET login = ?, password_hash = ? WHERE id = ?");
+        $updateStmt = $pdo->prepare("UPDATE " . table('applications') . " SET login = ?, password_hash = ? WHERE id = ?");
         $updateStmt->execute([$login, $password_hash, $user_id]);
         $pdo->commit();
         
@@ -151,7 +151,7 @@ try {
             sendResponse(['success' => false, 'errors' => $errors]);
         }
         $pdo->beginTransaction();
-        $sql = "UPDATE applications SET 
+        $sql = "UPDATE " . table('applications') . " SET 
                 full_name = :full_name, phone = :phone, email = :email, 
                 birth_date = :birth_date, gender = :gender, 
                 biography = :biography, contract_accepted = :contract_accepted
@@ -167,10 +167,10 @@ try {
             ':contract_accepted' => $input_data['contract_accepted'] ?? 0,
             ':id' => $user_id
         ]);
-        $pdo->prepare("DELETE FROM application_languages WHERE application_id = ?")->execute([$user_id]);
+        $pdo->prepare("DELETE FROM " . table('application_languages') . " WHERE application_id = ?")->execute([$user_id]);
         if (!empty($input_data['languages'])) {
-            $langStmt = $pdo->prepare("SELECT id FROM programming_languages WHERE name = ?");
-            $linkStmt = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (?, ?)");
+            $langStmt = $pdo->prepare("SELECT id FROM " . table('programming_languages') . " WHERE name = ?");
+            $linkStmt = $pdo->prepare("INSERT INTO " . table('application_languages') . " (application_id, language_id) VALUES (?, ?)");
             foreach ($input_data['languages'] as $lang_name) {
                 $langStmt->execute([$lang_name]);
                 $lang = $langStmt->fetch();

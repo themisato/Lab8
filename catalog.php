@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once 'config.php';
+
+$is_logged_in = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+$user_name = $_SESSION['user_name'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -125,26 +132,8 @@
     <!-- Шапка -->
     <header class="main-header">
       <div class="container header-container">
-        <a href="index.html" class="logo">Nod-Krai</a>
-        <nav class="main-nav" id="mainNav">
-          <ul>
-            <li><a href="index.html#home">Главная</a></li>
-            <li class="dropdown">
-              <a href="index.html#characters-block"
-                >Персонажи <i class="fas fa-chevron-down"></i
-              ></a>
-              <ul class="dropdown-menu">
-                <li><a href="index.html#characters-block">Все персонажи</a></li>
-                <li>
-                  <a href="catalog.html" class="active">Галерея персонажей</a>
-                </li>
-              </ul>
-            </li>
-            <li><a href="index.html#about-game">О игре</a></li>
-            <li><a href="index.html#about-region">О регионе</a></li>
-            <li><a href="index.html#contact">Связаться</a></li>
-          </ul>
-        </nav>
+        <a href="index.php" class="logo">Nod-Krai</a>
+        <?php include 'nav.php'; ?>
         <button class="menu-toggle" id="menuToggle" aria-label="Меню">
           <i class="fas fa-bars"></i>
         </button>
@@ -394,7 +383,7 @@
       </div>
 
       <div class="text-center" style="padding: 20px 0 50px">
-        <a href="index.html#characters-block" class="btn"
+        <a href="index.php#characters-block" class="btn"
           >Вернуться на главную</a
         >
       </div>

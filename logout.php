@@ -1,5 +1,5 @@
 <?php
-// logout.php - Выход из системы
+// logout.php - Выход из системы (для пользователей)
 session_start();
 
 // Очищаем все сессионные данные
@@ -18,6 +18,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Перенаправляем на главную
-header('Location: index.html');
+header('Location: index.php');
 exit;
 ?>

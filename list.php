@@ -1,12 +1,16 @@
 <?php
 // list.php - Список всех анкет
 require_once 'config.php';
+session_start();
+
+$is_logged_in = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+$user_name = $_SESSION['user_name'] ?? '';
 
 $sql = "SELECT a.*, 
         GROUP_CONCAT(pl.name ORDER BY pl.name SEPARATOR ', ') as languages
-        FROM applications a
-        LEFT JOIN application_languages al ON a.id = al.application_id
-        LEFT JOIN programming_languages pl ON al.language_id = pl.id
+        FROM " . table('applications') . " a
+        LEFT JOIN " . table('application_languages') . " al ON a.id = al.application_id
+        LEFT JOIN " . table('programming_languages') . " pl ON al.language_id = pl.id
         GROUP BY a.id
         ORDER BY a.created_at DESC";
 
@@ -119,24 +123,8 @@ $applications = $stmt->fetchAll();
 <body>
     <header class="main-header">
         <div class="container header-container">
-            <a href="index.html" class="logo">Нод-край</a>
-            <nav class="main-nav" id="mainNav">
-    <ul>
-        <li><a href="index.html#home">Главная</a></li>
-        <li><a href="catalog.html">Персонажи</a></li>
-        <li><a href="list.php" class="active">📋 Анкеты</a></li>
-        <li><a href="admin.php">🔧 Админка</a></li>
-        <!-- ТОЛЬКО ОДНА КНОПКА -->
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <li style="display:flex;align-items:center;gap:8px;margin-left:15px;background:rgba(64,201,255,0.1);padding:4px 14px 4px 18px;border-radius:30px;border:1px solid rgba(64,201,255,0.15);">
-                <span style="color:#40c9ff;font-weight:600;font-size:0.9rem;">👤 <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                <a href="logout.php" style="color:#ff6b6b;text-decoration:none;padding:3px 12px;border:1px solid rgba(255,107,107,0.3);border-radius:20px;font-size:0.75rem;">Выйти</a>
-            </li>
-        <?php else: ?>
-            <li><a href="login.php" style="background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;padding:6px 20px;border-radius:30px;font-weight:bold;font-size:0.95rem;">Войти</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>
+            <a href="index.php" class="logo">Нод-край</a>
+            <?php include 'nav.php'; ?>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню">
                 <i class="fas fa-bars"></i>
             </button>
@@ -145,7 +133,7 @@ $applications = $stmt->fetchAll();
 
     <main>
         <div class="container list-container">
-            <h1> Список анкет</h1>
+            <h1>📋 Список анкет</h1>
             <p class="subtitle">Все сохранённые анкеты пользователей</p>
             
             <div style="text-align:center; margin-bottom:1.5rem;">
@@ -156,9 +144,9 @@ $applications = $stmt->fetchAll();
 
             <?php if (empty($applications)): ?>
                 <div class="empty-state">
-                    <div class="icon"></div>
+                    <div class="icon">📭</div>
                     <p>Пока нет ни одной сохранённой анкеты.</p>
-                    <a href="index.html" class="btn-back"> Заполнить анкету</a>
+                    <a href="index.php" class="btn-back">📝 Заполнить анкету</a>
                 </div>
             <?php else: ?>
                 <div class="table-wrapper">
@@ -208,7 +196,7 @@ $applications = $stmt->fetchAll();
             <?php endif; ?>
             
             <div style="text-align:center; margin-top: 2rem;">
-                <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> На главную</a>
+                <a href="index.php" class="btn-back"><i class="fas fa-arrow-left"></i> На главную</a>
                 <a href="admin.php" class="btn-back btn-admin"><i class="fas fa-crown"></i> Админ-панель</a>
             </div>
         </div>

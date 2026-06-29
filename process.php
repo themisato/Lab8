@@ -81,15 +81,15 @@ if (!empty($errors)) {
             setcookie("form_$key", $value, 0, '/');
         }
     }
-    header("Location: index.html");
+    header("Location: index.php");
     exit;
 }
 
 // ===== СОХРАНЕНИЕ В БД =====
 try {
-    $check = $pdo->query("SHOW TABLES LIKE 'applications'");
+    $check = $pdo->query("SHOW TABLES LIKE '" . table('applications') . "'");
     if ($check->rowCount() == 0) {
-        throw new Exception("Таблица 'applications' не существует!");
+        throw new Exception("Таблица '" . table('applications') . "' не существует!");
     }
     
     $pdo->beginTransaction();
@@ -97,7 +97,7 @@ try {
     $isEdit = ($edit_id > 0 && isset($_SESSION['user_id']) && $_SESSION['user_id'] == $edit_id);
     
     if ($isEdit) {
-        $sql = "UPDATE applications SET 
+        $sql = "UPDATE " . table('applications') . " SET 
                 full_name = :full_name,
                 phone = :phone,
                 email = :email,
@@ -118,9 +118,9 @@ try {
             ':id' => $edit_id
         ]);
         $application_id = $edit_id;
-        $pdo->prepare("DELETE FROM application_languages WHERE application_id = :id")->execute([':id' => $edit_id]);
+        $pdo->prepare("DELETE FROM " . table('application_languages') . " WHERE application_id = :id")->execute([':id' => $edit_id]);
     } else {
-        $sql = "INSERT INTO applications (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
+        $sql = "INSERT INTO " . table('applications') . " (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
                 VALUES (:full_name, :phone, :email, :birth_date, :gender, :biography, :contract_accepted)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -139,7 +139,7 @@ try {
         $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%'), 0, 12);
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
-        $updateStmt = $pdo->prepare("UPDATE applications SET login = :login, password_hash = :hash WHERE id = :id");
+        $updateStmt = $pdo->prepare("UPDATE " . table('applications') . " SET login = :login, password_hash = :hash WHERE id = :id");
         $updateStmt->execute([
             ':login' => $login,
             ':hash' => $password_hash,
@@ -151,8 +151,8 @@ try {
     }
     
     if (!empty($languages)) {
-        $langStmt = $pdo->prepare("SELECT id FROM programming_languages WHERE name = :name");
-        $linkStmt = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (:app_id, :lang_id)");
+        $langStmt = $pdo->prepare("SELECT id FROM " . table('programming_languages') . " WHERE name = :name");
+        $linkStmt = $pdo->prepare("INSERT INTO " . table('application_languages') . " (application_id, language_id) VALUES (:app_id, :lang_id)");
         foreach ($languages as $lang_name) {
             $langStmt->execute([':name' => $lang_name]);
             $langRow = $langStmt->fetch();
@@ -177,12 +177,12 @@ try {
 } catch (PDOException $e) {
     $pdo->rollBack();
     error_log("Database error: " . $e->getMessage());
-    header("Location: index.html?error=db");
+    header("Location: index.php?error=db");
     exit;
 } catch (Exception $e) {
     $pdo->rollBack();
     error_log("General error: " . $e->getMessage());
-    header("Location: index.html?error=general");
+    header("Location: index.php?error=general");
     exit;
 }
 ?>

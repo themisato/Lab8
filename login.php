@@ -5,7 +5,7 @@ session_start();
 
 // Если уже авторизован - перенаправляем на главную
 if (isset($_SESSION['user_id'])) {
-    header('Location: index.html');
+    header('Location: index.php');
     exit;
 }
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($login) || empty($password)) {
         $error = 'Введите логин и пароль.';
     } else {
-        $stmt = $pdo->prepare("SELECT id, full_name, password_hash FROM applications WHERE login = :login");
+        $stmt = $pdo->prepare("SELECT id, full_name, password_hash FROM " . table('applications') . " WHERE login = :login");
         $stmt->execute([':login' => $login]);
         $user = $stmt->fetch();
         
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['full_name'];
-            header('Location: index.html');
+            header('Location: index.php');
             exit;
         } else {
             $error = 'Неверный логин или пароль.';
@@ -134,17 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header class="main-header">
         <div class="container header-container">
-            <a href="index.html" class="logo">Нод-край</a>
-            <nav class="main-nav" id="mainNav">
-                <ul>
-                    <li><a href="index.html#home">Главная</a></li>
-                    <li><a href="catalog.html">Персонажи</a></li>
-                    <li><a href="list.php">📋 Анкеты</a></li>
-                    <li><a href="admin.php">🔧 Админка</a></li>
-                    <!-- ТОЛЬКО ОДНА КНОПКА - ВХОД -->
-                    <li><a href="login.php" style="background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;padding:6px 20px;border-radius:30px;font-weight:bold;font-size:0.95rem;transition:all 0.3s;">🔐 Войти</a></li>
-                </ul>
-            </nav>
+            <a href="index.php" class="logo">Нод-край</a>
+            <?php include 'nav.php'; ?>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
         </div>
     </header>
@@ -174,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
                 
                 <div class="register-link">
-                    <p>Нет аккаунта? <a href="index.html">Заполните анкету</a></p>
+                    <p>Нет аккаунта? <a href="index.php">Заполните анкету</a></p>
                 </div>
             </div>
         </div>

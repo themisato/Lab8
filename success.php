@@ -3,6 +3,9 @@
 require_once 'config.php';
 session_start();
 
+$is_logged_in = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+$user_name = $_SESSION['user_name'] ?? '';
+
 $id = $_GET['id'] ?? '';
 $login = $_GET['login'] ?? '';
 $password = $_GET['password'] ?? '';
@@ -13,7 +16,7 @@ foreach (['full_name', 'phone', 'email', 'birth_date', 'gender', 'languages', 'b
 
 $application = null;
 if ($id) {
-    $stmt = $pdo->prepare("SELECT * FROM applications WHERE id = :id");
+    $stmt = $pdo->prepare("SELECT * FROM " . table('applications') . " WHERE id = :id");
     $stmt->execute([':id' => $id]);
     $application = $stmt->fetch();
 }
@@ -110,24 +113,8 @@ if ($id) {
 <body>
     <header class="main-header">
         <div class="container header-container">
-            <a href="index.html" class="logo">Нод-край</a>
-            <nav class="main-nav" id="mainNav">
-    <ul>
-        <li><a href="index.html#home">Главная</a></li>
-        <li><a href="catalog.html">Персонажи</a></li>
-        <li><a href="list.php">📋 Анкеты</a></li>
-        <li><a href="admin.php" class="active">🔧 Админка</a></li>
-        <!-- ТОЛЬКО ОДНА КНОПКА -->
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <li style="display:flex;align-items:center;gap:8px;margin-left:15px;background:rgba(64,201,255,0.1);padding:4px 14px 4px 18px;border-radius:30px;border:1px solid rgba(64,201,255,0.15);">
-                <span style="color:#40c9ff;font-weight:600;font-size:0.9rem;">👤 <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                <a href="logout.php" style="color:#ff6b6b;text-decoration:none;padding:3px 12px;border:1px solid rgba(255,107,107,0.3);border-radius:20px;font-size:0.75rem;">Выйти</a>
-            </li>
-        <?php else: ?>
-            <li><a href="login.php" style="background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;padding:6px 20px;border-radius:30px;font-weight:bold;font-size:0.95rem;">Войти</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>
+            <a href="index.php" class="logo">Нод-край</a>
+            <?php include 'nav.php'; ?>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню">
                 <i class="fas fa-bars"></i>
             </button>
@@ -176,7 +163,7 @@ if ($id) {
                 <?php endif; ?>
 
                 <div class="btn-group">
-                    <a href="index.html" class="btn">📝 Новая анкета</a>
+                    <a href="index.php" class="btn">📝 Новая анкета</a>
                     <a href="list.php" class="btn" style="background: linear-gradient(45deg, #1a5fb4, #26a0da);">📋 Все анкеты</a>
                     <a href="login.php" class="btn" style="background: linear-gradient(45deg, #b87333, #d4954a);">🔐 Войти</a>
                 </div>

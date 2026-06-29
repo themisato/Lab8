@@ -8,13 +8,16 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit;
 }
 
+$is_logged_in = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+$user_name = $_SESSION['user_name'] ?? '';
+
 $messages = [];
 
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     try {
-        $pdo->prepare("DELETE FROM application_languages WHERE application_id = ?")->execute([$id]);
-        $pdo->prepare("DELETE FROM applications WHERE id = ?")->execute([$id]);
+        $pdo->prepare("DELETE FROM " . table('application_languages') . " WHERE application_id = ?")->execute([$id]);
+        $pdo->prepare("DELETE FROM " . table('applications') . " WHERE id = ?")->execute([$id]);
         $messages[] = '<div class="success-message">✅ Анкета #' . $id . ' успешно удалена</div>';
     } catch (PDOException $e) {
         error_log("Delete error: " . $e->getMessage());
@@ -26,15 +29,15 @@ $edit_id = 0;
 $edit_values = [];
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $edit_id = (int)$_GET['edit'];
-    $stmt = $pdo->prepare("SELECT * FROM applications WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM " . table('applications') . " WHERE id = ?");
     $stmt->execute([$edit_id]);
     $edit_values = $stmt->fetch();
     
     if ($edit_values) {
         $lang_stmt = $pdo->prepare("
             SELECT pl.name 
-            FROM application_languages al 
-            JOIN programming_languages pl ON al.language_id = pl.id 
+            FROM " . table('application_languages') . " al 
+            JOIN " . table('programming_languages') . " pl ON al.language_id = pl.id 
             WHERE al.application_id = ?
         ");
         $lang_stmt->execute([$edit_id]);
@@ -59,20 +62,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
         try {
             $pdo->beginTransaction();
             
-            $stmt = $pdo->prepare("UPDATE applications SET 
+            $stmt = $pdo->prepare("UPDATE " . table('applications') . " SET 
                 full_name = ?, phone = ?, email = ?, birth_date = ?, 
                 gender = ?, biography = ?, contract_accepted = ?
                 WHERE id = ?");
             $stmt->execute([$full_name, $phone, $email, $birth_date, $gender, $biography, $contract_accepted, $id]);
             
-            $pdo->prepare("DELETE FROM application_languages WHERE application_id = ?")->execute([$id]);
+            $pdo->prepare("DELETE FROM " . table('application_languages') . " WHERE application_id = ?")->execute([$id]);
             
             $lang_map = [];
-            $stmt = $pdo->query("SELECT id, name FROM programming_languages");
+            $stmt = $pdo->query("SELECT id, name FROM " . table('programming_languages'));
             while ($row = $stmt->fetch()) {
                 $lang_map[$row['name']] = $row['id'];
             }
-            $stmt = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO " . table('application_languages') . " (application_id, language_id) VALUES (?, ?)");
             foreach ($languages as $lang_name) {
                 if (isset($lang_map[$lang_name])) {
                     $stmt->execute([$id, $lang_map[$lang_name]]);
@@ -93,9 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
 $applications = [];
 $stmt = $pdo->query("
     SELECT a.*, GROUP_CONCAT(pl.name SEPARATOR ', ') AS languages_list
-    FROM applications a
-    LEFT JOIN application_languages al ON a.id = al.application_id
-    LEFT JOIN programming_languages pl ON al.language_id = pl.id
+    FROM " . table('applications') . " a
+    LEFT JOIN " . table('application_languages') . " al ON a.id = al.application_id
+    LEFT JOIN " . table('programming_languages') . " pl ON al.language_id = pl.id
     GROUP BY a.id
     ORDER BY a.id DESC
 ");
@@ -104,15 +107,15 @@ $applications = $stmt->fetchAll();
 $stats = [];
 $stmt = $pdo->query("
     SELECT pl.name, COUNT(DISTINCT al.application_id) AS count
-    FROM programming_languages pl
-    LEFT JOIN application_languages al ON pl.id = al.language_id
+    FROM " . table('programming_languages') . " pl
+    LEFT JOIN " . table('application_languages') . " al ON pl.id = al.language_id
     GROUP BY pl.id
     ORDER BY count DESC
 ");
 $stats = $stmt->fetchAll();
 
 $total_users = count($applications);
-$all_languages = $pdo->query("SELECT name FROM programming_languages ORDER BY name")->fetchAll(PDO::FETCH_COLUMN);
+$all_languages = $pdo->query("SELECT name FROM " . table('programming_languages') . " ORDER BY name")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -375,24 +378,8 @@ $all_languages = $pdo->query("SELECT name FROM programming_languages ORDER BY na
 <body>
     <header class="main-header">
         <div class="container header-container">
-            <a href="index.html" class="logo">Нод-край</a>
-            <nav class="main-nav" id="mainNav">
-    <ul>
-        <li><a href="index.html#home">Главная</a></li>
-        <li><a href="catalog.html">Персонажи</a></li>
-        <li><a href="list.php">📋 Анкеты</a></li>
-        <li><a href="admin.php" class="active">🔧 Админка</a></li>
-        <!-- ТОЛЬКО ОДНА КНОПКА -->
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <li style="display:flex;align-items:center;gap:8px;margin-left:15px;background:rgba(64,201,255,0.1);padding:4px 14px 4px 18px;border-radius:30px;border:1px solid rgba(64,201,255,0.15);">
-                <span style="color:#40c9ff;font-weight:600;font-size:0.9rem;">👤 <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                <a href="logout.php" style="color:#ff6b6b;text-decoration:none;padding:3px 12px;border:1px solid rgba(255,107,107,0.3);border-radius:20px;font-size:0.75rem;">Выйти</a>
-            </li>
-        <?php else: ?>
-            <li><a href="login.php" style="background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;padding:6px 20px;border-radius:30px;font-weight:bold;font-size:0.95rem;">Войти</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>
+            <a href="index.php" class="logo">Нод-край</a>
+            <?php include 'nav.php'; ?>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню">
                 <i class="fas fa-bars"></i>
             </button>
@@ -537,7 +524,7 @@ $all_languages = $pdo->query("SELECT name FROM programming_languages ORDER BY na
 
             <div style="text-align:center; margin-top: 2rem;">
                 <a href="admin_stats.php" class="btn-back btn-stats"><i class="fas fa-chart-bar"></i> Подробная статистика</a>
-                <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> На главную</a>
+                <a href="index.php" class="btn-back"><i class="fas fa-arrow-left"></i> На главную</a>
                 <a href="list.php" class="btn-back"><i class="fas fa-list"></i> Список анкет</a>
             </div>
         </div>

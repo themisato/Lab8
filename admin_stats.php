@@ -12,17 +12,17 @@ $stats = [];
 $stmt = $pdo->query("
     SELECT pl.name, 
            COUNT(DISTINCT al.application_id) AS count,
-           ROUND(COUNT(DISTINCT al.application_id) * 100.0 / (SELECT COUNT(*) FROM applications), 2) AS percentage
-    FROM programming_languages pl
-    LEFT JOIN application_languages al ON pl.id = al.language_id
+           ROUND(COUNT(DISTINCT al.application_id) * 100.0 / (SELECT COUNT(*) FROM " . table('applications') . "), 2) AS percentage
+    FROM " . table('programming_languages') . " pl
+    LEFT JOIN " . table('application_languages') . " al ON pl.id = al.language_id
     GROUP BY pl.id
     ORDER BY count DESC
 ");
 $stats = $stmt->fetchAll();
 
-$total_users = $pdo->query("SELECT COUNT(*) FROM applications")->fetchColumn();
+$total_users = $pdo->query("SELECT COUNT(*) FROM " . table('applications'))->fetchColumn();
 
-$gender_stats = $pdo->query("SELECT gender, COUNT(*) FROM applications GROUP BY gender")->fetchAll();
+$gender_stats = $pdo->query("SELECT gender, COUNT(*) FROM " . table('applications') . " GROUP BY gender")->fetchAll();
 $male_count = 0;
 $female_count = 0;
 foreach ($gender_stats as $g) {
@@ -182,15 +182,8 @@ foreach ($gender_stats as $g) {
 <body>
     <header class="main-header">
         <div class="container header-container">
-            <a href="index.html" class="logo">Нод-край</a>
-            <nav class="main-nav" id="mainNav">
-                <ul>
-                    <li><a href="index.html#home">Главная</a></li>
-                    <li><a href="catalog.html">Персонажи</a></li>
-                    <li><a href="list.php">Анкеты</a></li>
-                    <li><a href="admin.php">Админка</a></li>
-                </ul>
-            </nav>
+            <a href="index.php" class="logo">Нод-край</a>
+            <?php include 'nav.php'; ?>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню">
                 <i class="fas fa-bars"></i>
             </button>

@@ -16,9 +16,12 @@ ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
 $host = 'localhost';
-$dbname = 'u82686';
+$dbname = 'u82686';  // Используем существующую БД
 $username = 'u82686';
 $password = '8078259';
+
+// Префикс для таблиц (чтобы не пересекаться с другими заданиями)
+define('DB_PREFIX', 'lab8_');
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
@@ -44,5 +47,10 @@ function generateCSRFToken() {
 
 function validateCSRFToken($token) {
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+}
+
+// Функция для получения имени таблицы с префиксом
+function table($name) {
+    return DB_PREFIX . $name;
 }
 ?>
