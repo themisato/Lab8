@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /send_email.php
+Disallow: /mail_log.txt
+Disallow: /mail_errors.txt
+
+Sitemap: https://ваш-сайт.ru/sitemap.xml

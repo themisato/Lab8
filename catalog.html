@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Галерея персонажей | Nod-Krai</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Дополнительные стили для страницы каталога */
+      .catalog-header {
+        padding-top: 120px;
+        padding-bottom: 50px;
+        background: linear-gradient(135deg, #0a1929 0%, #1e3a5f 100%);
+        text-align: center;
+      }
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 25px;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      @media (min-width: 1200px) {
+        .catalog-grid {
+          grid-template-columns: repeat(6, 1fr);
+        }
+      }
+      .catalog-card {
+        background-color: #1e3a5f;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
+        position: relative;
+      }
+      .catalog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      }
+      .star-5 {
+        background: linear-gradient(to bottom, #ffd700, #b8860b);
+      }
+      .star-4 {
+        background: linear-gradient(to bottom, #9370db, #4b0082);
+      }
+      .rarity {
+        height: 5px;
+        width: 100%;
+      }
+      .catalog-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      }
+      .catalog-info {
+        padding: 15px 10px;
+      }
+      .catalog-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+        color: #e6f7ff;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .element-icon-small {
+        font-size: 0.9rem;
+        color: #bae7ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .weapon-icon-small {
+        font-size: 0.8rem;
+        color: #aaa;
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .back-link {
+        display: block;
+        text-align: center;
+        margin: 30px auto 50px;
+        font-size: 1.1rem;
+        color: #40c9ff;
+        text-decoration: none;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+      .character-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+      }
+      .element-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Шапка -->
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">Nod-Krai</a>
+        <nav class="main-nav" id="mainNav">
+          <ul>
+            <li><a href="index.html#home">Главная</a></li>
+            <li class="dropdown">
+              <a href="index.html#characters-block"
+                >Персонажи <i class="fas fa-chevron-down"></i
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#characters-block">Все персонажи</a></li>
+                <li>
+                  <a href="catalog.html" class="active">Галерея персонажей</a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="index.html#about-game">О игре</a></li>
+            <li><a href="index.html#about-region">О регионе</a></li>
+            <li><a href="index.html#contact">Связаться</a></li>
+          </ul>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="catalog-header">
+        <div class="container">
+          <h1 class="section-title">Галерея персонажей Genshin Impact</h1>
+          <p class="section-subtitle">
+            Представленные в контексте фанатского региона Nod-Krai
+          </p>
+        </div>
+      </section>
+
+      <div class="catalog-grid">
+        <!-- 5★ Персонажи -->
+        <div class="catalog-card">
+          <a href="character-flince.html" class="character-link">
+            <div class="rarity star-5"></div>
+            <div class="element-badge" style="color: #d07cf6">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <img src="flins_icon.webp" alt="Cyno" />
+            <div class="catalog-info">
+              <h3>Флинс</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-bolt"></i> Электро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-spear"></i> Копейщик
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-lauma.html" class="character-link">
+            <div class="rarity star-5"></div>
+            <div class="element-badge" style="color: #32cd32">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <img src="lauma_icon.webp" alt="Lauma" />
+            <div class="catalog-info">
+              <h3>Лаума</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-leaf"></i> Дендро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-book"></i> Каталист
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-kokomi.html" class="character-link">
+            <div class="rarity star-5"></div>
+            <div class="element-badge" style="color: #00bfff">
+              <i class="fas fa-tint"></i>
+            </div>
+            <img src="columbina.webp" alt="Columbina" />
+            <div class="catalog-info">
+              <h3>Коломбина</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-tint"></i> Гидро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-book"></i> Каталист
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-diluc.html" class="character-link">
+            <div class="rarity star-5"></div>
+            <div class="element-badge" style="color: #ff9999">
+              <i class="fas fa-fire"></i>
+            </div>
+            <img src="Durin.webp" alt="Durin" />
+            <div class="catalog-info">
+              <h3>Дурин</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-fire"></i> Пиро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-sword"></i> Одноручник
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-zhongli.html" class="character-link">
+            <div class="rarity star-5"></div>
+            <div class="element-badge" style="color: #deb887">
+              <i class="fas fa-mountain"></i>
+            </div>
+            <img src="zibai.webp" alt="Zibai" />
+            <div class="catalog-info">
+              <h3>Цзы Бай</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-mountain"></i> Гео
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-sword"></i> Одноручник
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-eula.html" class="character-link">
+            <div class="rarity star-5"></div>
+            <div class="element-badge" style="color: #afeeee">
+              <i class="fas fa-snowflake"></i>
+            </div>
+            <img src="eula.webp" alt="Eula" />
+            <div class="catalog-info">
+              <h3>Эола</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-snowflake"></i> Крио
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-sword"></i> Двуручник
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 4★ Персонажи -->
+        <div class="catalog-card">
+          <a href="character-razor.html" class="character-link">
+            <div class="rarity star-4"></div>
+            <div class="element-badge" style="color: #d07cf6">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <img src="razor.webp" alt="Razor" />
+            <div class="catalog-info">
+              <h3>Рэйзор</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-bolt"></i> Электро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-sword"></i> Двуручник
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-barbara.html" class="character-link">
+            <div class="rarity star-4"></div>
+            <div class="element-badge" style="color: #00bfff">
+              <i class="fas fa-tint"></i>
+            </div>
+            <img src="barbara.webp" alt="Barbara" />
+            <div class="catalog-info">
+              <h3>Барбара</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-tint"></i> Гидро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-book"></i> Каталист
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-xiangling.html" class="character-link">
+            <div class="rarity star-4"></div>
+            <div class="element-badge" style="color: #ff9999">
+              <i class="fas fa-fire"></i>
+            </div>
+            <img src="xiangling.webp" alt="Xiangling" />
+            <div class="catalog-info">
+              <h3>Сян Лин</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-fire"></i> Пиро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-spear"></i> Копейщик
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-sucrose.html" class="character-link">
+            <div class="rarity star-4"></div>
+            <div class="element-badge" style="color: #00ff9d">
+              <i class="fas fa-wind"></i>
+            </div>
+            <img src="sucrose.webp" alt="Sucrose" />
+            <div class="catalog-info">
+              <h3>Сахароза</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-wind"></i> Анемо
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-book"></i> Каталист
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-noelle.html" class="character-link">
+            <div class="rarity star-4"></div>
+            <div class="element-badge" style="color: #deb887">
+              <i class="fas fa-mountain"></i>
+            </div>
+            <img src="noelle.webp" alt="Noelle" />
+            <div class="catalog-info">
+              <h3>Ноэль</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-mountain"></i> Гео
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-sword"></i> Двуручник
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-card">
+          <a href="character-fischl.html" class="character-link">
+            <div class="rarity star-4"></div>
+            <div class="element-badge" style="color: #d07cf6">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <img src="fischl.webp" alt="Fischl" />
+            <div class="catalog-info">
+              <h3>Фишль</h3>
+              <div class="element-icon-small">
+                <i class="fas fa-bolt"></i> Электро
+              </div>
+              <div class="weapon-icon-small">
+                <i class="fas fa-bow"></i> Лучник
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center" style="padding: 20px 0 50px">
+        <a href="index.html#characters-block" class="btn"
+          >Вернуться на главную</a
+        >
+      </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+      <div class="container">
+        <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
+        <p>
+          Данный фанатский сайт создан в ознакомительных целях. Nod-Krai
+          является фанатским концептом.
+        </p>
+        <p class="disclaimer">
+          Все изображения персонажей принадлежат HoYoverse.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

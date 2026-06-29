@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jean (Варка) | Nod-Krai</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .character-detail-header {
+        padding-top: 120px;
+        padding-bottom: 50px;
+        text-align: center;
+        background: linear-gradient(135deg, #006400 0%, #00ff9d 100%);
+        color: white;
+      }
+      .character-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .character-image img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      }
+      .character-lore {
+        background-color: rgba(30, 58, 95, 0.9);
+        padding: 30px;
+        border-radius: 20px;
+        border-left: 5px solid #00ff9d;
+      }
+      .character-lore h2 {
+        color: #00ff9d;
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .character-lore h3 {
+        color: #40c9ff;
+        margin: 25px 0 15px;
+        font-size: 1.5rem;
+      }
+      .character-lore p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+      .character-stats {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        background-color: rgba(0, 255, 157, 0.2);
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 1px solid #00ff9d;
+        min-width: 150px;
+      }
+      .stat strong {
+        color: #00ff9d;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        color: #40c9ff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        background-color: rgba(64, 201, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s;
+      }
+      .back-link:hover {
+        background-color: rgba(64, 201, 255, 0.2);
+        transform: translateX(-5px);
+      }
+      .abilities {
+        margin-top: 30px;
+      }
+      .ability {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 3px solid #00ff9d;
+      }
+      .ability h4 {
+        color: #00ff9d;
+        margin-bottom: 8px;
+      }
+      @media (max-width: 768px) {
+        .character-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">Nod-Krai</a>
+        <nav class="main-nav" id="mainNav">
+          <ul>
+            <li><a href="index.html#home">Главная</a></li>
+            <li class="dropdown">
+              <a href="index.html#characters-block"
+                >Персонажи <i class="fas fa-chevron-down"></i
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#characters-block">Все персонажи</a></li>
+                <li><a href="catalog.html">Галерея персонажей</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#about-game">О игре</a></li>
+            <li><a href="index.html#about-region">О регионе</a></li>
+            <li><a href="index.html#contact">Связаться</a></li>
+          </ul>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="character-detail-header">
+        <div class="container">
+          <h1 class="section-title">Jean (Варка)</h1>
+          <p class="section-subtitle">Рыцарь Бореалис | Анемо двуручник | 5★</p>
+        </div>
+      </section>
+
+      <div class="character-container">
+        <div class="character-image">
+          <img src="варка.webp" alt="Jean" />
+          <div class="character-stats">
+            <div class="stat">
+              <strong>Регион:</strong>
+              <span>Мондштадт</span>
+            </div>
+            <div class="stat">
+              <strong>Оружие:</strong>
+              <span>Двуручный меч</span>
+            </div>
+            <div class="stat">
+              <strong>Редкость:</strong>
+              <span>5★</span>
+            </div>
+            <div class="stat">
+              <strong>Стихия:</strong>
+              <span><i class="fas fa-wind"></i> Анемо</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="character-lore">
+          <h2><i class="fas fa-wind"></i> Jean (Варка)</h2>
+
+          <h3>Официальная информация</h3>
+          <p>
+            Jean Gunnhildr — действующий Исполняющий обязанности Магистра Ордо
+            Фавониус в Мондштадте. Она воплощение ответственности, дисциплины и
+            силы. Как потомок древнего рода Gunnhildr, она посвятила свою жизнь
+            защите Мондштадта и его идеалам свободы. Мастерски владеет двуручным
+            мечом и силой Анемо для исцеления союзников и контроля над полем
+            боя.
+          </p>
+
+          <h3>В контексте Нод-Края</h3>
+          <p>
+            В Лунном Крае Jean переосмыслена как
+            <strong>Варка, Рыцарь Бореалис (Северный Ветер)</strong>. Она
+            является командиром элитного отряда «Стражей Лунных Ветров»,
+            защищающих северные границы Нод-Края от угроз извне.
+          </p>
+
+          <p>
+            Её анемо-силы здесь приобрели особый характер — это не просто ветра
+            свободы, а леденящие ветра лунной ночи, способные замедлять время
+            для врагов и ускорять союзников. Она известна своей непоколебимой
+            преданностью Архонту Коломбине и строгим, но справедливым
+            руководством.
+          </p>
+
+          <div class="abilities">
+            <h3>Способности Рыцаря Бореалис</h3>
+
+            <div class="ability">
+              <h4>Клинок Северного Ветра</h4>
+              <p>
+                Создаёт вихрь Лунного Ветра, который притягивает врагов и
+                наносит им Анемо урон. Если вихрь поглотит другой элемент, он
+                нанесёт дополнительный урон этого элемента, усиленный лунной
+                магией.
+              </p>
+            </div>
+
+            <div class="ability">
+              <h4>Гимн Лунного Ветра</h4>
+              <p>
+                Призывает защитный круг Лунного Ветра, который непрерывно
+                исцеляет всех членов отряда и очищает их от негативных эффектов.
+                При выходе из круга создаёт импульс, отбрасывающий врагов и
+                накладывающий на них эффект замедления.
+              </p>
+            </div>
+
+            <div class="ability">
+              <h4>Дыхание Бореалиса (Пассивная)</h4>
+              <p>
+                Обычные атаки Варки имеют шанс восстановить HP всему отряду.
+                Этот шанс увеличивается ночью в игровом времени или в областях с
+                лунными аномалиями.
+              </p>
+            </div>
+          </div>
+
+          <a href="catalog.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Вернуться к галерее
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
+        <p>
+          Персонаж Jean является собственностью HoYoverse. Фанатская
+          интерпретация для Нод-Края.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

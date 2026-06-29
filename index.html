@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Нод-край | Genshin Impact</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Верхнее меню -->
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">Нод-край</a>
+        <nav class="main-nav" id="mainNav">
+          <ul>
+            <li><a href="#home">Главная</a></li>
+            <li class="dropdown">
+              <a href="#characters"
+                >Персонажи <i class="fas fa-chevron-down"></i
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="#characters-block">Все персонажи</a></li>
+                <li><a href="catalog.html">Галерея персонажей</a></li>
+              </ul>
+            </li>
+            <li><a href="#about-game">О игре</a></li>
+            <li><a href="#about-region">О регионе</a></li>
+            <li><a href="#contact">Связаться</a></li>
+          </ul>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Блок 1: Главная с видео -->
+      <section id="home" class="fullscreen-video-section">
+        <div class="video-container">
+          <video autoplay muted loop playsinline id="bgVideo">
+            <source src="nod.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает видео.
+          </video>
+          <div class="video-overlay"></div>
+        </div>
+        <div class="video-content">
+          <h1>Нод-край</h1>
+          <p class="tagline">
+            Земля вечного равновесия, где древние корни мудрости сплетаются с
+            тихим шепотом ветра. Затерянный регион, хранящий секреты забытых
+            цивилизаций и магию первозданной природы.
+          </p>
+          <a href="#about-region" class="btn">Узнать историю</a>
+        </div>
+      </section>
+
+      <!-- Блок 2: Персонажи -->
+      <section id="characters-block" class="section characters-section">
+        <div class="container">
+          <h2 class="section-title">Персонажи Нод-Края</h2>
+          <p class="section-subtitle">
+            Легендарные герои региона, владеющие различными стихиями.
+          </p>
+          <div class="characters-grid">
+            <!-- Карточка 1: Флинс (Электро копейщик) -->
+            <div class="character-card" data-element="electro">
+              <a href="character-flince.html" class="card-link">
+                <div class="card-front">
+                  <img src="флинс.webp" alt="Флинс" />
+                  <div class="card-info">
+                    <h3>Флинс</h3>
+                    <div class="element-weapon">
+                      <span class="element-icon"
+                        ><i class="fas fa-bolt" style="color: #d07cf6"></i>
+                        Электро</span
+                      >
+                      <span class="weapon-icon"
+                        ><i class="fas fa-spear" style="color: #aaa"></i>
+                        Копейщик</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Карточка 2: Лаума (Дендро каталист) -->
+            <div class="character-card" data-element="dendro">
+              <a href="character-lauma.html" class="card-link">
+                <div class="card-front">
+                  <img src="лаума.jpg" alt="Лаума" />
+                  <div class="card-info">
+                    <h3>Лаума</h3>
+                    <div class="element-weapon">
+                      <span class="element-icon"
+                        ><i class="fas fa-leaf" style="color: #32cd32"></i>
+                        Дендро</span
+                      >
+                      <span class="weapon-icon"
+                        ><i class="fas fa-book" style="color: #aaa"></i>
+                        Каталист</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Карточка 3: Коломбина (Гидро каталист) -->
+            <div class="character-card" data-element="hydro">
+              <a href="character-kokomi.html" class="card-link">
+                <div class="card-front">
+                  <img src="коломбина.jpg" alt="Коломбина" />
+                  <div class="card-info">
+                    <h3>Коломбина</h3>
+                    <div class="element-weapon">
+                      <span class="element-icon"
+                        ><i class="fas fa-tint" style="color: #00bfff"></i>
+                        Гидро</span
+                      >
+                      <span class="weapon-icon"
+                        ><i class="fas fa-book" style="color: #aaa"></i>
+                        Каталист</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Карточка 4: Варка (Анемо двуручник) -->
+            <div class="character-card" data-element="anemo">
+              <a href="character-jean.html" class="card-link">
+                <div class="card-front">
+                  <img src="варка.webp" alt="Варка" />
+                  <div class="card-info">
+                    <h3>Варка</h3>
+                    <div class="element-weapon">
+                      <span class="element-icon"
+                        ><i class="fas fa-wind" style="color: #00ff9d"></i>
+                        Анемо</span
+                      >
+                      <span class="weapon-icon"
+                        ><i class="fas fa-sword" style="color: #aaa"></i>
+                        Двуручник</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Карточка 5: Дурин (Пиро одноручник) -->
+            <div class="character-card" data-element="pyro">
+              <a href="character-diluc.html" class="card-link">
+                <div class="card-front">
+                  <img src="дурин.webp" alt="Дурин" />
+                  <div class="card-info">
+                    <h3>Дурин</h3>
+                    <div class="element-weapon">
+                      <span class="element-icon"
+                        ><i class="fas fa-fire" style="color: #ff9999"></i>
+                        Пиро</span
+                      >
+                      <span class="weapon-icon"
+                        ><i class="fas fa-sword" style="color: #aaa"></i>
+                        Одноручник</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Карточка 6: Цзы Бай (Гео одноручник) -->
+            <div class="character-card" data-element="geo">
+              <a href="character-zhongli.html" class="card-link">
+                <div class="card-front">
+                  <img src="ЦзыБай.jpg" alt="Цзы Бай" />
+                  <div class="card-info">
+                    <h3>Цзы Бай</h3>
+                    <div class="element-weapon">
+                      <span class="element-icon"
+                        ><i class="fas fa-mountain" style="color: #deb887"></i>
+                        Гео</span
+                      >
+                      <span class="weapon-icon"
+                        ><i class="fas fa-sword" style="color: #aaa"></i>
+                        Одноручник</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="text-center">
+            <a href="catalog.html" class="btn">Вся галерея персонажей</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Блок 3: О игре -->
+      <section id="about-game" class="section image-bg-section">
+        <div class="container">
+          <div class="text-content centered-content">
+            <h2 class="section-title">Genshin Impact</h2>
+            <p>
+              Это массовая многопользовательская action-RPG с открытым миром,
+              разработанная компанией HoYoverse. Отправляйтесь в путешествие по
+              фантастическому миру Тейвата, где воля богов проявляется в семи
+              стихиях.
+            </p>
+            <p>
+              Исследуйте обширные земли, объединяйтесь в отряды из уникальных
+              персонажей, раскрывайте тайны древних цивилизаций и сражайтесь с
+              могущественными врагами, чтобы найти потерянного родственника и
+              обрести ответы от самих богов.
+            </p>
+            <p>
+              Мир Тейвата полон чудес, и Нод-край — лишь одна из его жемчужин,
+              ожидающих своего исследователя.
+            </p>
+          </div>
+        </div>
+        <div
+          class="bg-image"
+          style="background-image: url(&quot;i.web&quot;)"
+        ></div>
+        <div class="bg-overlay"></div>
+      </section>
+
+      <!-- Блок 4: О регионе -->
+      <section id="about-region" class="section image-bg-section">
+        <div class="container">
+          <div class="text-content centered-content">
+            <h2 class="section-title">Нод-Край: Лунный Край</h2>
+            <p>
+              Согласно официальному релизу от HoYoverse,
+              <strong>Нод-Край (Nod-Krai)</strong> — седьмой и самый загадочный
+              регион Тейвата, чьи судьбы неразрывно связаны с луной. Это царство
+              серебристого света, древних тайн и тихой, но могущественной магии.
+            </p>
+
+            <h3 style="color: #b19cd9; margin-top: 25px">
+              🌙 Архонт Лунного Края
+            </h3>
+            <p>
+              Божественным покровителем и правителем региона является
+              <strong>Коломбина, Дева Луны (Columbina, the Lunar Maiden)</strong
+              >. Как новый Архонт, она олицетворяет собой умиротворение, тайну и
+              цикличность. Её власть простирается не только над землёй, но и над
+              особыми «лунными» вариациями элементальных реакций.
+            </p>
+
+            <h3 style="color: #b19cd9; margin-top: 25px">
+              ⚡ Уникальные Лунные Реакции
+            </h3>
+            <p>
+              Магия Нод-Края преломляет обычные законы стихий через призму
+              лунного света, создавая новые формы взаимодействий:
+            </p>
+            <ul
+              style="
+                margin-left: 20px;
+                margin-top: 10px;
+                list-style-type: &quot;🌙 &quot;;
+              "
+            >
+              <li>
+                <strong>Лунная Бутонизация (Dendro + Hydro):</strong> Порождает
+                не ядовитые споры, а сияющие «лунные лотосы», которые излечивают
+                союзников и взрываются через определенное время.
+              </li>
+              <li>
+                <strong>Лунный Заряд (Electro + Hydro):</strong> Вместо
+                хаотичных разрядов создаёт стабильные сферы конденсированной
+                лунной энергии, которые можно использовать для нанесения
+                периодического урона врагам.
+              </li>
+              <li>
+                <strong>Лунная Кристаллизация (Geo + Hydro):</strong> Создаёт не
+                обычные щиты, а «лунные столбы», которые не только поглощают
+                урон, но и наносят собственный урон периодически выпуская волны.
+              </li>
+            </ul>
+
+            <h3 style="color: #b19cd9; margin-top: 25px">
+              🏛️ Культура и Вдохновение
+            </h3>
+            <p>
+              Концепция Нод-Края глубоко вдохновлена богатым наследием
+              <strong>славянских мифов, обычаев и архитектуры</strong>.
+              Путешественники увидят здесь не классические европейские замки, а
+              величественные деревянные терема, таинственные капища в древних
+              лесах и города, вплетённые в ландшафт, а не покорившие его. Каждая
+              локация пропитана духом народных сказок и легенд.
+            </p>
+
+            <p style="margin-top: 20px; font-style: italic">
+              Приключениe в Нод-Крае обещают стать самым эпичным и мистическим
+              путешествием по Тейвату, где главной загадкой станет не только
+              земля под ногами, но и вечный спутник, освещающий путь.
+            </p>
+          </div>
+        </div>
+        <div
+          class="bg-image"
+          style="background-image: url(&quot;imageNod-krai.png&quot;)"
+        ></div>
+        <div class="bg-overlay"></div>
+      </section>
+
+      <!-- Блок 5: Форма обратной связи -->
+      <section id="contact" class="section form-section">
+        <div class="container">
+          <div class="text-center">
+            <h2 class="section-title">💬 Свяжитесь с нами</h2>
+            <p class="section-subtitle">
+              Мы всегда рады помочь и ответить на ваши вопросы
+            </p>
+            <button class="open-form-btn" id="openFormBtn">
+              Написать сообщение
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Модальное окно формы -->
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+          <button class="close-btn" id="closeBtn">×</button>
+
+          <div class="form-header">
+            <h2 class="form-title">Обратная связь</h2>
+            <p class="form-subtitle">
+              Заполните форму и мы ответим вам в течение дня
+            </p>
+          </div>
+
+          <!-- Контейнер для сообщений -->
+          <div id="messageContainer"></div>
+
+          <!-- Форма с поддержкой AJAX -->
+          <form
+            id="feedbackForm"
+            action="process.php"
+            method="POST"
+            data-api="true"
+          >
+            <!-- CSRF-токен (если нужно) -->
+            <input type="hidden" name="csrf_token" value="" />
+
+            <div class="form-group">
+              <input
+                type="text"
+                id="fullName"
+                name="full_name"
+                required
+                placeholder=" "
+                autocomplete="name"
+              />
+              <label for="fullName" class="required">ФИО</label>
+              <div class="error-message" id="fullNameError">
+                ФИО должно содержать только буквы и пробелы
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder=" "
+                autocomplete="tel"
+                maxlength="11"
+              />
+              <label for="phone" class="required">Телефон</label>
+              <div class="error-message" id="phoneError">
+                Телефон должен содержать ровно 11 цифр
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder=" "
+                autocomplete="email"
+              />
+              <label for="email" class="required">E-mail</label>
+              <div class="error-message" id="emailError">
+                Введите корректный email адрес (должен содержать @)
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="date"
+                id="birth_date"
+                name="birth_date"
+                required
+                placeholder=" "
+              />
+              <label for="birth_date" class="required">Дата рождения</label>
+              <div class="error-message" id="birth_dateError">
+                Введите корректную дату рождения
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="required">Пол</label>
+              <div style="display: flex; gap: 20px; margin-top: 8px">
+                <label style="display: flex; align-items: center; gap: 8px">
+                  <input type="radio" name="gender" value="male" /> Мужской
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px">
+                  <input type="radio" name="gender" value="female" /> Женский
+                </label>
+              </div>
+              <div class="error-message" id="genderError">Выберите пол</div>
+            </div>
+
+            <div class="form-group">
+              <label for="languages" class="required"
+                >Любимые языки программирования</label
+              >
+              <select
+                id="languages"
+                name="languages[]"
+                multiple
+                size="4"
+                style="width: 100%; padding: 10px; border-radius: 8px"
+              >
+                <option value="Pascal">Pascal</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="PHP">PHP</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="Haskell">Haskell</option>
+                <option value="Clojure">Clojure</option>
+                <option value="Prolog">Prolog</option>
+                <option value="Scala">Scala</option>
+                <option value="Go">Go</option>
+              </select>
+              <div class="error-message" id="languagesError">
+                Выберите хотя бы один язык
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea
+                id="biography"
+                name="biography"
+                placeholder=" "
+                rows="4"
+              ></textarea>
+              <label for="biography">Биография</label>
+              <div class="error-message" id="biographyError">
+                Биография не должна превышать 5000 символов
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="checkbox-group" id="checkboxGroup">
+                <input
+                  type="checkbox"
+                  id="privacyPolicy"
+                  name="contract_accepted"
+                  value="1"
+                  required
+                />
+                <label for="privacyPolicy" class="required">
+                  Я согласен с политикой обработки персональных данных и
+                  ознакомлен с контрактом
+                </label>
+              </div>
+              <div class="error-message" id="privacyPolicyError">
+                Необходимо согласие с политикой обработки данных
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              Отправить сообщение
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+      <div class="container">
+        <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
+        <p>
+          Данный фанатский сайт создан в ознакомительных целях. Все используемые
+          материалы являются собственностью их правообладателей.
+        </p>
+        <p class="disclaimer">
+          Нод-край — вымышленный регион, не входящий в официальный лор игры.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Подключаем скрипты -->
+    <script src="script.js"></script>
+    <script>
+      // ===== ДОПОЛНИТЕЛЬНЫЙ КОД ДЛЯ ФОРМЫ =====
+      document.addEventListener("DOMContentLoaded", function () {
+        // Открытие модального окна
+        const openBtn = document.getElementById("openFormBtn");
+        const modal = document.getElementById("modalOverlay");
+        const closeBtn = document.getElementById("closeBtn");
+
+        if (openBtn && modal) {
+          openBtn.addEventListener("click", function () {
+            modal.style.display = "flex";
+          });
+        }
+
+        if (closeBtn && modal) {
+          closeBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+          });
+        }
+
+        if (modal) {
+          modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+              modal.style.display = "none";
+            }
+          });
+        }
+
+        // ===== ОТПРАВКА ФОРМЫ ЧЕРЕЗ FETCH =====
+        const form = document.getElementById("feedbackForm");
+        const messageContainer = document.getElementById("messageContainer");
+
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            // Проверяем, не было ли уже отправки
+            if (form.dataset.submitted === "true") return;
+
+            e.preventDefault();
+
+            // Собираем данные формы
+            const formData = new FormData(form);
+            const data = {};
+
+            for (let [key, value] of formData.entries()) {
+              // Обрабатываем множественный select
+              if (key === "languages[]") {
+                if (!data.languages) data.languages = [];
+                data.languages.push(value);
+              } else {
+                data[key] = value;
+              }
+            }
+
+            // Если languages не было выбрано - удаляем пустой массив
+            if (data.languages && data.languages.length === 0) {
+              delete data.languages;
+            }
+
+            // Показываем загрузку
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn
+              ? submitBtn.textContent
+              : "Отправить";
+            if (submitBtn) {
+              submitBtn.textContent = "⏳ Отправка...";
+              submitBtn.disabled = true;
+            }
+
+            // Отправляем запрос к API
+            fetch("api.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify(data),
+              credentials: "same-origin",
+            })
+              .then((response) => response.json())
+              .then((result) => {
+                if (result.success) {
+                  // Успех
+                  showMessage(
+                    "✅ " + (result.message || "Данные успешно сохранены!"),
+                    "success",
+                  );
+
+                  // Если есть логин и пароль - показываем
+                  if (
+                    result.data &&
+                    result.data.login &&
+                    result.data.password
+                  ) {
+                    showCredentials(result.data.login, result.data.password);
+                  }
+
+                  // Очищаем форму
+                  form.reset();
+                  form
+                    .querySelectorAll(".success")
+                    .forEach((el) => el.classList.remove("success"));
+
+                  // Если есть profile_url - перенаправляем
+                  if (result.data && result.data.profile_url) {
+                    setTimeout(() => {
+                      window.location.href = result.data.profile_url;
+                    }, 3000);
+                  }
+                } else {
+                  // Ошибки валидации
+                  if (result.errors) {
+                    let errorText = "";
+                    for (let key in result.errors) {
+                      errorText += "• " + result.errors[key] + "\n";
+                    }
+                    showMessage("❌ " + errorText, "error");
+
+                    // Подсвечиваем поля с ошибками
+                    for (let key in result.errors) {
+                      const field = document.querySelector(`[name="${key}"]`);
+                      if (field) {
+                        field.classList.add("error");
+                      }
+                    }
+                  } else {
+                    showMessage(
+                      "❌ " + (result.error || "Ошибка при сохранении данных"),
+                      "error",
+                    );
+                  }
+                }
+              })
+              .catch((error) => {
+                console.error("Ошибка:", error);
+                showMessage("❌ Ошибка соединения. Попробуйте позже.", "error");
+
+                // Если fetch не работает - отправляем обычным способом
+                form.dataset.submitted = "true";
+                form.submit();
+              })
+              .finally(() => {
+                if (submitBtn) {
+                  submitBtn.textContent = originalText;
+                  submitBtn.disabled = false;
+                }
+              });
+          });
+        }
+
+        // Функция показа сообщений
+        function showMessage(text, type) {
+          if (!messageContainer) return;
+
+          const msg = document.createElement("div");
+          msg.className = "message " + type;
+          msg.textContent = text;
+          msg.style.whiteSpace = "pre-line";
+          msg.style.padding = "12px";
+          msg.style.borderRadius = "8px";
+          msg.style.marginBottom = "15px";
+
+          if (type === "success") {
+            msg.style.background = "#dcfce7";
+            msg.style.color = "#166534";
+            msg.style.border = "1px solid #bbf7d0";
+          } else {
+            msg.style.background = "#fee2e2";
+            msg.style.color = "#991b1b";
+            msg.style.border = "1px solid #fecaca";
+          }
+
+          messageContainer.innerHTML = "";
+          messageContainer.appendChild(msg);
+
+          setTimeout(() => {
+            if (msg.parentNode) {
+              msg.remove();
+            }
+          }, 8000);
+        }
+
+        // Функция показа логина и пароля
+        function showCredentials(login, password) {
+          if (!messageContainer) return;
+
+          const html = `
+            <div class="message" style="
+              background: #fff3e0;
+              color: #e65100;
+              border: 2px dashed #ff9800;
+              padding: 15px;
+              border-radius: 8px;
+              margin-bottom: 15px;
+              text-align: center;
+            ">
+              <strong>🔑 Ваши данные для входа сохранены!</strong><br>
+              <span style="font-size: 1.1rem;">
+                Логин: <strong>${login}</strong>
+              </span><br>
+              <span style="font-size: 1.1rem;">
+                Пароль: <strong>${password}</strong>
+              </span><br>
+              <span style="color: #d32f2f; font-size: 0.8rem;">
+                ⚠️ Сохраните эти данные! Пароль отображается только один раз.
+              </span>
+            </div>
+          `;
+
+          messageContainer.innerHTML += html;
+        }
+
+        // Автозаполнение данных при авторизации
+        // Проверяем, есть ли скрытое поле с ID пользователя
+        const editIdInput = document.querySelector('input[name="edit_id"]');
+        if (editIdInput && editIdInput.value) {
+          // Загружаем данные пользователя
+          fetch("api.php", {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+            },
+            credentials: "same-origin",
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              if (result.success && result.data) {
+                const data = result.data;
+                // Заполняем поля
+                const fields = [
+                  "full_name",
+                  "phone",
+                  "email",
+                  "birth_date",
+                  "gender",
+                  "biography",
+                ];
+                fields.forEach((field) => {
+                  const input = document.querySelector(`[name="${field}"]`);
+                  if (input && data[field]) {
+                    if (input.type === "radio") {
+                      const radio = document.querySelector(
+                        `[name="${field}"][value="${data[field]}"]`,
+                      );
+                      if (radio) radio.checked = true;
+                    } else {
+                      input.value = data[field];
+                    }
+                  }
+                });
+
+                // Заполняем языки
+                if (data.languages) {
+                  const select = document.getElementById("languages");
+                  if (select) {
+                    Array.from(select.options).forEach((opt) => {
+                      opt.selected = data.languages.includes(opt.value);
+                    });
+                  }
+                }
+
+                // Чекбокс контракта
+                const contractCheck = document.querySelector(
+                  '[name="contract_accepted"]',
+                );
+                if (contractCheck && data.contract_accepted) {
+                  contractCheck.checked = true;
+                }
+              }
+            })
+            .catch((error) => console.error("Ошибка загрузки данных:", error));
+        }
+      });
+    </script>
+  </body>
+</html>

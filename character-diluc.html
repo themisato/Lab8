@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diluc (Дурин) | Nod-Krai</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .character-detail-header {
+        padding-top: 120px;
+        padding-bottom: 50px;
+        text-align: center;
+        background: linear-gradient(135deg, #8b0000 0%, #ff9999 100%);
+        color: white;
+      }
+      .character-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .character-image img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      }
+      .character-lore {
+        background-color: rgba(30, 58, 95, 0.9);
+        padding: 30px;
+        border-radius: 20px;
+        border-left: 5px solid #ff9999;
+      }
+      .character-lore h2 {
+        color: #ff9999;
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .character-lore h3 {
+        color: #40c9ff;
+        margin: 25px 0 15px;
+        font-size: 1.5rem;
+      }
+      .character-lore p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+      .character-stats {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        background-color: rgba(255, 153, 153, 0.2);
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 1px solid #ff9999;
+        min-width: 150px;
+      }
+      .stat strong {
+        color: #ff9999;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        color: #40c9ff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        background-color: rgba(64, 201, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s;
+      }
+      .back-link:hover {
+        background-color: rgba(64, 201, 255, 0.2);
+        transform: translateX(-5px);
+      }
+      .abilities {
+        margin-top: 30px;
+      }
+      .ability {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 3px solid #ff9999;
+      }
+      .ability h4 {
+        color: #ff9999;
+        margin-bottom: 8px;
+      }
+      @media (max-width: 768px) {
+        .character-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">Nod-Krai</a>
+        <nav class="main-nav" id="mainNav">
+          <ul>
+            <li><a href="index.html#home">Главная</a></li>
+            <li class="dropdown">
+              <a href="index.html#characters-block"
+                >Персонажи <i class="fas fa-chevron-down"></i
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#characters-block">Все персонажи</a></li>
+                <li><a href="catalog.html">Галерея персонажей</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#about-game">О игре</a></li>
+            <li><a href="index.html#about-region">О регионе</a></li>
+            <li><a href="index.html#contact">Связаться</a></li>
+          </ul>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="character-detail-header">
+        <div class="container">
+          <h1 class="section-title">Diluc (Дурин)</h1>
+          <p class="section-subtitle">Тень Рассвета | Пиро одноручник | 5★</p>
+        </div>
+      </section>
+
+      <div class="character-container">
+        <div class="character-image">
+          <img src="дурин.webp" alt="Дурин" />
+          <div class="character-stats">
+            <div class="stat">
+              <strong>Регион:</strong>
+              <span>Мондштадт</span>
+            </div>
+            <div class="stat">
+              <strong>Оружие:</strong>
+              <span>Одноручный меч</span>
+            </div>
+            <div class="stat">
+              <strong>Редкость:</strong>
+              <span>5★</span>
+            </div>
+            <div class="stat">
+              <strong>Стихия:</strong>
+              <span><i class="fas fa-fire"></i> Пиро</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="character-lore">
+          <h2><i class="fas fa-fire"></i> Diluc (Дурин)</h2>
+
+          <h3>Официальная информация</h3>
+          <p>
+            Diluc Ragnvindr — владелец винодельни «Рассвет» в Мондштадте и
+            бывший рыцарь Ордо Фавониус. После трагических событий, связанных со
+            смертью отца, он оставил орден и теперь действует как тёмный рыцарь,
+            защищающий Мондштадт из тени. Его боевой стиль агрессивен и
+            разрушителен, сочетая мастерское владение одноручным мечом с мощью
+            Пиро-визиона.
+          </p>
+
+          <h3>В контексте Нод-Края</h3>
+          <p>
+            В Лунном Крае Diluc переосмыслен как
+            <strong>Дурин, Кузнец Лунного Пламени</strong>. Он является потомком
+            древнего рода кузнецов, который когда-то выковал первые лунные
+            артефакты для Архонта Коломбины.
+          </p>
+
+          <p>
+            В отличие от яростного пламени Дилюка, огонь Дурина — это холодное,
+            серебристое «лунное пламя», которое горит, но не сжигает, а скорее
+            замораживает и очищает. Он использует эту силу для ковки уникального
+            оружия и доспехов, а также для борьбы с теневыми существами, которые
+            активизируются в лунные ночи.
+          </p>
+
+          <div class="abilities">
+            <h3>Техники Лунного Кузнеца</h3>
+
+            <div class="ability">
+              <h4>Рассечение Рассвета</h4>
+              <p>
+                Выпускает вперед волну Лунного Пламени, наносящую Пиро урон всем
+                врагам на пути. При использовании ночью урон превращается в
+                «Лунный Ожог», который накладывает на врагов эффект замедления и
+                снижения защиты.
+              </p>
+            </div>
+
+            <div class="ability">
+              <h4>Феникс Лунного Рассвета</h4>
+              <p>
+                Выпускает феникса, сотканного из лунного пламени, который летит
+                вперёд, нанося массированный Пиро урон всем врагам на пути.
+                Феникс оставляет после себя тропу, которая усиливает лунные
+                элементальные реакции у союзников.
+              </p>
+            </div>
+
+            <div class="ability">
+              <h4>Наследие Кузнеца (Пассивная)</h4>
+              <p>
+                Уменьшает стоимость крафта оружия из категории «одноручный меч»
+                и имеет шанс создать усиленную версию при крафте во время
+                полнолуния в игровом времени.
+              </p>
+            </div>
+          </div>
+
+          <a href="catalog.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Вернуться к галерее
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
+        <p>
+          Персонаж Diluc является собственностью HoYoverse. Фанатская
+          интерпретация для Нод-Края.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

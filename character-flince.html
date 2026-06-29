@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyno (Флинс) | Nod-Krai</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Стили для страницы персонажа */
+      .character-detail-header {
+        padding-top: 120px;
+        padding-bottom: 50px;
+        text-align: center;
+        background: linear-gradient(135deg, #4a0080 0%, #d07cf6 100%);
+        color: white;
+      }
+      .character-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .character-image img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      }
+      .character-lore {
+        background-color: rgba(30, 58, 95, 0.9);
+        padding: 30px;
+        border-radius: 20px;
+        border-left: 5px solid #d07cf6;
+      }
+      .character-lore h2 {
+        color: #d07cf6;
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .character-lore h3 {
+        color: #40c9ff;
+        margin: 25px 0 15px;
+        font-size: 1.5rem;
+      }
+      .character-lore p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+      .character-stats {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        background-color: rgba(208, 124, 246, 0.2);
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 1px solid #d07cf6;
+        min-width: 150px;
+      }
+      .stat strong {
+        color: #d07cf6;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        color: #40c9ff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        background-color: rgba(64, 201, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s;
+      }
+      .back-link:hover {
+        background-color: rgba(64, 201, 255, 0.2);
+        transform: translateX(-5px);
+      }
+      .abilities {
+        margin-top: 30px;
+      }
+      .ability {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 3px solid #d07cf6;
+      }
+      .ability h4 {
+        color: #d07cf6;
+        margin-bottom: 8px;
+      }
+      @media (max-width: 768px) {
+        .character-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">Nod-Krai</a>
+        <nav class="main-nav" id="mainNav">
+          <ul>
+            <li><a href="index.html#home">Главная</a></li>
+            <li class="dropdown">
+              <a href="index.html#characters-block"
+                >Персонажи <i class="fas fa-chevron-down"></i
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#characters-block">Все персонажи</a></li>
+                <li><a href="catalog.html">Галерея персонажей</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#about-game">О игре</a></li>
+            <li><a href="index.html#about-region">О регионе</a></li>
+            <li><a href="index.html#contact">Связаться</a></li>
+          </ul>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="character-detail-header">
+        <div class="container">
+          <h1 class="section-title">Cyno (Флинс)</h1>
+          <p class="section-subtitle">
+            Генерал Махаматра | Электро копейщик | 5★
+          </p>
+        </div>
+      </section>
+
+      <div class="character-container">
+        <div class="character-image">
+          <img src="флинс.webp" alt="Cyno" />
+          <div class="character-stats">
+            <div class="stat">
+              <strong>Регион:</strong>
+              <span>Сумеру</span>
+            </div>
+            <div class="stat">
+              <strong>Оружие:</strong>
+              <span>Копье</span>
+            </div>
+            <div class="stat">
+              <strong>Редкость:</strong>
+              <span>5★</span>
+            </div>
+            <div class="stat">
+              <strong>Стихия:</strong>
+              <span><i class="fas fa-bolt"></i> Электро</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="character-lore">
+          <h2><i class="fas fa-bolt"></i> Cyno (Флинс)</h2>
+
+          <h3>Официальная информация</h3>
+          <p>
+            Cyno — Генерал Махаматра и лидер отряда Матрасов в Академии Сумеру.
+            Он отвечает за поддержание порядка и дисциплины среди студентов и
+            ученых. Несмотря на свою серьезную должность, Cyno известен своим
+            строгим, но справедливым характером.
+          </p>
+
+          <p>
+            Его уникальные способности связаны с древним духом по имени
+            Херманубис, который дает ему силу в битве. Cyno мастерски владеет
+            копьем и использует силу Электро в сочетании со своими боевыми
+            навыками.
+          </p>
+
+          <h3>В контексте Nod-Krai</h3>
+          <p>
+            В фанатском регионе Nod-Krai, Cyno переосмыслен как
+            <strong>Флинс</strong> — страж древних знаний и традиций. Его роль
+            генерала Махаматры трансформировалась в положение Хранителя
+            Равновесия, ответственного за сохранение баланса между природой и
+            цивилизацией в Nod-Krai.
+          </p>
+
+          <p>
+            Как Флинс, он использует силу молний не для устрашения, а для
+            очищения и защиты. Его копье, украшенное рунами древнего славянского
+            письма, является не только оружием, но и ключом к священным местам
+            региона.
+          </p>
+
+          <div class="abilities">
+            <h3>Особые способности</h3>
+
+            <div class="ability">
+              <h4>Тайный обряд: Пробуждённый дух</h4>
+              <p>
+                Призывает силу Херманубиса, увеличивая урон от обычных атак и
+                превращая их в урон Электро. В форме Nod-Krai это способность
+                «Призыв Грома Перуна».
+              </p>
+            </div>
+
+            <div class="ability">
+              <h4>Таинственный обряд: Погребальный причал</h4>
+              <p>
+                Наносит Электро урон по площади и создает поле, увеличивающее
+                мастерство стихий. В Nod-Krai это «Круг Равновесия»,
+                восстанавливающий природную гармонию.
+              </p>
+            </div>
+          </div>
+
+          <a href="catalog.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Вернуться к галерее
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
+        <p>
+          Персонаж Cyno является собственностью HoYoverse. Фанатская
+          интерпретация для Nod-Krai.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

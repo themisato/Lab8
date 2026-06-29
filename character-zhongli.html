@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zhongli (Цзы Бай) | Nod-Krai</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .character-detail-header {
+        padding-top: 120px;
+        padding-bottom: 50px;
+        text-align: center;
+        background: linear-gradient(135deg, #696969 0%, #deb887 100%);
+        color: white;
+      }
+      .character-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .character-image img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      }
+      .character-lore {
+        background-color: rgba(30, 58, 95, 0.9);
+        padding: 30px;
+        border-radius: 20px;
+        border-left: 5px solid #deb887;
+      }
+      .character-lore h2 {
+        color: #deb887;
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .character-lore h3 {
+        color: #40c9ff;
+        margin: 25px 0 15px;
+        font-size: 1.5rem;
+      }
+      .character-lore p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+      .character-stats {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        background-color: rgba(222, 184, 135, 0.2);
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 1px solid #deb887;
+        min-width: 150px;
+      }
+      .stat strong {
+        color: #deb887;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        color: #40c9ff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        background-color: rgba(64, 201, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s;
+      }
+      .back-link:hover {
+        background-color: rgba(64, 201, 255, 0.2);
+        transform: translateX(-5px);
+      }
+      .abilities {
+        margin-top: 30px;
+      }
+      .ability {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 3px solid #deb887;
+      }
+      .ability h4 {
+        color: #deb887;
+        margin-bottom: 8px;
+      }
+      @media (max-width: 768px) {
+        .character-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">Nod-Krai</a>
+        <nav class="main-nav" id="mainNav">
+          <ul>
+            <li><a href="index.html#home">Главная</a></li>
+            <li class="dropdown">
+              <a href="index.html#characters-block"
+                >Персонажи <i class="fas fa-chevron-down"></i
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#characters-block">Все персонажи</a></li>
+                <li><a href="catalog.html">Галерея персонажей</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#about-game">О игре</a></li>
+            <li><a href="index.html#about-region">О регионе</a></li>
+            <li><a href="index.html#contact">Связаться</a></li>
+          </ul>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="character-detail-header">
+        <div class="container">
+          <h1 class="section-title">Zhongli (Цзы Бай)</h1>
+          <p class="section-subtitle">
+            Страж Лунных Хроник | Гео одноручник | 5★
+          </p>
+        </div>
+      </section>
+
+      <div class="character-container">
+        <div class="character-image">
+          <img src="ЦзыБай.jpg" alt="Zhongli" />
+          <div class="character-stats">
+            <div class="stat">
+              <strong>Регион:</strong>
+              <span>Ли Юэ</span>
+            </div>
+            <div class="stat">
+              <strong>Оружие:</strong>
+              <span>Древковое (Копьё)</span>
+            </div>
+            <div class="stat">
+              <strong>Редкость:</strong>
+              <span>5★</span>
+            </div>
+            <div class="stat">
+              <strong>Стихия:</strong>
+              <span><i class="fas fa-mountain"></i> Гео</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="character-lore">
+          <h2><i class="fas fa-mountain"></i> Zhongli (Цзы Бай)</h2>
+
+          <h3>Официальная информация</h3>
+          <p>
+            Zhongli — бывший Гео Архонт Моракс, правивший Ли Юэ на протяжении
+            тысячелетий. Ныне он живёт как простой консультант похоронного бюро
+            «Ваншэн». Обладает невероятными знаниями об истории, культуре и
+            искусстве Тейвата. В бою проявляет себя как непревзойдённый мастер
+            Гео-стихии, создавая мощные щиты и управляя каменными структурами.
+          </p>
+
+          <h3>В контексте Нод-Края</h3>
+          <p>
+            В Лунном Крае Zhongli переосмыслен как
+            <strong>Цзы Бай, Бессмертный Летописец и Страж Лунных Хроник</strong
+            >. Он является древнейшим существом в регионе, свидетелем всей его
+            истории от первых дней правления Коломбины.
+          </p>
+
+          <p>
+            Его гео-силы здесь проявляются как управление не просто камнем, а
+            «лунным камнем» — особым материалом, который поглощает и излучает
+            лунный свет. Он служит историком, советником и защитником, создавая
+            непробиваемые щиты из лунного нефрита и вызывая каменные стелы, на
+            которых записаны древние знания.
+          </p>
+
+          <div class="abilities">
+            <h3>Искусства Лунного Стража</h3>
+
+            <div class="ability">
+              <h4>Доминирование над Луной: Каменная стела</h4>
+              <p>
+                Призывает каменную стелу, которая периодически наносит Гео урон
+                по площади и создаёт кристаллы Лунной Кристаллизации. Эти
+                кристаллы при поднятии создают более прочные щиты и
+                дополнительно восстанавливают HP.
+              </p>
+            </div>
+
+            <div class="ability">
+              <h4>Падение Кометы: Звёздный разлом</h4>
+              <p>
+                Призывает с небес метеорит из лунного камня, наносящий
+                массированный Гео урон по области и окаменяющий всех поражённых
+                врагов. Также создаёт мощный щит Лунного Нефрита для активного
+                персонажа.
+              </p>
+            </div>
+
+            <div class="ability">
+              <h4>Резонанс Лунной Породы (Пассивная)</h4>
+              <p>
+                Все щиты, созданные Цзы Баем или полученные через Лунную
+                Кристаллизацию, на 20% прочнее. Кроме того, находясь под защитой
+                щита, все члены отряда получают бонус к урону элементальных
+                взрывов.
+              </p>
+            </div>
+          </div>
+
+          <a href="catalog.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Вернуться к галерее
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
+        <p>
+          Персонаж Zhongli является собственностью HoYoverse. Фанатская
+          интерпретация для Нод-Края.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
