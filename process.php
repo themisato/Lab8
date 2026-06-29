@@ -1,45 +1,188 @@
 <?php
-// config.php
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: DENY');
-header('X-XSS-Protection: 1; mode=block');
+// process.php - Обработчик формы (если JavaScript выключен)
+require_once 'config.php';
+session_start();
 
-ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_samesite', 'Strict');
-ini_set('session.use_only_cookies', 1);
-ini_set('session.gc_maxlifetime', 3600);
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-error_reporting(E_ALL);
-
-$host = 'localhost';
-$dbname = 'u82686';
-$username = 'u82686';
-$password = '8078259';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    error_log("DB Connection Error: " . $e->getMessage());
-    die("Извините, временные технические проблемы. Попробуйте позже.");
+// ===== ПРИНИМАЕМ POST =====
+$method = $_SERVER['REQUEST_METHOD'];
+if ($method === 'POST') {
+    $input_data = $_POST;
+} else {
+    $input_data = $_GET;
 }
 
-define('SECRET_KEY', 'your-secret-key-here-change-it-2026');
+$full_name = trim($input_data['full_name'] ?? '');
+$phone = trim($input_data['phone'] ?? '');
+$email = trim($input_data['email'] ?? '');
+$birth_date = trim($input_data['birth_date'] ?? '');
+$gender = $input_data['gender'] ?? '';
+$languages = $input_data['languages'] ?? [];
+$biography = trim($input_data['biography'] ?? '');
+$contract_accepted = isset($input_data['contract_accepted']) ? 1 : 0;
+$edit_id = isset($input_data['edit_id']) && is_numeric($input_data['edit_id']) ? (int)$input_data['edit_id'] : 0;
 
-function h($str) {
-    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+$errors = [];
+
+// ===== ВАЛИДАЦИЯ =====
+if (empty($full_name)) {
+    $errors['full_name'] = "ФИО обязательно для заполнения";
+} elseif (strlen($full_name) > 150) {
+    $errors['full_name'] = "ФИО не должно превышать 150 символов";
+} elseif (!preg_match('/^[a-zA-Zа-яА-ЯёЁ\s\-]+$/u', $full_name)) {
+    $errors['full_name'] = "ФИО может содержать только буквы, пробелы и дефис";
 }
 
-function generateCSRFToken() {
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+$phone_clean = preg_replace('/[^0-9+]/', '', $phone);
+if (empty($phone_clean)) {
+    $errors['phone'] = "Телефон обязателен для заполнения";
+} elseif (!preg_match('/^(\+7|8)[0-9]{10}$/', $phone_clean)) {
+    $errors['phone'] = "Телефон должен быть в формате +7XXXXXXXXXX или 8XXXXXXXXXX";
+}
+
+if (empty($email)) {
+    $errors['email'] = "E-mail обязателен для заполнения";
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors['email'] = "Введите корректный E-mail";
+}
+
+if (empty($birth_date)) {
+    $errors['birth_date'] = "Дата рождения обязательна для заполнения";
+} else {
+    $date_obj = DateTime::createFromFormat('Y-m-d', $birth_date);
+    if (!$date_obj || $date_obj->format('Y-m-d') !== $birth_date) {
+        $errors['birth_date'] = "Неверный формат даты";
     }
-    return $_SESSION['csrf_token'];
 }
 
-function validateCSRFToken($token) {
-    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+if (empty($gender)) {
+    $errors['gender'] = "Выберите пол";
+} elseif (!in_array($gender, ['male', 'female'])) {
+    $errors['gender'] = "Некорректное значение пола";
+}
+
+if (empty($languages)) {
+    $errors['languages'] = "Выберите хотя бы один язык";
+}
+
+if (!$contract_accepted) {
+    $errors['contract_accepted'] = "Вы должны согласиться с контрактом";
+}
+
+// ===== ЕСЛИ ЕСТЬ ОШИБКИ =====
+if (!empty($errors)) {
+    // Сохраняем ошибки и данные в Cookies
+    foreach ($errors as $field => $message) {
+        setcookie("error_$field", $message, 0, '/');
+    }
+    foreach ($input_data as $key => $value) {
+        if (is_array($value)) {
+            setcookie("form_$key", implode(',', $value), 0, '/');
+        } else {
+            setcookie("form_$key", $value, 0, '/');
+        }
+    }
+    header("Location: index.html");
+    exit;
+}
+
+// ===== СОХРАНЕНИЕ В БД =====
+try {
+    $check = $pdo->query("SHOW TABLES LIKE 'applications'");
+    if ($check->rowCount() == 0) {
+        throw new Exception("Таблица 'applications' не существует!");
+    }
+    
+    $pdo->beginTransaction();
+    
+    $isEdit = ($edit_id > 0 && isset($_SESSION['user_id']) && $_SESSION['user_id'] == $edit_id);
+    
+    if ($isEdit) {
+        $sql = "UPDATE applications SET 
+                full_name = :full_name,
+                phone = :phone,
+                email = :email,
+                birth_date = :birth_date,
+                gender = :gender,
+                biography = :biography,
+                contract_accepted = :contract_accepted
+                WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':full_name' => $full_name,
+            ':phone' => $phone_clean,
+            ':email' => $email,
+            ':birth_date' => $birth_date,
+            ':gender' => $gender,
+            ':biography' => $biography,
+            ':contract_accepted' => $contract_accepted,
+            ':id' => $edit_id
+        ]);
+        $application_id = $edit_id;
+        $pdo->prepare("DELETE FROM application_languages WHERE application_id = :id")->execute([':id' => $edit_id]);
+    } else {
+        $sql = "INSERT INTO applications (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
+                VALUES (:full_name, :phone, :email, :birth_date, :gender, :biography, :contract_accepted)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':full_name' => $full_name,
+            ':phone' => $phone_clean,
+            ':email' => $email,
+            ':birth_date' => $birth_date,
+            ':gender' => $gender,
+            ':biography' => $biography,
+            ':contract_accepted' => $contract_accepted
+        ]);
+        $application_id = $pdo->lastInsertId();
+        
+        $login = strtolower(preg_replace('/[^a-zA-Z]/', '', $full_name));
+        $login = substr($login, 0, 8) . '_' . rand(100, 999);
+        $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%'), 0, 12);
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        
+        $updateStmt = $pdo->prepare("UPDATE applications SET login = :login, password_hash = :hash WHERE id = :id");
+        $updateStmt->execute([
+            ':login' => $login,
+            ':hash' => $password_hash,
+            ':id' => $application_id
+        ]);
+        
+        $_SESSION['user_id'] = $application_id;
+        $_SESSION['user_name'] = $full_name;
+    }
+    
+    if (!empty($languages)) {
+        $langStmt = $pdo->prepare("SELECT id FROM programming_languages WHERE name = :name");
+        $linkStmt = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (:app_id, :lang_id)");
+        foreach ($languages as $lang_name) {
+            $langStmt->execute([':name' => $lang_name]);
+            $langRow = $langStmt->fetch();
+            if ($langRow) {
+                $linkStmt->execute([
+                    ':app_id' => $application_id,
+                    ':lang_id' => $langRow['id']
+                ]);
+            }
+        }
+    }
+    
+    $pdo->commit();
+    
+    foreach (['full_name', 'phone', 'email', 'birth_date', 'gender', 'languages', 'biography', 'contract_accepted'] as $field) {
+        setcookie("error_$field", "", time() - 3600, '/');
+    }
+    
+    header("Location: success.php?id=" . $application_id . "&login=" . urlencode($login ?? '') . "&password=" . urlencode($password ?? ''));
+    exit;
+    
+} catch (PDOException $e) {
+    $pdo->rollBack();
+    error_log("Database error: " . $e->getMessage());
+    header("Location: index.html?error=db");
+    exit;
+} catch (Exception $e) {
+    $pdo->rollBack();
+    error_log("General error: " . $e->getMessage());
+    header("Location: index.html?error=general");
+    exit;
 }
 ?>

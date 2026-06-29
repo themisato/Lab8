@@ -1266,3 +1266,41 @@ body {
     font-size: 0.65rem !important;
   }
 }
+/* ===== СООБЩЕНИЯ ===== */
+.message {
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  margin-bottom: 10px !important;
+  text-align: center !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+
+.message.success {
+  background: rgba(76, 175, 80, 0.15) !important;
+  color: #81c784 !important;
+  border: 1px solid rgba(76, 175, 80, 0.2) !important;
+}
+
+.message.error {
+  background: rgba(255, 107, 107, 0.15) !important;
+  color: #ff6b6b !important;
+  border: 1px solid rgba(255, 107, 107, 0.2) !important;
+}
+
+/* Контейнер для сообщений */
+#messageContainer {
+  margin-bottom: 10px !important;
+}
+
+/* Ошибки полей */
+.modal-content .error-message {
+  color: #ff6b6b !important;
+  font-size: 0.7rem !important;
+  margin-top: 3px !important;
+  display: none !important;
+}
+
+.modal-content .error-message.show {
+  display: block !important;
+}

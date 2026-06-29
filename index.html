@@ -11,7 +11,7 @@
     />
   </head>
   <body>
-    <!-- Верхнее меню -->
+    <!-- Шапка -->
     <header class="main-header">
       <div class="container header-container">
         <a href="index.html" class="logo">Нод-край</a>
@@ -23,19 +23,18 @@
             <li><a href="admin.php">🔧 Админка</a></li>
           </ul>
         </nav>
-        <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+        <button class="menu-toggle" id="menuToggle">
           <i class="fas fa-bars"></i>
         </button>
       </div>
     </header>
 
     <main>
-      <!-- Блок 1: Главная с видео -->
+      <!-- Видео-блок -->
       <section id="home" class="fullscreen-video-section">
         <div class="video-container">
           <video autoplay muted loop playsinline id="bgVideo">
             <source src="nod.mp4" type="video/mp4" />
-            Ваш браузер не поддерживает видео.
           </video>
           <div class="video-overlay"></div>
         </div>
@@ -43,14 +42,13 @@
           <h1>Нод-край</h1>
           <p class="tagline">
             Земля вечного равновесия, где древние корни мудрости сплетаются с
-            тихим шепотом ветра. Затерянный регион, хранящий секреты забытых
-            цивилизаций и магию первозданной природы.
+            тихим шепотом ветра.
           </p>
           <a href="#about-region" class="btn">Узнать историю</a>
         </div>
       </section>
 
-      <!-- Блок 2: Персонажи -->
+      <!-- Персонажи -->
       <section id="characters-block" class="section characters-section">
         <div class="container">
           <h2 class="section-title">Персонажи Нод-Края</h2>
@@ -58,7 +56,6 @@
             Легендарные герои региона, владеющие различными стихиями.
           </p>
           <div class="characters-grid">
-            <!-- Карточка 1: Флинс -->
             <div class="character-card" data-element="electro">
               <a href="character-flince.html" class="card-link">
                 <div class="card-front">
@@ -71,16 +68,13 @@
                         Электро</span
                       >
                       <span class="weapon-icon"
-                        ><i class="fas fa-spear" style="color: #aaa"></i>
-                        Копейщик</span
+                        ><i class="fas fa-spear"></i> Копейщик</span
                       >
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 2: Лаума -->
             <div class="character-card" data-element="dendro">
               <a href="character-lauma.html" class="card-link">
                 <div class="card-front">
@@ -93,16 +87,13 @@
                         Дендро</span
                       >
                       <span class="weapon-icon"
-                        ><i class="fas fa-book" style="color: #aaa"></i>
-                        Каталист</span
+                        ><i class="fas fa-book"></i> Каталист</span
                       >
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 3: Коломбина -->
             <div class="character-card" data-element="hydro">
               <a href="character-kokomi.html" class="card-link">
                 <div class="card-front">
@@ -115,16 +106,13 @@
                         Гидро</span
                       >
                       <span class="weapon-icon"
-                        ><i class="fas fa-book" style="color: #aaa"></i>
-                        Каталист</span
+                        ><i class="fas fa-book"></i> Каталист</span
                       >
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 4: Варка -->
             <div class="character-card" data-element="anemo">
               <a href="character-jean.html" class="card-link">
                 <div class="card-front">
@@ -137,16 +125,13 @@
                         Анемо</span
                       >
                       <span class="weapon-icon"
-                        ><i class="fas fa-sword" style="color: #aaa"></i>
-                        Двуручник</span
+                        ><i class="fas fa-sword"></i> Двуручник</span
                       >
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 5: Дурин -->
             <div class="character-card" data-element="pyro">
               <a href="character-diluc.html" class="card-link">
                 <div class="card-front">
@@ -159,16 +144,13 @@
                         Пиро</span
                       >
                       <span class="weapon-icon"
-                        ><i class="fas fa-sword" style="color: #aaa"></i>
-                        Одноручник</span
+                        ><i class="fas fa-sword"></i> Одноручник</span
                       >
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 6: Цзы Бай -->
             <div class="character-card" data-element="geo">
               <a href="character-zhongli.html" class="card-link">
                 <div class="card-front">
@@ -181,8 +163,7 @@
                         Гео</span
                       >
                       <span class="weapon-icon"
-                        ><i class="fas fa-sword" style="color: #aaa"></i>
-                        Одноручник</span
+                        ><i class="fas fa-sword"></i> Одноручник</span
                       >
                     </div>
                   </div>
@@ -196,26 +177,18 @@
         </div>
       </section>
 
-      <!-- Блок 3: О игре -->
+      <!-- О игре -->
       <section id="about-game" class="section image-bg-section">
         <div class="container">
           <div class="text-content centered-content">
             <h2 class="section-title">Genshin Impact</h2>
             <p>
               Это массовая многопользовательская action-RPG с открытым миром,
-              разработанная компанией HoYoverse. Отправляйтесь в путешествие по
-              фантастическому миру Тейвата, где воля богов проявляется в семи
-              стихиях.
+              разработанная компанией HoYoverse.
             </p>
             <p>
               Исследуйте обширные земли, объединяйтесь в отряды из уникальных
-              персонажей, раскрывайте тайны древних цивилизаций и сражайтесь с
-              могущественными врагами, чтобы найти потерянного родственника и
-              обрести ответы от самих богов.
-            </p>
-            <p>
-              Мир Тейвата полон чудес, и Нод-край — лишь одна из его жемчужин,
-              ожидающих своего исследователя.
+              персонажей, раскрывайте тайны древних цивилизаций.
             </p>
           </div>
         </div>
@@ -226,36 +199,22 @@
         <div class="bg-overlay"></div>
       </section>
 
-      <!-- Блок 4: О регионе -->
+      <!-- О регионе -->
       <section id="about-region" class="section image-bg-section">
         <div class="container">
           <div class="text-content centered-content">
             <h2 class="section-title">Нод-Край: Лунный Край</h2>
             <p>
-              Согласно официальному релизу от HoYoverse,
               <strong>Нод-Край (Nod-Krai)</strong> — седьмой и самый загадочный
-              регион Тейвата, чьи судьбы неразрывно связаны с луной. Это царство
-              серебристого света, древних тайн и тихой, но могущественной магии.
+              регион Тейвата.
             </p>
-
             <h3 style="color: #b19cd9; margin-top: 25px">
               🌙 Архонт Лунного Края
             </h3>
-            <p>
-              Божественным покровителем и правителем региона является
-              <strong>Коломбина, Дева Луны (Columbina, the Lunar Maiden)</strong
-              >. Как новый Архонт, она олицетворяет собой умиротворение, тайну и
-              цикличность. Её власть простирается не только над землёй, но и над
-              особыми «лунными» вариациями элементальных реакций.
-            </p>
-
+            <p><strong>Коломбина, Дева Луны</strong> — правитель региона.</p>
             <h3 style="color: #b19cd9; margin-top: 25px">
               ⚡ Уникальные Лунные Реакции
             </h3>
-            <p>
-              Магия Нод-Края преломляет обычные законы стихий через призму
-              лунного света:
-            </p>
             <ul
               style="
                 margin-left: 20px;
@@ -265,7 +224,7 @@
             >
               <li>
                 <strong>Лунная Бутонизация (Dendro + Hydro):</strong> Порождает
-                сияющие «лунные лотосы», которые излечивают союзников.
+                сияющие «лунные лотосы».
               </li>
               <li>
                 <strong>Лунный Заряд (Electro + Hydro):</strong> Создаёт
@@ -273,23 +232,14 @@
               </li>
               <li>
                 <strong>Лунная Кристаллизация (Geo + Hydro):</strong> Создаёт
-                «лунные столбы», поглощающие урон.
+                «лунные столбы».
               </li>
             </ul>
-
             <h3 style="color: #b19cd9; margin-top: 25px">
               🏛️ Культура и Вдохновение
             </h3>
             <p>
-              Концепция Нод-Края глубоко вдохновлена богатым наследием
-              <strong>славянских мифов, обычаев и архитектуры</strong>.
-              Путешественники увидят здесь величественные деревянные терема,
-              таинственные капища в древних лесах и города, вплетённые в
-              ландшафт.
-            </p>
-            <p style="margin-top: 20px; font-style: italic">
-              Приключение в Нод-Крае обещает стать самым эпичным и мистическим
-              путешествием по Тейвату.
+              Концепция Нод-Края вдохновлена славянскими мифами и архитектурой.
             </p>
           </div>
         </div>
@@ -300,141 +250,185 @@
         <div class="bg-overlay"></div>
       </section>
 
-      <!-- Блок 5: Форма обратной связи -->
-<section id="contact" class="section form-section">
-    <div class="container">
-        <div class="text-center">
+      <!-- Кнопка открытия анкеты -->
+      <section id="contact" class="section form-section">
+        <div class="container">
+          <div class="text-center">
             <h2 class="section-title">💬 Свяжитесь с нами</h2>
             <p class="section-subtitle">
-                Мы всегда рады помочь и ответить на ваши вопросы
+              Мы всегда рады помочь и ответить на ваши вопросы
             </p>
             <button class="open-form-btn" id="openFormBtn">
-                📝 Заполнить анкету
+              📝 Заполнить анкету
             </button>
+          </div>
         </div>
-    </div>
-</section>
+      </section>
 
-<!-- Модальное окно формы -->
-<div class="modal-overlay" id="modalOverlay">
-    <div class="modal-content">
-      <!-- Внутри modal-content -->
-<div class="form-scroll">
-    <form id="feedbackForm" action="api.php" method="POST" data-api="true">
-        <!-- все поля формы -->
-    
-        <button class="close-btn" id="closeBtn">×</button>
+      <!-- Модальное окно с формой -->
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+          <button class="close-btn" id="closeBtn">×</button>
 
-        <div class="form-header">
+          <div class="form-header">
             <h2 class="form-title">📋 Анкета</h2>
             <p class="form-subtitle">Заполните все обязательные поля</p>
-        </div>
+          </div>
 
-        <div id="messageContainer"></div>
+          <div id="messageContainer"></div>
 
-        <!-- ИЗМЕНЕНО: action="api.php" -->
-        <form id="feedbackForm" action="api.php" method="POST" data-api="true">
-            <input type="hidden" name="csrf_token" value="" />
+          <!-- ОДНА ФОРМА! -->
+          <div class="form-scroll">
+            <form
+              id="feedbackForm"
+              action="api.php"
+              method="POST"
+              data-api="true"
+            >
+              <input type="hidden" name="csrf_token" value="" />
 
-            <!-- ФИО -->
-            <div class="form-group">
-                <input type="text" id="fullName" name="full_name" required placeholder=" " autocomplete="name" />
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="fullName"
+                  name="full_name"
+                  required
+                  placeholder=" "
+                  autocomplete="name"
+                />
                 <label for="fullName" class="required">ФИО</label>
-                <div class="error-message" id="fullNameError">ФИО должно содержать только буквы и пробелы</div>
-            </div>
+                <div class="error-message" id="fullNameError">
+                  ФИО должно содержать только буквы и пробелы
+                </div>
+              </div>
 
-            <!-- Телефон -->
-            <div class="form-group">
-                <input type="tel" id="phone" name="phone" required placeholder=" " autocomplete="tel" maxlength="11" />
+              <div class="form-group">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder=" "
+                  autocomplete="tel"
+                  maxlength="11"
+                />
                 <label for="phone" class="required">Телефон</label>
-                <div class="error-message" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
-            </div>
+                <div class="error-message" id="phoneError">
+                  Телефон должен содержать ровно 11 цифр
+                </div>
+              </div>
 
-            <!-- Email -->
-            <div class="form-group">
-                <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder=" "
+                  autocomplete="email"
+                />
                 <label for="email" class="required">E-mail</label>
-                <div class="error-message" id="emailError">Введите корректный email адрес</div>
-            </div>
+                <div class="error-message" id="emailError">
+                  Введите корректный email адрес
+                </div>
+              </div>
 
-            <!-- Дата рождения -->
-            <div class="form-group">
-                <input type="date" id="birth_date" name="birth_date" required placeholder=" " />
+              <div class="form-group">
+                <input
+                  type="date"
+                  id="birth_date"
+                  name="birth_date"
+                  required
+                  placeholder=" "
+                />
                 <label for="birth_date" class="required">Дата рождения</label>
-                <div class="error-message" id="birth_dateError">Введите корректную дату рождения</div>
-            </div>
+                <div class="error-message" id="birth_dateError">
+                  Введите корректную дату рождения
+                </div>
+              </div>
 
-            <!-- Пол -->
-            <div class="form-group">
+              <div class="form-group">
                 <label class="required">Пол</label>
                 <div class="radio-group">
-                    <label>
-                        <input type="radio" name="gender" value="male" /> Мужской
-                    </label>
-                    <label>
-                        <input type="radio" name="gender" value="female" /> Женский
-                    </label>
+                  <label
+                    ><input type="radio" name="gender" value="male" />
+                    Мужской</label
+                  >
+                  <label
+                    ><input type="radio" name="gender" value="female" />
+                    Женский</label
+                  >
                 </div>
                 <div class="error-message" id="genderError">Выберите пол</div>
-            </div>
+              </div>
 
-            <!-- Языки -->
-            <div class="form-group">
-                <label for="languages" class="required">Любимые языки программирования</label>
+              <div class="form-group">
+                <label for="languages" class="required"
+                  >Любимые языки программирования</label
+                >
                 <select id="languages" name="languages[]" multiple size="4">
-                    <option value="Pascal">Pascal</option>
-                    <option value="C">C</option>
-                    <option value="C++">C++</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="PHP">PHP</option>
-                    <option value="Python">Python</option>
-                    <option value="Java">Java</option>
-                    <option value="Haskell">Haskell</option>
-                    <option value="Clojure">Clojure</option>
-                    <option value="Prolog">Prolog</option>
-                    <option value="Scala">Scala</option>
-                    <option value="Go">Go</option>
+                  <option value="Pascal">Pascal</option>
+                  <option value="C">C</option>
+                  <option value="C++">C++</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="PHP">PHP</option>
+                  <option value="Python">Python</option>
+                  <option value="Java">Java</option>
+                  <option value="Haskell">Haskell</option>
+                  <option value="Clojure">Clojure</option>
+                  <option value="Prolog">Prolog</option>
+                  <option value="Scala">Scala</option>
+                  <option value="Go">Go</option>
                 </select>
-                <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
-            </div>
+                <div class="error-message" id="languagesError">
+                  Выберите хотя бы один язык
+                </div>
+              </div>
 
-            <!-- Биография -->
-            <div class="form-group">
-                <textarea id="biography" name="biography" placeholder=" " rows="4"></textarea>
+              <div class="form-group">
+                <textarea
+                  id="biography"
+                  name="biography"
+                  placeholder=" "
+                  rows="4"
+                ></textarea>
                 <label for="biography">Биография</label>
-                <div class="error-message" id="biographyError">Биография не должна превышать 5000 символов</div>
-            </div>
+                <div class="error-message" id="biographyError">
+                  Биография не должна превышать 5000 символов
+                </div>
+              </div>
 
-            <!-- Чекбокс -->
-            <div class="form-group">
+              <div class="form-group">
                 <div class="checkbox-group-custom" id="checkboxGroup">
-                    <input type="checkbox" id="privacyPolicy" name="contract_accepted" value="1" required />
-                    <label for="privacyPolicy" class="required">
-                        Я согласен с политикой обработки персональных данных и ознакомлен с контрактом
-                    </label>
+                  <input
+                    type="checkbox"
+                    id="privacyPolicy"
+                    name="contract_accepted"
+                    value="1"
+                    required
+                  />
+                  <label for="privacyPolicy" class="required">
+                    Я согласен с политикой обработки персональных данных и
+                    ознакомлен с контрактом
+                  </label>
                 </div>
                 <div class="error-message" id="privacyPolicyError">
-                    Необходимо согласие с политикой обработки данных
+                  Необходимо согласие с политикой обработки данных
                 </div>
-            </div>
+              </div>
 
-            <!-- КНОПКА ОТПРАВКИ -->
-            <button type="submit" class="submit-btn" id="submitBtn">
+              <button type="submit" class="submit-btn" id="submitBtn">
                 📤 Отправить анкету
-            </button>
-        </form>
-    </div>
-</div>
-</form>
-</div>
-    <!-- Подвал -->
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
     <footer class="main-footer">
       <div class="container">
         <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
-        <p>
-          Данный фанатский сайт создан в ознакомительных целях. Все используемые
-          материалы являются собственностью их правообладателей.
-        </p>
         <p class="disclaimer">
           Нод-край — вымышленный регион, не входящий в официальный лор игры.
         </p>
@@ -442,163 +436,114 @@
     </footer>
 
     <script src="script.js"></script>
-      <script>
-    // ===== ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
-    document.addEventListener('DOMContentLoaded', function() {
-        const openBtn = document.getElementById('openFormBtn');
-        const modal = document.getElementById('modalOverlay');
-        const closeBtn = document.getElementById('closeBtn');
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Открытие/закрытие модального окна
+        const openBtn = document.getElementById("openFormBtn");
+        const modal = document.getElementById("modalOverlay");
+        const closeBtn = document.getElementById("closeBtn");
 
-        if (openBtn && modal) {
-            openBtn.addEventListener('click', function() {
-                modal.style.display = 'flex';
-            });
-        }
+        if (openBtn)
+          openBtn.addEventListener("click", function () {
+            modal.style.display = "flex";
+          });
+        if (closeBtn)
+          closeBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+          });
+        if (modal)
+          modal.addEventListener("click", function (e) {
+            if (e.target === modal) modal.style.display = "none";
+          });
 
-        if (closeBtn && modal) {
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-        }
+        // ОТПРАВКА ФОРМЫ
+        const form = document.getElementById("feedbackForm");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        }
-
-        // ОТПРАВКА ФОРМЫ ЧЕРЕЗ FETCH
-const form = document.getElementById('feedbackForm');
-
-if (form) {
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const data = {};
-
-        for (let [key, value] of formData.entries()) {
-            if (key === 'languages[]') {
+            const formData = new FormData(form);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+              if (key === "languages[]") {
                 if (!data.languages) data.languages = [];
                 data.languages.push(value);
-            } else {
+              } else {
                 data[key] = value;
+              }
             }
-        }
+            if (data.languages && data.languages.length === 0)
+              delete data.languages;
 
-        if (data.languages && data.languages.length === 0) {
-            delete data.languages;
-        }
-
-        const submitBtn = form.querySelector('.submit-btn');
-        const originalText = submitBtn ? submitBtn.textContent : 'Отправить';
-        if (submitBtn) {
-            submitBtn.textContent = '⏳ Отправка...';
-            submitBtn.disabled = true;
-        }
-
-        // ОТПРАВЛЯЕМ НА API.PHP
-        fetch('api.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-            credentials: 'same-origin'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Ошибка сети: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(result => {
-            if (result.success) {
-                let html = '<div class="message success">✅ ' + (result.message || 'Данные сохранены!') + '</div>';
-                if (result.data && result.data.login && result.data.password) {
-                    html += `
-                        <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;text-align:center;">
-                            <strong>🔑 Ваши данные для входа!</strong><br>
-                            Логин: <strong>${result.data.login}</strong><br>
-                            Пароль: <strong>${result.data.password}</strong><br>
-                            <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные!</span>
-                        </div>
-                    `;
-                }
-                document.getElementById('messageContainer').innerHTML = html;
-                form.reset();
-            } else {
-                if (result.errors) {
-                    let errorText = '';
-                    for (let key in result.errors) {
-                        errorText += '• ' + result.errors[key] + '<br>';
-                    }
-                    document.getElementById('messageContainer').innerHTML = `<div class="message error">❌ ${errorText}</div>`;
-                } else {
-                    document.getElementById('messageContainer').innerHTML = `<div class="message error">❌ ${result.error || 'Ошибка'}</div>`;
-                }
-            }
-        })
-        .catch(error => {
-            document.getElementById('messageContainer').innerHTML = `
-                <div class="message error">
-                    ❌ Ошибка соединения с api.php<br>
-                    <small>Проверьте, что файл существует</small>
-                </div>
-            `;
-        })
-        .finally(() => {
+            const submitBtn = form.querySelector(".submit-btn");
+            const originalText = submitBtn
+              ? submitBtn.textContent
+              : "Отправить";
             if (submitBtn) {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+              submitBtn.textContent = "⏳ Отправка...";
+              submitBtn.disabled = true;
             }
-        });
-    });
-}
 
-        // Автозаполнение данных при авторизации
-        const editIdInput = document.querySelector('input[name="edit_id"]');
-        if (editIdInput && editIdInput.value) {
-            fetch('api.php', {
-                method: 'GET',
-                headers: { 'Accept': 'application/json' },
-                credentials: 'same-origin'
+            fetch("api.php", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+              credentials: "same-origin",
             })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success && result.data) {
-                    const data = result.data;
-                    const fields = ['full_name', 'phone', 'email', 'birth_date', 'gender', 'biography'];
-                    fields.forEach(field => {
-                        const input = document.querySelector(`[name="${field}"]`);
-                        if (input && data[field]) {
-                            if (input.type === 'radio') {
-                                const radio = document.querySelector(`[name="${field}"][value="${data[field]}"]`);
-                                if (radio) radio.checked = true;
-                            } else {
-                                input.value = data[field];
-                            }
-                        }
-                    });
-                    if (data.languages) {
-                        const select = document.getElementById('languages');
-                        if (select) {
-                            Array.from(select.options).forEach(opt => {
-                                opt.selected = data.languages.includes(opt.value);
-                            });
-                        }
+              .then((response) => response.json())
+              .then((result) => {
+                let html = "";
+                if (result.success) {
+                  html =
+                    '<div class="message success">✅ ' +
+                    (result.message || "Данные сохранены!") +
+                    "</div>";
+                  if (
+                    result.data &&
+                    result.data.login &&
+                    result.data.password
+                  ) {
+                    html += `
+                                    <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;text-align:center;">
+                                        <strong>🔑 Ваши данные для входа!</strong><br>
+                                        Логин: <strong>${result.data.login}</strong><br>
+                                        Пароль: <strong>${result.data.password}</strong><br>
+                                        <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные!</span>
+                                    </div>
+                                `;
+                  }
+                  form.reset();
+                } else {
+                  if (result.errors) {
+                    let errorText = "";
+                    for (let key in result.errors) {
+                      errorText += "• " + result.errors[key] + "<br>";
                     }
-                    const contractCheck = document.querySelector('[name="contract_accepted"]');
-                    if (contractCheck && data.contract_accepted) {
-                        contractCheck.checked = true;
-                    }
+                    html =
+                      '<div class="message error">❌ ' + errorText + "</div>";
+                  } else {
+                    html =
+                      '<div class="message error">❌ ' +
+                      (result.error || "Ошибка") +
+                      "</div>";
+                  }
                 }
-            })
-            .catch(error => console.error('Ошибка загрузки данных:', error));
+                document.getElementById("messageContainer").innerHTML = html;
+              })
+              .catch((error) => {
+                document.getElementById("messageContainer").innerHTML = `
+                            <div class="message error">❌ Ошибка соединения с api.php<br><small>Проверьте, что файл существует</small></div>
+                        `;
+              })
+              .finally(() => {
+                if (submitBtn) {
+                  submitBtn.textContent = originalText;
+                  submitBtn.disabled = false;
+                }
+              });
+          });
         }
-    });
-</script>
+      });
+    </script>
   </body>
 </html>
