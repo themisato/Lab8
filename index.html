@@ -2,7 +2,6 @@
 session_start();
 require_once 'config.php';
 
-// Проверяем, авторизован ли пользователь
 $is_logged_in = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 $user_name = $_SESSION['user_name'] ?? '';
 ?>
@@ -29,20 +28,21 @@ $user_name = $_SESSION['user_name'] ?? '';
             <li><a href="catalog.html">Персонажи</a></li>
             <li><a href="list.php">📋 Анкеты</a></li>
             <li><a href="admin.php">🔧 Админка</a></li>
+            <!-- ТОЛЬКО ОДНА КНОПКА В ЗАВИСИМОСТИ ОТ СЕССИИ -->
             <?php if ($is_logged_in): ?>
             <li
               style="
                 display: flex;
                 align-items: center;
-                gap: 10px;
-                margin-left: 20px;
-                background: rgba(64, 201, 255, 0.08);
-                padding: 5px 16px 5px 20px;
+                gap: 8px;
+                margin-left: 15px;
+                background: rgba(64, 201, 255, 0.1);
+                padding: 4px 14px 4px 18px;
                 border-radius: 30px;
                 border: 1px solid rgba(64, 201, 255, 0.15);
               "
             >
-              <span style="color: #40c9ff; font-weight: 600; font-size: 0.95rem"
+              <span style="color: #40c9ff; font-weight: 600; font-size: 0.9rem"
                 >👤 <?php echo htmlspecialchars($user_name); ?></span
               >
               <a
@@ -50,13 +50,14 @@ $user_name = $_SESSION['user_name'] ?? '';
                 style="
                   color: #ff6b6b;
                   text-decoration: none;
-                  padding: 4px 14px;
+                  padding: 3px 12px;
                   border: 1px solid rgba(255, 107, 107, 0.3);
                   border-radius: 20px;
-                  font-size: 0.8rem;
+                  font-size: 0.75rem;
                   transition: all 0.3s;
+                  background: rgba(255, 107, 107, 0.05);
                 "
-                >🚪 Выйти</a
+                >Выйти</a
               >
             </li>
             <?php else: ?>
@@ -66,13 +67,13 @@ $user_name = $_SESSION['user_name'] ?? '';
                 style="
                   background: linear-gradient(45deg, #1a5fb4, #40c9ff);
                   color: white;
-                  padding: 8px 22px;
+                  padding: 6px 20px;
                   border-radius: 30px;
                   font-weight: bold;
+                  font-size: 0.95rem;
                   transition: all 0.3s;
-                  display: inline-block;
                 "
-                >🔐 Войти</a
+                >Войти</a
               >
             </li>
             <?php endif; ?>
@@ -497,7 +498,6 @@ $user_name = $_SESSION['user_name'] ?? '';
             if (e.target === modal) modal.style.display = "none";
           });
 
-        // ===== ОТПРАВКА ФОРМЫ =====
         const form = document.getElementById("feedbackForm");
         if (form) {
           form.addEventListener("submit", function (e) {
