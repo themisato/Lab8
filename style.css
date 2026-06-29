@@ -1346,3 +1346,44 @@ body {
 .user-nav-info .logout-link-nav:hover {
   background: rgba(255, 107, 107, 0.1);
 }
+/* ===== АВТОРИЗАЦИЯ В МЕНЮ ===== */
+.user-nav-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-left: 20px !important;
+}
+
+.user-nav-info .user-name {
+  color: #40c9ff !important;
+  font-weight: bold !important;
+}
+
+.user-nav-info .logout-link-nav {
+  color: #ff6b6b !important;
+  text-decoration: none !important;
+  padding: 5px 14px !important;
+  border: 1px solid rgba(255, 107, 107, 0.3) !important;
+  border-radius: 20px !important;
+  font-size: 0.85rem !important;
+  transition: all 0.3s !important;
+}
+
+.user-nav-info .logout-link-nav:hover {
+  background: rgba(255, 107, 107, 0.1) !important;
+}
+
+/* Кнопка входа в меню */
+.login-btn-nav {
+  background: linear-gradient(45deg, #1a5fb4, #40c9ff) !important;
+  color: white !important;
+  padding: 8px 18px !important;
+  border-radius: 30px !important;
+  font-weight: bold !important;
+  transition: all 0.3s ease !important;
+}
+
+.login-btn-nav:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(64, 201, 255, 0.4) !important;
+}

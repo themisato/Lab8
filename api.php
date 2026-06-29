@@ -1,5 +1,5 @@
 <?php
-// api.php - Веб-сервис (исправленный)
+// api.php - Веб-сервис
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS');
@@ -73,8 +73,6 @@ function validateData($data) {
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
-$user_id = $_SESSION['user_id'] ?? null;
-$is_auth = isset($user_id);
 
 $input_data = [];
 if ($method === 'POST' || $method === 'PUT') {
@@ -85,36 +83,8 @@ if ($method === 'POST' || $method === 'PUT') {
 }
 
 try {
-    if ($method === 'GET') {
-        if (!$is_auth) {
-            sendResponse(['error' => 'Требуется авторизация']);
-        }
-        $stmt = $pdo->prepare("SELECT * FROM applications WHERE id = ?");
-        $stmt->execute([$user_id]);
-        $user = $stmt->fetch();
-        if (!$user) {
-            sendResponse(['error' => 'Пользователь не найден']);
-        }
-        $langStmt = $pdo->prepare("SELECT pl.name FROM application_languages al JOIN programming_languages pl ON al.language_id = pl.id WHERE al.application_id = ?");
-        $langStmt->execute([$user_id]);
-        $languages = $langStmt->fetchAll(PDO::FETCH_COLUMN);
-        sendResponse([
-            'success' => true,
-            'data' => [
-                'id' => $user['id'],
-                'full_name' => $user['full_name'],
-                'phone' => $user['phone'],
-                'email' => $user['email'],
-                'birth_date' => $user['birth_date'],
-                'gender' => $user['gender'],
-                'biography' => $user['biography'],
-                'languages' => $languages,
-                'contract_accepted' => (bool)$user['contract_accepted']
-            ]
-        ]);
-    }
-    elseif ($method === 'POST') {
-        // ===== РАЗРЕШАЕМ СОЗДАНИЕ НОВОЙ АНКЕТЫ ВСЕГДА =====
+    if ($method === 'POST') {
+        // ВСЕГДА СОЗДАЕМ НОВУЮ АНКЕТУ
         $errors = validateData($input_data);
         if (!empty($errors)) {
             sendResponse(['success' => false, 'errors' => $errors]);
@@ -156,7 +126,7 @@ try {
         $updateStmt->execute([$login, $password_hash, $user_id]);
         $pdo->commit();
         
-        // Обновляем сессию - теперь пользователь авторизован под НОВОЙ анкетой
+        // ОБНОВЛЯЕМ СЕССИЮ
         $_SESSION['user_id'] = $user_id;
         $_SESSION['user_name'] = $input_data['full_name'];
         
@@ -172,7 +142,8 @@ try {
         ]);
     }
     elseif ($method === 'PUT') {
-        if (!$is_auth) {
+        $user_id = $_SESSION['user_id'] ?? null;
+        if (!$user_id) {
             sendResponse(['error' => 'Требуется авторизация']);
         }
         $errors = validateData($input_data);
@@ -221,9 +192,9 @@ try {
 } catch (PDOException $e) {
     if (isset($pdo)) $pdo->rollBack();
     error_log("API Error: " . $e->getMessage());
-    sendResponse(['error' => 'Ошибка базы данных: ' . $e->getMessage()]);
+    sendResponse(['error' => 'Ошибка базы данных']);
 } catch (Exception $e) {
     error_log("API Error: " . $e->getMessage());
-    sendResponse(['error' => 'Ошибка сервера: ' . $e->getMessage()]);
+    sendResponse(['error' => 'Ошибка сервера']);
 }
 ?>

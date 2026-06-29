@@ -18,13 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($login) || empty($password)) {
         $error = 'Введите логин и пароль.';
     } else {
-        // Ищем пользователя по логину
         $stmt = $pdo->prepare("SELECT id, full_name, password_hash FROM applications WHERE login = :login");
         $stmt->execute([':login' => $login]);
         $user = $stmt->fetch();
         
         if ($user && password_verify($password, $user['password_hash'])) {
-            // Успешный вход
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['full_name'];
@@ -99,9 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             outline: none;
             box-shadow: 0 0 0 3px rgba(64, 201, 255, 0.2);
         }
-        .login-container .form-group input::placeholder {
-            color: rgba(255,255,255,0.3);
-        }
         .login-btn {
             width: 100%;
             padding: 0.85rem;
@@ -143,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <li><a href="catalog.html">Персонажи</a></li>
                     <li><a href="list.php">📋 Анкеты</a></li>
                     <li><a href="admin.php">🔧 Админка</a></li>
-                    <li><a href="login.php" class="login-btn-nav">🔐 Войти</a></li>
+                    <li><a href="login.php" style="background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;padding:8px 18px;border-radius:30px;font-weight:bold;">🔐 Войти</a></li>
                 </ul>
             </nav>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>

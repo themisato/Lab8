@@ -29,14 +29,46 @@ $user_name = $_SESSION['user_name'] ?? '';
             <li><a href="list.php">📋 Анкеты</a></li>
             <li><a href="admin.php">🔧 Админка</a></li>
             <?php if ($is_logged_in): ?>
-            <li class="user-nav-info">
-              <span class="user-name"
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-left: 20px;
+              "
+            >
+              <span style="color: #40c9ff; font-weight: bold"
                 >👤 <?php echo htmlspecialchars($user_name); ?></span
               >
-              <a href="logout.php" class="logout-link-nav">🚪 Выйти</a>
+              <a
+                href="logout.php"
+                style="
+                  color: #ff6b6b;
+                  text-decoration: none;
+                  padding: 5px 14px;
+                  border: 1px solid rgba(255, 107, 107, 0.3);
+                  border-radius: 20px;
+                  font-size: 0.85rem;
+                  transition: all 0.3s;
+                "
+                >🚪 Выйти</a
+              >
             </li>
             <?php else: ?>
-            <li><a href="login.php" class="login-btn-nav">🔐 Войти</a></li>
+            <li>
+              <a
+                href="login.php"
+                style="
+                  background: linear-gradient(45deg, #1a5fb4, #40c9ff);
+                  color: white;
+                  padding: 8px 18px;
+                  border-radius: 30px;
+                  font-weight: bold;
+                  transition: all 0.3s;
+                "
+                >🔐 Войти</a
+              >
+            </li>
             <?php endif; ?>
           </ul>
         </nav>
@@ -75,7 +107,6 @@ $user_name = $_SESSION['user_name'] ?? '';
             Легендарные герои региона, владеющие различными стихиями.
           </p>
           <div class="characters-grid">
-            <!-- Карточка 1: Флинс -->
             <div class="character-card" data-element="electro">
               <a href="character-flince.html" class="card-link">
                 <div class="card-front">
@@ -95,8 +126,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 2: Лаума -->
             <div class="character-card" data-element="dendro">
               <a href="character-lauma.html" class="card-link">
                 <div class="card-front">
@@ -116,8 +145,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 3: Коломбина -->
             <div class="character-card" data-element="hydro">
               <a href="character-kokomi.html" class="card-link">
                 <div class="card-front">
@@ -137,8 +164,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 4: Варка -->
             <div class="character-card" data-element="anemo">
               <a href="character-jean.html" class="card-link">
                 <div class="card-front">
@@ -158,8 +183,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 5: Дурин -->
             <div class="character-card" data-element="pyro">
               <a href="character-diluc.html" class="card-link">
                 <div class="card-front">
@@ -179,8 +202,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                 </div>
               </a>
             </div>
-
-            <!-- Карточка 6: Цзы Бай -->
             <div class="character-card" data-element="geo">
               <a href="character-zhongli.html" class="card-link">
                 <div class="card-front">
@@ -248,25 +269,17 @@ $user_name = $_SESSION['user_name'] ?? '';
               регион Тейвата, чьи судьбы неразрывно связаны с луной. Это царство
               серебристого света, древних тайн и тихой, но могущественной магии.
             </p>
-
             <h3 style="color: #b19cd9; margin-top: 25px">
               🌙 Архонт Лунного Края
             </h3>
             <p>
               Божественным покровителем и правителем региона является
               <strong>Коломбина, Дева Луны (Columbina, the Lunar Maiden)</strong
-              >. Как новый Архонт, она олицетворяет собой умиротворение, тайну и
-              цикличность. Её власть простирается не только над землёй, но и над
-              особыми «лунными» вариациями элементальных реакций.
+              >.
             </p>
-
             <h3 style="color: #b19cd9; margin-top: 25px">
               ⚡ Уникальные Лунные Реакции
             </h3>
-            <p>
-              Магия Нод-Края преломляет обычные законы стихий через призму
-              лунного света, создавая новые формы взаимодействий:
-            </p>
             <ul
               style="
                 margin-left: 20px;
@@ -276,38 +289,27 @@ $user_name = $_SESSION['user_name'] ?? '';
             >
               <li>
                 <strong>Лунная Бутонизация (Dendro + Hydro):</strong> Порождает
-                не ядовитые споры, а сияющие «лунные лотосы», которые излечивают
-                союзников и взрываются через определенное время.
+                сияющие «лунные лотосы».
               </li>
               <li>
-                <strong>Лунный Заряд (Electro + Hydro):</strong> Вместо
-                хаотичных разрядов создаёт стабильные сферы конденсированной
-                лунной энергии, которые можно использовать для нанесения
-                периодического урона врагам.
+                <strong>Лунный Заряд (Electro + Hydro):</strong> Создаёт
+                стабильные сферы лунной энергии.
               </li>
               <li>
-                <strong>Лунная Кристаллизация (Geo + Hydro):</strong> Создаёт не
-                обычные щиты, а «лунные столбы», которые не только поглощают
-                урон, но и наносят собственный урон периодически выпуская волны.
+                <strong>Лунная Кристаллизация (Geo + Hydro):</strong> Создаёт
+                «лунные столбы».
               </li>
             </ul>
-
             <h3 style="color: #b19cd9; margin-top: 25px">
               🏛️ Культура и Вдохновение
             </h3>
             <p>
               Концепция Нод-Края глубоко вдохновлена богатым наследием
               <strong>славянских мифов, обычаев и архитектуры</strong>.
-              Путешественники увидят здесь не классические европейские замки, а
-              величественные деревянные терема, таинственные капища в древних
-              лесах и города, вплетённые в ландшафт, а не покорившие его. Каждая
-              локация пропитана духом народных сказок и легенд.
             </p>
-
             <p style="margin-top: 20px; font-style: italic">
               Приключениe в Нод-Крае обещают стать самым эпичным и мистическим
-              путешествием по Тейвату, где главной загадкой станет не только
-              земля под ногами, но и вечный спутник, освещающий путь.
+              путешествием по Тейвату.
             </p>
           </div>
         </div>

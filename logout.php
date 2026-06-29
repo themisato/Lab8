@@ -1,12 +1,23 @@
 <?php
 // logout.php - Выход из системы
 session_start();
+
+// Очищаем все сессионные данные
 $_SESSION = array();
+
+// Удаляем куки сессии
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
 }
+
+// Уничтожаем сессию
 session_destroy();
-header('Location: login.php');
+
+// Перенаправляем на главную
+header('Location: index.html');
 exit;
 ?>
