@@ -1,5 +1,5 @@
 <?php
-// api.php - Веб-сервис (JSON/XML)
+// api.php - Веб-сервис
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS');
@@ -13,28 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-function sendResponse($data, $format = 'json') {
-    if ($format === 'xml') {
-        header('Content-Type: application/xml; charset=utf-8');
-        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><response/>');
-        array_to_xml($data, $xml);
-        echo $xml->asXML();
-    } else {
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    }
+function sendResponse($data) {
+    echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     exit;
-}
-
-function array_to_xml($data, &$xml) {
-    foreach ($data as $key => $value) {
-        if (is_array($value)) {
-            $subnode = $xml->addChild(is_numeric($key) ? 'item' : $key);
-            array_to_xml($value, $subnode);
-        } else {
-            $xml->addChild($key, htmlspecialchars($value));
-        }
-    }
 }
 
 function validateData($data) {
@@ -91,20 +72,14 @@ function validateData($data) {
     return $errors;
 }
 
-$format = $_GET['format'] ?? 'json';
 $method = $_SERVER['REQUEST_METHOD'];
 $user_id = $_SESSION['user_id'] ?? null;
 $is_auth = isset($user_id);
 
 $input_data = [];
 if ($method === 'POST' || $method === 'PUT') {
-    $content_type = $_SERVER['CONTENT_TYPE'] ?? '';
-    if (strpos($content_type, 'application/json') !== false) {
-        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
-    } elseif (strpos($content_type, 'application/xml') !== false) {
-        $xml = simplexml_load_string(file_get_contents('php://input'));
-        $input_data = json_decode(json_encode($xml), true) ?? [];
-    } else {
+    $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+    if (empty($input_data)) {
         $input_data = $_POST;
     }
 }
@@ -112,13 +87,13 @@ if ($method === 'POST' || $method === 'PUT') {
 try {
     if ($method === 'GET') {
         if (!$is_auth) {
-            sendResponse(['error' => 'Требуется авторизация'], $format);
+            sendResponse(['error' => 'Требуется авторизация']);
         }
         $stmt = $pdo->prepare("SELECT * FROM applications WHERE id = ?");
         $stmt->execute([$user_id]);
         $user = $stmt->fetch();
         if (!$user) {
-            sendResponse(['error' => 'Пользователь не найден'], $format);
+            sendResponse(['error' => 'Пользователь не найден']);
         }
         $langStmt = $pdo->prepare("SELECT pl.name FROM application_languages al JOIN programming_languages pl ON al.language_id = pl.id WHERE al.application_id = ?");
         $langStmt->execute([$user_id]);
@@ -136,15 +111,15 @@ try {
                 'languages' => $languages,
                 'contract_accepted' => (bool)$user['contract_accepted']
             ]
-        ], $format);
+        ]);
     }
     elseif ($method === 'POST') {
         if ($is_auth) {
-            sendResponse(['error' => 'Вы уже авторизованы. Используйте PUT для обновления'], $format);
+            sendResponse(['error' => 'Вы уже авторизованы. Используйте PUT для обновления']);
         }
         $errors = validateData($input_data);
         if (!empty($errors)) {
-            sendResponse(['success' => false, 'errors' => $errors], $format);
+            sendResponse(['success' => false, 'errors' => $errors]);
         }
         $pdo->beginTransaction();
         $sql = "INSERT INTO applications (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
@@ -189,15 +164,15 @@ try {
                 'password' => $password,
                 'profile_url' => "success.php?id=" . $user_id . "&login=" . urlencode($login) . "&password=" . urlencode($password)
             ]
-        ], $format);
+        ]);
     }
     elseif ($method === 'PUT') {
         if (!$is_auth) {
-            sendResponse(['error' => 'Требуется авторизация'], $format);
+            sendResponse(['error' => 'Требуется авторизация']);
         }
         $errors = validateData($input_data);
         if (!empty($errors)) {
-            sendResponse(['success' => false, 'errors' => $errors], $format);
+            sendResponse(['success' => false, 'errors' => $errors]);
         }
         $pdo->beginTransaction();
         $sql = "UPDATE applications SET 
@@ -233,16 +208,17 @@ try {
             'success' => true,
             'message' => 'Данные обновлены',
             'data' => ['id' => $user_id]
-        ], $format);
+        ]);
     }
     else {
-        sendResponse(['error' => 'Метод не поддерживается'], $format);
+        sendResponse(['error' => 'Метод не поддерживается']);
     }
 } catch (PDOException $e) {
+    $pdo->rollBack();
     error_log("API Error: " . $e->getMessage());
-    sendResponse(['error' => 'Ошибка базы данных'], $format);
+    sendResponse(['error' => 'Ошибка базы данных: ' . $e->getMessage()]);
 } catch (Exception $e) {
     error_log("API Error: " . $e->getMessage());
-    sendResponse(['error' => 'Ошибка сервера'], $format);
+    sendResponse(['error' => 'Ошибка сервера: ' . $e->getMessage()]);
 }
 ?>

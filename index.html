@@ -327,100 +327,97 @@
 
         <div id="messageContainer"></div>
 
-        <!-- ОБЕРТКА С ПРОКРУТКОЙ -->
-        <div class="form-scroll">
-            <form id="feedbackForm" action="process.php" method="POST" data-api="true">
-                <input type="hidden" name="csrf_token" value="" />
+        <!-- ИЗМЕНЕНО: action="api.php" -->
+        <form id="feedbackForm" action="api.php" method="POST" data-api="true">
+            <input type="hidden" name="csrf_token" value="" />
 
-                <!-- ФИО -->
-                <div class="form-group">
-                    <input type="text" id="fullName" name="full_name" required placeholder=" " autocomplete="name" />
-                    <label for="fullName" class="required">ФИО</label>
-                    <div class="error-message" id="fullNameError">ФИО должно содержать только буквы и пробелы</div>
+            <!-- ФИО -->
+            <div class="form-group">
+                <input type="text" id="fullName" name="full_name" required placeholder=" " autocomplete="name" />
+                <label for="fullName" class="required">ФИО</label>
+                <div class="error-message" id="fullNameError">ФИО должно содержать только буквы и пробелы</div>
+            </div>
+
+            <!-- Телефон -->
+            <div class="form-group">
+                <input type="tel" id="phone" name="phone" required placeholder=" " autocomplete="tel" maxlength="11" />
+                <label for="phone" class="required">Телефон</label>
+                <div class="error-message" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
+                <label for="email" class="required">E-mail</label>
+                <div class="error-message" id="emailError">Введите корректный email адрес</div>
+            </div>
+
+            <!-- Дата рождения -->
+            <div class="form-group">
+                <input type="date" id="birth_date" name="birth_date" required placeholder=" " />
+                <label for="birth_date" class="required">Дата рождения</label>
+                <div class="error-message" id="birth_dateError">Введите корректную дату рождения</div>
+            </div>
+
+            <!-- Пол -->
+            <div class="form-group">
+                <label class="required">Пол</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="gender" value="male" /> Мужской
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="female" /> Женский
+                    </label>
                 </div>
+                <div class="error-message" id="genderError">Выберите пол</div>
+            </div>
 
-                <!-- Телефон -->
-                <div class="form-group">
-                    <input type="tel" id="phone" name="phone" required placeholder=" " autocomplete="tel" maxlength="11" />
-                    <label for="phone" class="required">Телефон</label>
-                    <div class="error-message" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
+            <!-- Языки -->
+            <div class="form-group">
+                <label for="languages" class="required">Любимые языки программирования</label>
+                <select id="languages" name="languages[]" multiple size="4">
+                    <option value="Pascal">Pascal</option>
+                    <option value="C">C</option>
+                    <option value="C++">C++</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="Haskell">Haskell</option>
+                    <option value="Clojure">Clojure</option>
+                    <option value="Prolog">Prolog</option>
+                    <option value="Scala">Scala</option>
+                    <option value="Go">Go</option>
+                </select>
+                <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
+            </div>
+
+            <!-- Биография -->
+            <div class="form-group">
+                <textarea id="biography" name="biography" placeholder=" " rows="4"></textarea>
+                <label for="biography">Биография</label>
+                <div class="error-message" id="biographyError">Биография не должна превышать 5000 символов</div>
+            </div>
+
+            <!-- Чекбокс -->
+            <div class="form-group">
+                <div class="checkbox-group-custom" id="checkboxGroup">
+                    <input type="checkbox" id="privacyPolicy" name="contract_accepted" value="1" required />
+                    <label for="privacyPolicy" class="required">
+                        Я согласен с политикой обработки персональных данных и ознакомлен с контрактом
+                    </label>
                 </div>
-
-                <!-- Email -->
-                <div class="form-group">
-                    <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
-                    <label for="email" class="required">E-mail</label>
-                    <div class="error-message" id="emailError">Введите корректный email адрес</div>
+                <div class="error-message" id="privacyPolicyError">
+                    Необходимо согласие с политикой обработки данных
                 </div>
+            </div>
 
-                <!-- Дата рождения -->
-                <div class="form-group">
-                    <input type="date" id="birth_date" name="birth_date" required placeholder=" " />
-                    <label for="birth_date" class="required">Дата рождения</label>
-                    <div class="error-message" id="birth_dateError">Введите корректную дату рождения</div>
-                </div>
-
-                <!-- Пол -->
-                <div class="form-group">
-                    <label class="required">Пол</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="gender" value="male" /> Мужской
-                        </label>
-                        <label>
-                            <input type="radio" name="gender" value="female" /> Женский
-                        </label>
-                    </div>
-                    <div class="error-message" id="genderError">Выберите пол</div>
-                </div>
-
-                <!-- Языки -->
-                <div class="form-group">
-                    <label for="languages" class="required">Любимые языки программирования</label>
-                    <select id="languages" name="languages[]" multiple size="4">
-                        <option value="Pascal">Pascal</option>
-                        <option value="C">C</option>
-                        <option value="C++">C++</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="PHP">PHP</option>
-                        <option value="Python">Python</option>
-                        <option value="Java">Java</option>
-                        <option value="Haskell">Haskell</option>
-                        <option value="Clojure">Clojure</option>
-                        <option value="Prolog">Prolog</option>
-                        <option value="Scala">Scala</option>
-                        <option value="Go">Go</option>
-                    </select>
-                    <div class="error-message" id="languagesError">Выберите хотя бы один язык</div>
-                </div>
-
-                <!-- Биография -->
-                <div class="form-group">
-                    <textarea id="biography" name="biography" placeholder=" " rows="3"></textarea>
-                    <label for="biography">Биография</label>
-                    <div class="error-message" id="biographyError">Биография не должна превышать 5000 символов</div>
-                </div>
-
-                <!-- Чекбокс -->
-                <div class="form-group">
-                    <div class="checkbox-group-custom" id="checkboxGroup">
-                        <input type="checkbox" id="privacyPolicy" name="contract_accepted" value="1" required />
-                        <label for="privacyPolicy" class="required">
-                            Я согласен с политикой обработки персональных данных и ознакомлен с контрактом
-                        </label>
-                    </div>
-                    <div class="error-message" id="privacyPolicyError">
-                        Необходимо согласие с политикой обработки данных
-                    </div>
-                </div>
-
-                <!-- КНОПКА ОТПРАВКИ -->
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    📤 Отправить анкету
-                </button>
-            </form>
-        </div>
-        <!-- КОНЕЦ ОБЕРТКИ С ПРОКРУТКОЙ -->
+            <!-- КНОПКА ОТПРАВКИ -->
+            <button type="submit" class="submit-btn" id="submitBtn">
+                📤 Отправить анкету
+            </button>
+        </form>
     </div>
 </div>
     <!-- Подвал -->
@@ -465,130 +462,94 @@
             });
         }
 
-        // ===== ОТПРАВКА ФОРМЫ ЧЕРЕЗ FETCH =====
-        const form = document.getElementById('feedbackForm');
-        const messageContainer = document.getElementById('messageContainer');
+        // ОТПРАВКА ФОРМЫ ЧЕРЕЗ FETCH
+const form = document.getElementById('feedbackForm');
 
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-                // Собираем данные формы
-                const formData = new FormData(form);
-                const data = {};
+        const formData = new FormData(form);
+        const data = {};
 
-                for (let [key, value] of formData.entries()) {
-                    if (key === 'languages[]') {
-                        if (!data.languages) data.languages = [];
-                        data.languages.push(value);
-                    } else {
-                        data[key] = value;
-                    }
-                }
+        for (let [key, value] of formData.entries()) {
+            if (key === 'languages[]') {
+                if (!data.languages) data.languages = [];
+                data.languages.push(value);
+            } else {
+                data[key] = value;
+            }
+        }
 
-                if (data.languages && data.languages.length === 0) {
-                    delete data.languages;
-                }
+        if (data.languages && data.languages.length === 0) {
+            delete data.languages;
+        }
 
-                // Блокируем кнопку
-                const submitBtn = form.querySelector('.submit-btn');
-                const originalText = submitBtn ? submitBtn.textContent : 'Отправить';
-                if (submitBtn) {
-                    submitBtn.textContent = '⏳ Отправка...';
-                    submitBtn.disabled = true;
-                }
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn ? submitBtn.textContent : 'Отправить';
+        if (submitBtn) {
+            submitBtn.textContent = '⏳ Отправка...';
+            submitBtn.disabled = true;
+        }
 
-                // Отправляем запрос к API
-                fetch('api.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(data),
-                    credentials: 'same-origin'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Ошибка сети: ' + response.status);
-                    }
-                    return response.json();
-                })
-                .then(result => {
-                    if (result.success) {
-                        // УСПЕХ - показываем логин и пароль
-                        let message = '✅ ' + (result.message || 'Данные успешно сохранены!');
-                        let html = '<div class="message success">' + message + '</div>';
-                        
-                        if (result.data && result.data.login && result.data.password) {
-                            html += `
-                                <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;margin-bottom:15px;text-align:center;">
-                                    <strong>🔑 Ваши данные для входа сохранены!</strong><br>
-                                    Логин: <strong>${result.data.login}</strong><br>
-                                    Пароль: <strong>${result.data.password}</strong><br>
-                                    <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные! Пароль отображается только один раз.</span>
-                                </div>
-                            `;
-                        }
-                        
-                        messageContainer.innerHTML = html;
-                        
-                        // Очищаем форму
-                        form.reset();
-                        form.querySelectorAll('.success').forEach(el => el.classList.remove('success'));
-                        
-                        // НЕ ЗАКРЫВАЕМ ОКНО - пользователь закроет сам
-                        
-                        // Если есть profile_url - показать ссылку
-                        if (result.data && result.data.profile_url) {
-                            html += `<div style="text-align:center;margin-top:10px;">
-                                <a href="${result.data.profile_url}" class="btn" style="display:inline-block;padding:8px 20px;font-size:0.9rem;">Перейти к анкете</a>
-                            </div>`;
-                            messageContainer.innerHTML = html;
-                        }
-                    } else {
-                        // Ошибки валидации
-                        if (result.errors) {
-                            let errorText = '';
-                            for (let key in result.errors) {
-                                errorText += '• ' + result.errors[key] + '<br>';
-                                // Подсвечиваем поля с ошибками
-                                const field = document.querySelector(`[name="${key}"]`);
-                                if (field) {
-                                    field.classList.add('error');
-                                    // Показываем ошибку под полем
-                                    const errorEl = document.getElementById(key + 'Error');
-                                    if (errorEl) {
-                                        errorEl.textContent = result.errors[key];
-                                        errorEl.classList.add('show');
-                                    }
-                                }
-                            }
-                            messageContainer.innerHTML = `<div class="message error">❌ ${errorText}</div>`;
-                        } else {
-                            messageContainer.innerHTML = `<div class="message error">❌ ${result.error || 'Ошибка при сохранении данных'}</div>`;
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка:', error);
-                    // Показываем ошибку, НЕ закрываем окно
-                    messageContainer.innerHTML = `
-                        <div class="message error">
-                            ❌ Ошибка соединения. Попробуйте позже.
-                            <br><small>Проверьте, что файл api.php существует на сервере.</small>
+        // ОТПРАВЛЯЕМ НА API.PHP
+        fetch('api.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка сети: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(result => {
+            if (result.success) {
+                let html = '<div class="message success">✅ ' + (result.message || 'Данные сохранены!') + '</div>';
+                if (result.data && result.data.login && result.data.password) {
+                    html += `
+                        <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;text-align:center;">
+                            <strong>🔑 Ваши данные для входа!</strong><br>
+                            Логин: <strong>${result.data.login}</strong><br>
+                            Пароль: <strong>${result.data.password}</strong><br>
+                            <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные!</span>
                         </div>
                     `;
-                })
-                .finally(() => {
-                    // Восстанавливаем кнопку
-                    if (submitBtn) {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
+                }
+                document.getElementById('messageContainer').innerHTML = html;
+                form.reset();
+            } else {
+                if (result.errors) {
+                    let errorText = '';
+                    for (let key in result.errors) {
+                        errorText += '• ' + result.errors[key] + '<br>';
                     }
-                });
-            });
-        }
+                    document.getElementById('messageContainer').innerHTML = `<div class="message error">❌ ${errorText}</div>`;
+                } else {
+                    document.getElementById('messageContainer').innerHTML = `<div class="message error">❌ ${result.error || 'Ошибка'}</div>`;
+                }
+            }
+        })
+        .catch(error => {
+            document.getElementById('messageContainer').innerHTML = `
+                <div class="message error">
+                    ❌ Ошибка соединения с api.php<br>
+                    <small>Проверьте, что файл существует</small>
+                </div>
+            `;
+        })
+        .finally(() => {
+            if (submitBtn) {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    });
+}
 
         // Автозаполнение данных при авторизации
         const editIdInput = document.querySelector('input[name="edit_id"]');
