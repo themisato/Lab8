@@ -1,12 +1,12 @@
 <?php
 require_once 'config.php';
 
-// Генерируем правильный хеш для пароля admin123
+// Генерируем правильный хеш для пароля admin123 через PHP
 $password = 'admin123';
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
 echo "Пароль: " . $password . "<br>";
-echo "Хеш: " . $hash . "<br><br>";
+echo "Сгенерированный хеш: " . $hash . "<br><br>";
 
 // Удаляем старого админа
 try {
@@ -36,11 +36,10 @@ if ($admin) {
     echo "Hash: " . $admin['password_hash'] . "<br><br>";
     
     if (password_verify($password, $admin['password_hash'])) {
-        echo "✅ ПАРОЛЬ ВЕРНЫЙ! Теперь можно войти с логином 'admin' и паролем 'admin123'<br>";
+        echo "✅✅✅ ПАРОЛЬ ВЕРНЫЙ! Теперь можно войти с логином 'admin' и паролем 'admin123'<br>";
+        echo "<a href='admin_login.php' style='display:inline-block;padding:10px 20px;background:green;color:white;text-decoration:none;border-radius:5px;'>Перейти к входу</a>";
     } else {
         echo "❌ Пароль все еще неверный<br>";
     }
 }
-
-echo "<br><a href='admin_login.php'>Перейти к входу в админку</a>";
 ?>
