@@ -2,7 +2,8 @@
 session_start();
 require_once 'config.php';
 
-$is_logged_in = isset($_SESSION['user_id']);
+// Проверяем, авторизован ли пользователь
+$is_logged_in = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 $user_name = $_SESSION['user_name'] ?? '';
 ?>
 <!doctype html>
@@ -33,7 +34,7 @@ $user_name = $_SESSION['user_name'] ?? '';
               style="
                 display: flex;
                 align-items: center;
-                gap: 12px;
+                gap: 10px;
                 margin-left: 20px;
                 background: rgba(64, 201, 255, 0.08);
                 padding: 5px 16px 5px 20px;
@@ -54,7 +55,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   border-radius: 20px;
                   font-size: 0.8rem;
                   transition: all 0.3s;
-                  background: rgba(255, 107, 107, 0.05);
                 "
                 >🚪 Выйти</a
               >
@@ -98,8 +98,7 @@ $user_name = $_SESSION['user_name'] ?? '';
           <h1>Нод-край</h1>
           <p class="tagline">
             Земля вечного равновесия, где древние корни мудрости сплетаются с
-            тихим шепотом ветра. Затерянный регион, хранящий секреты забытых
-            цивилизаций и магию первозданной природы.
+            тихим шепотом ветра.
           </p>
           <a href="#about-region" class="btn">Узнать историю</a>
         </div>
@@ -241,19 +240,11 @@ $user_name = $_SESSION['user_name'] ?? '';
             <h2 class="section-title">Genshin Impact</h2>
             <p>
               Это массовая многопользовательская action-RPG с открытым миром,
-              разработанная компанией HoYoverse. Отправляйтесь в путешествие по
-              фантастическому миру Тейвата, где воля богов проявляется в семи
-              стихиях.
+              разработанная компанией HoYoverse.
             </p>
             <p>
               Исследуйте обширные земли, объединяйтесь в отряды из уникальных
-              персонажей, раскрывайте тайны древних цивилизаций и сражайтесь с
-              могущественными врагами, чтобы найти потерянного родственника и
-              обрести ответы от самих богов.
-            </p>
-            <p>
-              Мир Тейвата полон чудес, и Нод-край — лишь одна из его жемчужин,
-              ожидающих своего исследователя.
+              персонажей, раскрывайте тайны древних цивилизаций.
             </p>
           </div>
         </div>
@@ -270,19 +261,13 @@ $user_name = $_SESSION['user_name'] ?? '';
           <div class="text-content centered-content">
             <h2 class="section-title">Нод-Край: Лунный Край</h2>
             <p>
-              Согласно официальному релизу от HoYoverse,
               <strong>Нод-Край (Nod-Krai)</strong> — седьмой и самый загадочный
-              регион Тейвата, чьи судьбы неразрывно связаны с луной. Это царство
-              серебристого света, древних тайн и тихой, но могущественной магии.
+              регион Тейвата.
             </p>
             <h3 style="color: #b19cd9; margin-top: 25px">
               🌙 Архонт Лунного Края
             </h3>
-            <p>
-              Божественным покровителем и правителем региона является
-              <strong>Коломбина, Дева Луны (Columbina, the Lunar Maiden)</strong
-              >.
-            </p>
+            <p><strong>Коломбина, Дева Луны</strong> — правитель региона.</p>
             <h3 style="color: #b19cd9; margin-top: 25px">
               ⚡ Уникальные Лунные Реакции
             </h3>
@@ -310,12 +295,12 @@ $user_name = $_SESSION['user_name'] ?? '';
               🏛️ Культура и Вдохновение
             </h3>
             <p>
-              Концепция Нод-Края глубоко вдохновлена богатым наследием
-              <strong>славянских мифов, обычаев и архитектуры</strong>.
+              Концепция Нод-Края глубоко вдохновлена славянскими мифами и
+              архитектурой.
             </p>
             <p style="margin-top: 20px; font-style: italic">
-              Приключениe в Нод-Крае обещают стать самым эпичным и мистическим
-              путешествием по Тейвату.
+              Приключение в Нод-Крае обещает стать самым эпичным путешествием по
+              Тейвату.
             </p>
           </div>
         </div>
@@ -326,7 +311,7 @@ $user_name = $_SESSION['user_name'] ?? '';
         <div class="bg-overlay"></div>
       </section>
 
-      <!-- Блок 5: Форма обратной связи -->
+      <!-- Блок 5: Форма -->
       <section id="contact" class="section form-section">
         <div class="container">
           <div class="text-center">
@@ -341,22 +326,17 @@ $user_name = $_SESSION['user_name'] ?? '';
         </div>
       </section>
 
-      <!-- Модальное окно формы -->
+      <!-- Модальное окно -->
       <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
           <button class="close-btn" id="closeBtn">×</button>
-
           <div class="form-header">
             <h2 class="form-title">📋 Анкета</h2>
             <p class="form-subtitle">Заполните все обязательные поля</p>
           </div>
-
           <div id="messageContainer"></div>
-
           <div class="form-scroll">
             <form id="feedbackForm" method="POST" data-api="true">
-              <input type="hidden" name="csrf_token" value="" />
-
               <div class="form-group">
                 <input
                   type="text"
@@ -371,7 +351,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   ФИО должно содержать только буквы и пробелы
                 </div>
               </div>
-
               <div class="form-group">
                 <input
                   type="tel"
@@ -387,7 +366,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   Телефон должен содержать ровно 11 цифр
                 </div>
               </div>
-
               <div class="form-group">
                 <input
                   type="email"
@@ -402,7 +380,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   Введите корректный email адрес
                 </div>
               </div>
-
               <div class="form-group">
                 <input
                   type="date"
@@ -416,7 +393,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   Введите корректную дату рождения
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="required">Пол</label>
                 <div class="radio-group">
@@ -431,7 +407,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                 </div>
                 <div class="error-message" id="genderError">Выберите пол</div>
               </div>
-
               <div class="form-group">
                 <label for="languages" class="required"
                   >Любимые языки программирования</label
@@ -454,7 +429,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   Выберите хотя бы один язык
                 </div>
               </div>
-
               <div class="form-group">
                 <textarea
                   id="biography"
@@ -467,7 +441,6 @@ $user_name = $_SESSION['user_name'] ?? '';
                   Биография не должна превышать 5000 символов
                 </div>
               </div>
-
               <div class="form-group">
                 <div class="checkbox-group-custom" id="checkboxGroup">
                   <input
@@ -477,16 +450,15 @@ $user_name = $_SESSION['user_name'] ?? '';
                     value="1"
                     required
                   />
-                  <label for="privacyPolicy" class="required">
-                    Я согласен с политикой обработки персональных данных и
-                    ознакомлен с контрактом
-                  </label>
+                  <label for="privacyPolicy" class="required"
+                    >Я согласен с политикой обработки персональных данных и
+                    ознакомлен с контрактом</label
+                  >
                 </div>
                 <div class="error-message" id="privacyPolicyError">
                   Необходимо согласие с политикой обработки данных
                 </div>
               </div>
-
               <button type="submit" class="submit-btn" id="submitBtn">
                 📤 Отправить анкету
               </button>
@@ -500,50 +472,36 @@ $user_name = $_SESSION['user_name'] ?? '';
     <footer class="main-footer">
       <div class="container">
         <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
-        <p>
-          Данный фанатский сайт создан в ознакомительных целях. Все используемые
-          материалы являются собственностью их правообладателей.
-        </p>
         <p class="disclaimer">
           Нод-край — вымышленный регион, не входящий в официальный лор игры.
         </p>
       </div>
     </footer>
 
-    <script src="script.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Открытие/закрытие модального окна
         const openBtn = document.getElementById("openFormBtn");
         const modal = document.getElementById("modalOverlay");
         const closeBtn = document.getElementById("closeBtn");
 
-        if (openBtn) {
+        if (openBtn)
           openBtn.addEventListener("click", function () {
             modal.style.display = "flex";
           });
-        }
-
-        if (closeBtn) {
+        if (closeBtn)
           closeBtn.addEventListener("click", function () {
             modal.style.display = "none";
           });
-        }
-
-        if (modal) {
+        if (modal)
           modal.addEventListener("click", function (e) {
-            if (e.target === modal) {
-              modal.style.display = "none";
-            }
+            if (e.target === modal) modal.style.display = "none";
           });
-        }
 
         // ===== ОТПРАВКА ФОРМЫ =====
         const form = document.getElementById("feedbackForm");
         if (form) {
           form.addEventListener("submit", function (e) {
             e.preventDefault();
-
             const formData = new FormData(form);
             const data = {};
             for (let [key, value] of formData.entries()) {
