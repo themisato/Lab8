@@ -304,11 +304,11 @@ $user_name = $_SESSION['user_name'] ?? '';
                   required
                   placeholder=" "
                   autocomplete="tel"
-                  maxlength="11"
+                  maxlength="20"
                 />
                 <label for="phone" class="required">Телефон</label>
                 <div class="error-message" id="phoneError">
-                  Телефон должен содержать ровно 11 цифр
+                  Введите номер в формате +7XXXXXXXXXX или 8XXXXXXXXXX
                 </div>
               </div>
               <div class="form-group">
@@ -495,13 +495,15 @@ $user_name = $_SESSION['user_name'] ?? '';
                                         <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные!</span>
                                         <br><br>
                                         <a href="login.php" style="display:inline-block;padding:8px 20px;background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;border-radius:30px;text-decoration:none;font-weight:bold;">🔐 Перейти ко входу</a>
+                                        <button onclick="this.parentElement.parentElement.remove()" style="display:inline-block;padding:8px 20px;background:linear-gradient(45deg,#666,#888);color:white;border:none;border-radius:30px;font-weight:bold;cursor:pointer;margin-left:10px;">✖ Закрыть</button>
                                     </div>
                                 `;
                   }
                   form.reset();
-                  setTimeout(function () {
-                    location.reload();
-                  }, 3000);
+                  // УБИРАЕМ АВТОМАТИЧЕСКИЙ РЕДИРЕКТ
+                  // setTimeout(function () {
+                  //   location.reload();
+                  // }, 3000);
                 } else {
                   if (result.errors) {
                     let errorText = "";
