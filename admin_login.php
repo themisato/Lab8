@@ -207,7 +207,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" action="">
                 <div class="form-group">
                     <label for="login">Логин</label>
-                    <input type="text" id="login" name="login" required placeholder="Введите логин" value="admin">
+                    <div>
+                    <input type="text" id="login" name="login" required placeholder="Введите логин" value="admin"></div>
                 </div>
                 
                 <div class="form-group">
