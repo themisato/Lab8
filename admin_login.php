@@ -210,9 +210,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     <input type="text" id="login" name="login" required placeholder="Введите логин" value="admin">
                 </div>
-                
+                <label for="password">Пароль</label>
                 <div class="form-group">
-                    <label for="password">Пароль</label>
+                    
                     <input type="password" id="password" name="password" required placeholder="Введите пароль" value="admin123">
                 </div>
                 
