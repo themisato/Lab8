@@ -1,19 +1,6 @@
 <?php
 // config.php - НЕТ session_start()!
 
-// ===== НАСТРОЙКИ СЕССИИ (ДО ЗАПУСКА) =====
-// Эти настройки должны быть ДО того, как начнется сессия
-// Они устанавливаются в самом начале, до любого вызова session_start()
-
-ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_samesite', 'Strict');
-ini_set('session.use_only_cookies', 1);
-ini_set('session.gc_maxlifetime', 3600);
-
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-error_reporting(E_ALL);
-
 // ===== ЗАГОЛОВКИ БЕЗОПАСНОСТИ =====
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');

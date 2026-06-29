@@ -1,4 +1,10 @@
 <?php
+// Настройки сессии ДО session_start()
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 3600);
+
 session_start();
 require_once 'config.php';
 
@@ -478,32 +484,18 @@ $user_name = $_SESSION['user_name'] ?? '';
               .then((result) => {
                 let html = "";
                 if (result.success) {
-                  html =
-                    '<div class="message success">✅ ' +
-                    (result.message || "Данные сохранены!") +
-                    "</div>";
-                  if (
-                    result.data &&
-                    result.data.login &&
-                    result.data.password
-                  ) {
-                    html += `
-                                    <div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;text-align:center;">
-                                        <strong>🔑 Ваши данные для входа!</strong><br>
-                                        Логин: <strong>${result.data.login}</strong><br>
-                                        Пароль: <strong>${result.data.password}</strong><br>
-                                        <span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные!</span>
-                                        <br><br>
-                                        <a href="login.php" style="display:inline-block;padding:8px 20px;background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;border-radius:30px;text-decoration:none;font-weight:bold;">🔐 Перейти ко входу</a>
-                                        <button onclick="this.parentElement.parentElement.remove()" style="display:inline-block;padding:8px 20px;background:linear-gradient(45deg,#666,#888);color:white;border:none;border-radius:30px;font-weight:bold;cursor:pointer;margin-left:10px;">✖ Закрыть</button>
-                                    </div>
-                                `;
+                  html = '<div class="message success">✅ ' + (result.message || "Данные сохранены!") + "</div>";
+                  if (result.data && result.data.login && result.data.password) {
+                    html += '<div class="message" style="background:rgba(255,152,0,0.15);color:#ffb74d;border:2px dashed #ff9800;padding:15px;border-radius:8px;text-align:center;">' +
+                        '<strong>🔑 Ваши данные для входа!</strong><br>' +
+                        'Логин: <strong>' + result.data.login + '</strong><br>' +
+                        'Пароль: <strong>' + result.data.password + '</strong><br>' +
+                        '<span style="color:#ff6b6b;font-size:0.8rem;">⚠️ Сохраните эти данные!</span><br><br>' +
+                        '<a href="login.php" style="display:inline-block;padding:8px 20px;background:linear-gradient(45deg,#1a5fb4,#40c9ff);color:white;border-radius:30px;text-decoration:none;font-weight:bold;">🔐 Перейти ко входу</a>' +
+                        '<button onclick="this.closest(\'.message\').remove()" style="display:inline-block;padding:8px 20px;background:linear-gradient(45deg,#666,#888);color:white;border:none;border-radius:30px;font-weight:bold;cursor:pointer;margin-left:10px;">✖ Закрыть</button>' +
+                        '</div>';
                   }
                   form.reset();
-                  // УБИРАЕМ АВТОМАТИЧЕСКИЙ РЕДИРЕКТ
-                  // setTimeout(function () {
-                  //   location.reload();
-                  // }, 3000);
                 } else {
                   if (result.errors) {
                     let errorText = "";

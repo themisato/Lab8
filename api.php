@@ -1,12 +1,18 @@
 <?php
 // api.php - Веб-сервис
+// Настройки сессии ДО session_start()
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 3600);
+
+session_start();
+require_once 'config.php';
+
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
-
-require_once 'config.php';
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);

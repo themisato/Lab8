@@ -1,7 +1,13 @@
 <?php
 // process.php - Обработчик формы (если JavaScript выключен)
-require_once 'config.php';
+// Настройки сессии ДО session_start()
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 3600);
+
 session_start();
+require_once 'config.php';
 
 // ===== ПРИНИМАЕМ POST =====
 $method = $_SERVER['REQUEST_METHOD'];

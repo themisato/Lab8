@@ -1,7 +1,13 @@
 <?php
 // list.php - Список всех анкет
-require_once 'config.php';
+// Настройки сессии ДО session_start()
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 3600);
+
 session_start();
+require_once 'config.php';
 
 $is_logged_in = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 $user_name = $_SESSION['user_name'] ?? '';
