@@ -30,11 +30,12 @@ function validateData($data) {
         $errors['full_name'] = 'ФИО может содержать только буквы, пробелы и дефис';
     }
     
+    // Очищаем телефон от всего, кроме цифр и +
     $phone = preg_replace('/[^0-9+]/', '', $data['phone'] ?? '');
     if (empty($phone)) {
         $errors['phone'] = 'Телефон обязателен для заполнения';
     } elseif (!preg_match('/^(\+7|8)[0-9]{10}$/', $phone)) {
-        $errors['phone'] = 'Телефон должен быть в формате +7XXXXXXXXXX или 8XXXXXXXXXX';
+        $errors['phone'] = 'Введите номер в формате +7XXXXXXXXXX (11 цифр) или 8XXXXXXXXXX (11 цифр)';
     }
     
     $email = trim($data['email'] ?? '');
@@ -94,9 +95,13 @@ try {
         $sql = "INSERT INTO " . table('applications') . " (full_name, phone, email, birth_date, gender, biography, contract_accepted) 
                 VALUES (:full_name, :phone, :email, :birth_date, :gender, :biography, :contract_accepted)";
         $stmt = $pdo->prepare($sql);
+        
+        // Очищаем телефон перед сохранением
+        $phone_clean = preg_replace('/[^0-9+]/', '', $input_data['phone']);
+        
         $stmt->execute([
             ':full_name' => $input_data['full_name'],
-            ':phone' => preg_replace('/[^0-9+]/', '', $input_data['phone']),
+            ':phone' => $phone_clean,
             ':email' => $input_data['email'],
             ':birth_date' => $input_data['birth_date'],
             ':gender' => $input_data['gender'],
@@ -157,9 +162,12 @@ try {
                 biography = :biography, contract_accepted = :contract_accepted
                 WHERE id = :id";
         $stmt = $pdo->prepare($sql);
+        
+        $phone_clean = preg_replace('/[^0-9+]/', '', $input_data['phone']);
+        
         $stmt->execute([
             ':full_name' => $input_data['full_name'],
-            ':phone' => preg_replace('/[^0-9+]/', '', $input_data['phone']),
+            ':phone' => $phone_clean,
             ':email' => $input_data['email'],
             ':birth_date' => $input_data['birth_date'],
             ':gender' => $input_data['gender'],

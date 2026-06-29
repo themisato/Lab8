@@ -32,11 +32,12 @@ if (empty($full_name)) {
     $errors['full_name'] = "ФИО может содержать только буквы, пробелы и дефис";
 }
 
+// Очищаем телефон от всего, кроме цифр и +
 $phone_clean = preg_replace('/[^0-9+]/', '', $phone);
 if (empty($phone_clean)) {
     $errors['phone'] = "Телефон обязателен для заполнения";
 } elseif (!preg_match('/^(\+7|8)[0-9]{10}$/', $phone_clean)) {
-    $errors['phone'] = "Телефон должен быть в формате +7XXXXXXXXXX или 8XXXXXXXXXX";
+    $errors['phone'] = "Введите номер в формате +7XXXXXXXXXX (11 цифр) или 8XXXXXXXXXX (11 цифр)";
 }
 
 if (empty($email)) {

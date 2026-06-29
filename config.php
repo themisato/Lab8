@@ -1,11 +1,10 @@
 <?php
 // config.php - НЕТ session_start()!
 
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: DENY');
-header('X-XSS-Protection: 1; mode=block');
-
 // ===== НАСТРОЙКИ СЕССИИ (ДО ЗАПУСКА) =====
+// Эти настройки должны быть ДО того, как начнется сессия
+// Они устанавливаются в самом начале, до любого вызова session_start()
+
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_samesite', 'Strict');
 ini_set('session.use_only_cookies', 1);
@@ -15,8 +14,14 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
+// ===== ЗАГОЛОВКИ БЕЗОПАСНОСТИ =====
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
+
+// ===== ПОДКЛЮЧЕНИЕ К БД =====
 $host = 'localhost';
-$dbname = 'u82686';  // Используем существующую БД
+$dbname = 'u82686';
 $username = 'u82686';
 $password = '8078259';
 
@@ -34,6 +39,7 @@ try {
 
 define('SECRET_KEY', 'your-secret-key-here-change-it-2026');
 
+// ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
 function h($str) {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }

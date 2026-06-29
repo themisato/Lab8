@@ -117,28 +117,34 @@ body {
   text-decoration: none;
   font-family: "Georgia", serif;
   text-shadow: 0 0 10px rgba(64, 201, 255, 0.5);
+  flex-shrink: 0;
 }
 
 /* Основная навигация */
 .main-nav ul {
   display: flex;
   list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .main-nav li {
   position: relative;
-  margin-left: 30px;
+  margin-left: 25px;
+  list-style: none;
 }
 
 .main-nav a {
   color: #bae7ff;
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   padding: 8px 5px;
   transition: color 0.3s;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .main-nav a:hover,
@@ -177,11 +183,13 @@ body {
 
 .dropdown-menu li {
   margin: 0;
+  padding: 0;
 }
 
 .dropdown-menu a {
   display: block;
-  padding: 12px 20px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
 }
 
 .dropdown-menu a:hover {
@@ -823,9 +831,17 @@ body {
   }
   .main-nav ul {
     flex-direction: column;
+    align-items: stretch;
+    width: 100%;
   }
   .main-nav li {
-    margin: 0 0 15px 0;
+    margin: 0 0 12px 0;
+    width: 100%;
+  }
+  .main-nav a {
+    padding: 10px 15px;
+    width: 100%;
+    justify-content: flex-start;
   }
   .dropdown-menu {
     position: static;
@@ -838,9 +854,26 @@ body {
     padding-left: 20px;
     margin-top: 10px;
     display: none;
+    width: 100%;
   }
   .dropdown.active .dropdown-menu {
     display: block;
+  }
+  .dropdown-menu li {
+    margin: 0 0 8px 0;
+  }
+  .dropdown-menu a {
+    padding: 8px 15px;
+    font-size: 0.95rem;
+  }
+  /* Кнопка входа/выхода на мобильных */
+  .main-nav li:last-child {
+    margin-top: 5px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(64, 145, 223, 0.15);
+  }
+  .main-nav li:last-child a {
+    justify-content: center;
   }
   .video-content h1 {
     font-size: 2.8rem;
@@ -884,6 +917,7 @@ body {
     flex-wrap: wrap;
   }
 }
+
 /* ====================================================
    АДАПТИВНАЯ ФОРМА - ВСЕ ВЛАЗИТ В ОКНО
    ==================================================== */
@@ -1266,6 +1300,7 @@ body {
     font-size: 0.65rem !important;
   }
 }
+
 /* ===== СООБЩЕНИЯ ===== */
 .message {
   padding: 10px 14px !important;
@@ -1304,6 +1339,7 @@ body {
 .modal-content .error-message.show {
   display: block !important;
 }
+
 /* ===== КНОПКА ВХОДА В МЕНЮ ===== */
 .login-btn-nav {
   background: linear-gradient(45deg, #1a5fb4, #40c9ff) !important;
@@ -1346,6 +1382,7 @@ body {
 .user-nav-info .logout-link-nav:hover {
   background: rgba(255, 107, 107, 0.1);
 }
+
 /* ===== АВТОРИЗАЦИЯ В МЕНЮ ===== */
 .user-nav-info {
   display: flex !important;
