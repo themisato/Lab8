@@ -205,10 +205,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
             
             <form method="POST" action="">
+                <label for="login">Логин</label>
                 <div class="form-group">
-                    <label for="login">Логин</label>
-                    <p>
-                    <input type="text" id="login" name="login" required placeholder="Введите логин" value="admin"></p>
+                    
+                    <input type="text" id="login" name="login" required placeholder="Введите логин" value="admin">
                 </div>
                 
                 <div class="form-group">
