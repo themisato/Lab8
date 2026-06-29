@@ -1304,3 +1304,45 @@ body {
 .modal-content .error-message.show {
   display: block !important;
 }
+/* ===== КНОПКА ВХОДА В МЕНЮ ===== */
+.login-btn-nav {
+  background: linear-gradient(45deg, #1a5fb4, #40c9ff) !important;
+  color: white !important;
+  padding: 8px 18px !important;
+  border-radius: 30px !important;
+  font-weight: bold !important;
+  transition: all 0.3s ease !important;
+}
+
+.login-btn-nav:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(64, 201, 255, 0.4) !important;
+  background: linear-gradient(45deg, #0d47a1, #1a5fb4) !important;
+}
+
+/* Если пользователь авторизован - показываем его имя и кнопку выхода */
+.user-nav-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #bae7ff;
+}
+
+.user-nav-info .user-name {
+  color: #40c9ff;
+  font-weight: bold;
+}
+
+.user-nav-info .logout-link-nav {
+  color: #ff6b6b;
+  text-decoration: none;
+  padding: 5px 14px;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.user-nav-info .logout-link-nav:hover {
+  background: rgba(255, 107, 107, 0.1);
+}

@@ -3,6 +3,7 @@
 require_once 'config.php';
 session_start();
 
+// Если уже авторизован - перенаправляем на главную
 if (isset($_SESSION['user_id'])) {
     header('Location: index.html');
     exit;
@@ -17,11 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($login) || empty($password)) {
         $error = 'Введите логин и пароль.';
     } else {
+        // Ищем пользователя по логину
         $stmt = $pdo->prepare("SELECT id, full_name, password_hash FROM applications WHERE login = :login");
         $stmt->execute([':login' => $login]);
         $user = $stmt->fetch();
         
         if ($user && password_verify($password, $user['password_hash'])) {
+            // Успешный вход
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['full_name'];
@@ -138,13 +141,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <ul>
                     <li><a href="index.html#home">Главная</a></li>
                     <li><a href="catalog.html">Персонажи</a></li>
-                    <li><a href="list.php">Анкеты</a></li>
-                    <li><a href="admin.php">Админка</a></li>
+                    <li><a href="list.php">📋 Анкеты</a></li>
+                    <li><a href="admin.php">🔧 Админка</a></li>
+                    <li><a href="login.php" class="login-btn-nav">🔐 Войти</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" id="menuToggle" aria-label="Меню">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
@@ -155,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h2>Вход в систему</h2>
                 
                 <?php if ($error): ?>
-                    <div class="login-error">❌ <?php echo h($error); ?></div>
+                    <div class="login-error">❌ <?php echo htmlspecialchars($error); ?></div>
                 <?php endif; ?>
                 
                 <form method="POST" action="">

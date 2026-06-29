@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once 'config.php';
+
+$is_logged_in = isset($_SESSION['user_id']);
+$user_name = $_SESSION['user_name'] ?? '';
+?>
 <!doctype html>
 <html lang="ru">
   <head>
@@ -21,6 +28,16 @@
             <li><a href="catalog.html">Персонажи</a></li>
             <li><a href="list.php">📋 Анкеты</a></li>
             <li><a href="admin.php">🔧 Админка</a></li>
+            <?php if ($is_logged_in): ?>
+            <li class="user-nav-info">
+              <span class="user-name"
+                >👤 <?php echo htmlspecialchars($user_name); ?></span
+              >
+              <a href="logout.php" class="logout-link-nav">🚪 Выйти</a>
+            </li>
+            <?php else: ?>
+            <li><a href="login.php" class="login-btn-nav">🔐 Войти</a></li>
+            <?php endif; ?>
           </ul>
         </nav>
         <button class="menu-toggle" id="menuToggle">
@@ -30,11 +47,12 @@
     </header>
 
     <main>
-      <!-- Видео-блок -->
+      <!-- Блок 1: Главная с видео -->
       <section id="home" class="fullscreen-video-section">
         <div class="video-container">
           <video autoplay muted loop playsinline id="bgVideo">
             <source src="nod.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает видео.
           </video>
           <div class="video-overlay"></div>
         </div>
@@ -42,13 +60,14 @@
           <h1>Нод-край</h1>
           <p class="tagline">
             Земля вечного равновесия, где древние корни мудрости сплетаются с
-            тихим шепотом ветра.
+            тихим шепотом ветра. Затерянный регион, хранящий секреты забытых
+            цивилизаций и магию первозданной природы.
           </p>
           <a href="#about-region" class="btn">Узнать историю</a>
         </div>
       </section>
 
-      <!-- Персонажи -->
+      <!-- Блок 2: Персонажи -->
       <section id="characters-block" class="section characters-section">
         <div class="container">
           <h2 class="section-title">Персонажи Нод-Края</h2>
@@ -56,6 +75,7 @@
             Легендарные герои региона, владеющие различными стихиями.
           </p>
           <div class="characters-grid">
+            <!-- Карточка 1: Флинс -->
             <div class="character-card" data-element="electro">
               <a href="character-flince.html" class="card-link">
                 <div class="card-front">
@@ -75,6 +95,8 @@
                 </div>
               </a>
             </div>
+
+            <!-- Карточка 2: Лаума -->
             <div class="character-card" data-element="dendro">
               <a href="character-lauma.html" class="card-link">
                 <div class="card-front">
@@ -94,6 +116,8 @@
                 </div>
               </a>
             </div>
+
+            <!-- Карточка 3: Коломбина -->
             <div class="character-card" data-element="hydro">
               <a href="character-kokomi.html" class="card-link">
                 <div class="card-front">
@@ -113,6 +137,8 @@
                 </div>
               </a>
             </div>
+
+            <!-- Карточка 4: Варка -->
             <div class="character-card" data-element="anemo">
               <a href="character-jean.html" class="card-link">
                 <div class="card-front">
@@ -132,6 +158,8 @@
                 </div>
               </a>
             </div>
+
+            <!-- Карточка 5: Дурин -->
             <div class="character-card" data-element="pyro">
               <a href="character-diluc.html" class="card-link">
                 <div class="card-front">
@@ -151,6 +179,8 @@
                 </div>
               </a>
             </div>
+
+            <!-- Карточка 6: Цзы Бай -->
             <div class="character-card" data-element="geo">
               <a href="character-zhongli.html" class="card-link">
                 <div class="card-front">
@@ -177,18 +207,26 @@
         </div>
       </section>
 
-      <!-- О игре -->
+      <!-- Блок 3: О игре -->
       <section id="about-game" class="section image-bg-section">
         <div class="container">
           <div class="text-content centered-content">
             <h2 class="section-title">Genshin Impact</h2>
             <p>
               Это массовая многопользовательская action-RPG с открытым миром,
-              разработанная компанией HoYoverse.
+              разработанная компанией HoYoverse. Отправляйтесь в путешествие по
+              фантастическому миру Тейвата, где воля богов проявляется в семи
+              стихиях.
             </p>
             <p>
               Исследуйте обширные земли, объединяйтесь в отряды из уникальных
-              персонажей, раскрывайте тайны древних цивилизаций.
+              персонажей, раскрывайте тайны древних цивилизаций и сражайтесь с
+              могущественными врагами, чтобы найти потерянного родственника и
+              обрести ответы от самих богов.
+            </p>
+            <p>
+              Мир Тейвата полон чудес, и Нод-край — лишь одна из его жемчужин,
+              ожидающих своего исследователя.
             </p>
           </div>
         </div>
@@ -199,22 +237,36 @@
         <div class="bg-overlay"></div>
       </section>
 
-      <!-- О регионе -->
+      <!-- Блок 4: О регионе -->
       <section id="about-region" class="section image-bg-section">
         <div class="container">
           <div class="text-content centered-content">
             <h2 class="section-title">Нод-Край: Лунный Край</h2>
             <p>
+              Согласно официальному релизу от HoYoverse,
               <strong>Нод-Край (Nod-Krai)</strong> — седьмой и самый загадочный
-              регион Тейвата.
+              регион Тейвата, чьи судьбы неразрывно связаны с луной. Это царство
+              серебристого света, древних тайн и тихой, но могущественной магии.
             </p>
+
             <h3 style="color: #b19cd9; margin-top: 25px">
               🌙 Архонт Лунного Края
             </h3>
-            <p><strong>Коломбина, Дева Луны</strong> — правитель региона.</p>
+            <p>
+              Божественным покровителем и правителем региона является
+              <strong>Коломбина, Дева Луны (Columbina, the Lunar Maiden)</strong
+              >. Как новый Архонт, она олицетворяет собой умиротворение, тайну и
+              цикличность. Её власть простирается не только над землёй, но и над
+              особыми «лунными» вариациями элементальных реакций.
+            </p>
+
             <h3 style="color: #b19cd9; margin-top: 25px">
               ⚡ Уникальные Лунные Реакции
             </h3>
+            <p>
+              Магия Нод-Края преломляет обычные законы стихий через призму
+              лунного света, создавая новые формы взаимодействий:
+            </p>
             <ul
               style="
                 margin-left: 20px;
@@ -224,22 +276,38 @@
             >
               <li>
                 <strong>Лунная Бутонизация (Dendro + Hydro):</strong> Порождает
-                сияющие «лунные лотосы».
+                не ядовитые споры, а сияющие «лунные лотосы», которые излечивают
+                союзников и взрываются через определенное время.
               </li>
               <li>
-                <strong>Лунный Заряд (Electro + Hydro):</strong> Создаёт
-                стабильные сферы лунной энергии.
+                <strong>Лунный Заряд (Electro + Hydro):</strong> Вместо
+                хаотичных разрядов создаёт стабильные сферы конденсированной
+                лунной энергии, которые можно использовать для нанесения
+                периодического урона врагам.
               </li>
               <li>
-                <strong>Лунная Кристаллизация (Geo + Hydro):</strong> Создаёт
-                «лунные столбы».
+                <strong>Лунная Кристаллизация (Geo + Hydro):</strong> Создаёт не
+                обычные щиты, а «лунные столбы», которые не только поглощают
+                урон, но и наносят собственный урон периодически выпуская волны.
               </li>
             </ul>
+
             <h3 style="color: #b19cd9; margin-top: 25px">
               🏛️ Культура и Вдохновение
             </h3>
             <p>
-              Концепция Нод-Края вдохновлена славянскими мифами и архитектурой.
+              Концепция Нод-Края глубоко вдохновлена богатым наследием
+              <strong>славянских мифов, обычаев и архитектуры</strong>.
+              Путешественники увидят здесь не классические европейские замки, а
+              величественные деревянные терема, таинственные капища в древних
+              лесах и города, вплетённые в ландшафт, а не покорившие его. Каждая
+              локация пропитана духом народных сказок и легенд.
+            </p>
+
+            <p style="margin-top: 20px; font-style: italic">
+              Приключениe в Нод-Крае обещают стать самым эпичным и мистическим
+              путешествием по Тейвату, где главной загадкой станет не только
+              земля под ногами, но и вечный спутник, освещающий путь.
             </p>
           </div>
         </div>
@@ -250,7 +318,7 @@
         <div class="bg-overlay"></div>
       </section>
 
-      <!-- Кнопка открытия анкеты -->
+      <!-- Блок 5: Форма обратной связи -->
       <section id="contact" class="section form-section">
         <div class="container">
           <div class="text-center">
@@ -265,7 +333,7 @@
         </div>
       </section>
 
-      <!-- Модальное окно с формой -->
+      <!-- Модальное окно формы -->
       <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
           <button class="close-btn" id="closeBtn">×</button>
@@ -277,7 +345,6 @@
 
           <div id="messageContainer"></div>
 
-          <!-- ОДНА ФОРМА! -->
           <div class="form-scroll">
             <form
               id="feedbackForm"
@@ -426,9 +493,14 @@
       </div>
     </main>
 
+    <!-- Подвал -->
     <footer class="main-footer">
       <div class="container">
         <p>Genshin Impact &copy; HoYoverse. Все права защищены.</p>
+        <p>
+          Данный фанатский сайт создан в ознакомительных целях. Все используемые
+          материалы являются собственностью их правообладателей.
+        </p>
         <p class="disclaimer">
           Нод-край — вымышленный регион, не входящий в официальный лор игры.
         </p>
@@ -443,20 +515,27 @@
         const modal = document.getElementById("modalOverlay");
         const closeBtn = document.getElementById("closeBtn");
 
-        if (openBtn)
+        if (openBtn) {
           openBtn.addEventListener("click", function () {
             modal.style.display = "flex";
           });
-        if (closeBtn)
+        }
+
+        if (closeBtn) {
           closeBtn.addEventListener("click", function () {
             modal.style.display = "none";
           });
-        if (modal)
-          modal.addEventListener("click", function (e) {
-            if (e.target === modal) modal.style.display = "none";
-          });
+        }
 
-        // ОТПРАВКА ФОРМЫ
+        if (modal) {
+          modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+              modal.style.display = "none";
+            }
+          });
+        }
+
+        // ===== ОТПРАВКА ФОРМЫ =====
         const form = document.getElementById("feedbackForm");
         if (form) {
           form.addEventListener("submit", function (e) {

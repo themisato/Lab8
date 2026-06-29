@@ -382,6 +382,7 @@ $all_languages = $pdo->query("SELECT name FROM programming_languages ORDER BY na
                     <li><a href="catalog.html">Персонажи</a></li>
                     <li><a href="list.php">Анкеты</a></li>
                     <li><a href="admin.php" class="active">Админка</a></li>
+                    <li><a href="login.php">🔐 Войти</a></li>
                 </ul>
             </nav>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню">

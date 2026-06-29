@@ -126,6 +126,7 @@ $applications = $stmt->fetchAll();
                     <li><a href="catalog.html">Персонажи</a></li>
                     <li><a href="list.php" class="active">Анкеты</a></li>
                     <li><a href="admin.php">Админка</a></li>
+                    <li><a href="login.php">🔐 Войти</a></li>
                 </ul>
             </nav>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню">
